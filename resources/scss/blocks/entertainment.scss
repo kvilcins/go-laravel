@@ -1,0 +1,128 @@
+.entertainment__title {
+    white-space: pre-line;
+}
+
+.entertainment__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 20px;
+    align-items: flex-end;
+    margin: 0 0 70px 0;
+}
+
+.entertainment__item {
+    display: flex;
+    transition: 0.4s;
+    background-size: 380px 228px;
+    background-repeat: no-repeat;
+    width: 380px;
+    height: 228px;
+    flex-basis: 380px;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px 1px var(--dark-purple, #6C0287);
+    }
+
+    &--vr {
+        background-image: url("img/vr.jpg");
+    }
+
+    &--audio {
+        background-image: url("img/audio.jpg");
+        margin: 0 0 -70px 0;
+    }
+
+    &--karaoke {
+        background-image: url("img/karaoke.jpg");
+    }
+
+    &--games {
+        background-image: url("img/games.jpg");
+    }
+
+    &--movies {
+        background-image: url("img/movies.jpg");
+        margin: 0 0 -70px 0;
+    }
+
+    &--ps {
+        background-image: url("img/ps5.jpg");
+    }
+}
+
+.entertainment__description {
+    position: absolute;
+    padding: 0 0 34px 40px;
+    white-space: pre-line;
+    height: 62px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--main-text-color, #FFFFFF);
+    margin: 0;
+    align-self: flex-end;
+}
+
+@media screen and (max-width: 1320px) {
+    .entertainment__item {
+        flex-basis: 287px;
+        background-size: 287px 172px;
+        width: 287px;
+        height: 172px;
+    }
+
+    .entertainment__description {
+        padding: 0 0 30px 20px;
+    }
+
+    .entertainment__list {
+        gap: 30px 20px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .entertainment__item {
+        flex-basis: 334px;
+        background-size: 334px 200px;
+        width: 334px;
+        height: 200px;
+
+        &--audio {
+            margin: unset;
+        }
+
+        &--movies {
+            margin: unset;
+        }
+    }
+
+    .entertainment__list {
+        gap: 20px;
+        margin: unset;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .entertainment__item {
+        flex-basis: 135px;
+        background-size: 135px 75px;
+        width: 135px;
+        height: 75px;
+
+        &--movies {
+            width: 130px;
+            white-space: normal;
+        }
+    }
+
+    .entertainment__description {
+        padding: 0 0 3px 10px;
+        font-size: 10px;
+        line-height: 14px;
+        height: 44px;
+        width: 135px;
+        white-space: normal;
+    }
+}

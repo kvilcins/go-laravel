@@ -8,11 +8,20 @@
         "hot": "webpack serve --mode development --hot"
     },
     "devDependencies": {
+        "@babel/core": "^7.27.7",
+        "@babel/preset-env": "^7.27.2",
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.8.2",
+        "babel-loader": "^10.0.0",
         "concurrently": "^9.0.1",
+        "copy-webpack-plugin": "^13.0.0",
+        "css-loader": "^7.1.2",
         "laravel-vite-plugin": "^1.2.0",
+        "mini-css-extract-plugin": "^2.9.2",
+        "sass": "^1.89.2",
+        "sass-loader": "^16.0.5",
         "tailwindcss": "^4.0.0",
-        "vite": "^6.2.4"
+        "vite": "^6.2.4",
+        "webpack-cli": "^6.0.1"
     }
 }

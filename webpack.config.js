@@ -1,12 +1,19 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { fileURLToPath } from 'url';
 
-module.exports = {
-    entry: './resources/js/app.js',
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+    entry: {
+        app: ['./resources/js/app.js', './resources/scss/app.scss']
+    },
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'js/app.js',
-        assetModuleFilename: 'assets/[name][ext]',
+        filename: 'js/[name].js',
+        assetModuleFilename: 'assets/[name][ext]'
     },
     module: {
         rules: [
@@ -14,49 +21,49 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                },
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader',
-                ],
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'img/[name][ext]',
-                },
+                    filename: 'img/[name][ext]'
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'fonts/[name][ext]',
-                },
-            },
-        ],
+                    filename: 'fonts/[name][ext]'
+                }
+            }
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/app.css',
+            filename: 'css/[name].css'
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'resources/img',
+                    to: 'img'
+                }
+            ]
+        })
     ],
     resolve: {
-        extensions: ['.js', '.scss'],
+        extensions: ['.js', '.scss']
     },
     devtool: 'source-map',
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
-        },
-        compress: true,
-        hot: true,
-        port: 9000,
-    },
-    mode: 'development',
+    mode: 'production'
 };

@@ -1,0 +1,5 @@
+
+npm install --save-dev webpack webpack-cli webpack-dev-server
+npm install --save-dev css-loader sass-loader sass postcss-loader postcss
+npm install --save-dev mini-css-extract-plugin
+npm install --save-dev babel-loader @babel/core @babel/preset-env

@@ -1,28 +1,36 @@
 <section class="feedbacks" id="feedbacks">
     <div class="container">
-        <h2 class="feedbacks__title">Отзывы посетителей</h2>
-        <ul class="feedbacks__list">
-            <li class="feedbacks__item feedbacks-card">
-                <figure class="feedbacks-card__picture-wrap">
-                    <img alt="Фото Макс Самойлов" class="feedbacks-card__img" src="styles/feedbacks-card/img/maxim.png">
-                    <figcaption class="feedbacks-card__description">Макс Самойлов</figcaption>
-                </figure>
-                <p class="feedbacks-card__review">Отмечали здесь день рождения с компанией друзей, все было очень круто! VR очки это просто бомба, никогда еще я не был в таком полном игровом погружении. Сервис на высоте!</p>
-            </li>
-            <li class="feedbacks__item feedbacks-card">
-                <figure class="feedbacks-card__picture-wrap">
-                    <img alt="Фото Оксана Григорьева" class="feedbacks-card__img" src="styles/feedbacks-card/img/oksana.png">
-                    <figcaption class="feedbacks-card__description">Оксана Григорьева</figcaption>
-                </figure>
-                <p class="feedbacks-card__review">Были в комнате Дикий Запад, пели в караоке под Шакиру, отличный получился корпоратив! У нас в городе больше нет подобных заведений</p>
-            </li>
-            <li class="feedbacks__item feedbacks-card">
-                <figure class="feedbacks-card__picture-wrap">
-                    <img alt="Фото Никита Ященко" class="feedbacks-card__img" src="styles/feedbacks-card/img/nikita.png">
-                    <figcaption class="feedbacks-card__description">Никита Ященко</figcaption>
-                </figure>
-                <p class="feedbacks-card__review">Немного подвисала игра в VR очках, а так все норм. Крутое оформление комнаты в стиле звездных войн, попал в атмосферу космоса</p>
-            </li>
-        </ul>
+        <h2 class="feedbacks__title">{!! get_data($data, 'title', 'Отзывы посетителей') !!}</h2>
+        <div class="feedbacks__slider">
+            <div class="feedbacks__wrapper">
+                <div class="feedbacks__track">
+                    @foreach(get_data($data, 'reviews', []) as $review)
+                        <div class="feedbacks__slide">
+                            <div class="feedbacks__item">
+                                <figure class="feedbacks__photo">
+                                    {!! get_img($review, 'photo', 'feedbacks__image', 'img/faces') !!}
+                                    <figcaption class="feedbacks__name">{!! get_data($review, 'name') !!}</figcaption>
+                                </figure>
+                                <p class="feedbacks__text">{!! get_data($review, 'text') !!}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="feedbacks__controls">
+                <button class="feedbacks__btn feedbacks__btn--prev" type="button">
+                    <svg class="feedbacks__icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                    </svg>
+                </button>
+                <div class="feedbacks__dots"></div>
+                <button class="feedbacks__btn feedbacks__btn--next" type="button">
+                    <svg class="feedbacks__icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 </section>

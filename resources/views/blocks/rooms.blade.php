@@ -1,19 +1,13 @@
-<section class="halls" id="halls">
+<section class="room" id="room">
     <div class="container">
-        <h2 class="halls__title">Наши залы</h2>
-        <ul class="halls__list">
-            <li class="halls__item halls__item--80s card">
-                <p lang="en" class="card__description">80's vibes</p>
-            </li>
-            <li class="halls__item halls__item--star-wars card">
-                <p lang="en" class="card__description">Star wars</p>
-            </li>
-            <li class="halls__item halls__item--wild-west card">
-                <p lang="en" class="card__description">Wild west</p>
-            </li>
-            <li class="halls__item halls__item--neon-style card">
-                <p lang="en" class="card__description">Neon style</p>
-            </li>
+        <h2 class="room__title">{!! $title !!}</h2>
+        <ul class="room__list">
+            @foreach($items as $item)
+                <li class="room__item room__item--{!! get_data($item, 'class') !!}">
+                    {!! get_img($item, 'image', 'room__image') !!}
+                    <p class="room__description">{!! get_data($item, 'description') !!}</p>
+                </li>
+            @endforeach
         </ul>
     </div>
 </section>

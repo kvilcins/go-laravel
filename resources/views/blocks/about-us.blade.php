@@ -1,31 +1,33 @@
 <section class="about-us" id="about-us">
     <div class="container">
-        <h2 class="about-us__title">О нас</h2>
-        <div class="about-us__flex-wrapper flex-wrapper">
-            <div class="flex-wrapper__img flex-img">
-                <div class="flex-img__item flex-img__item--vr"></div>
-                <div class="flex-img__item flex-img__item--games"></div>
-                <div class="flex-img__item flex-img__item--fifa"></div>
-                <div class="flex-img__item flex-img__item--pad"></div>
-                <div class="flex-img__item flex-img__item--controller"></div>
-                <div class="flex-img__item flex-img__item--karaoke"></div>
-                <div class="flex-img__item flex-img__item--vr2"></div>
+        <h2 class="about-us__title">{!! get_data($data, 'title', 'О нас') !!}</h2>
+        <div class="about-us__content">
+            <div class="about-us__gallery">
+                @foreach(get_data($data, 'gallery', []) as $item)
+                    <div class="about-us__gallery-item about-us__gallery-item--{!! get_data($item, 'class') !!}">
+                        {!! get_img($item, 'image', 'about-us__image', 'img/about-us') !!}
+                    </div>
+                @endforeach
             </div>
-            <div class="flex-wrapper__text blockquote-text">
-                <p class="blockquote-text__description">Для наших гостей мы создали концептуально новое игровое пространство виртуальной реальности в центральной части города.</p>
-                <p class="blockquote-text__description">Каждый день мы стараемся создавать для вас самую лучшую игровую атмосферу и радовать Вас топовыми игровыми разработками со всего мира.</p>
+
+            <div class="about-us__text">
+                @foreach(get_data($data, 'descriptions', []) as $description)
+                    <p class="about-us__description">{!! $description !!}</p>
+                @endforeach
             </div>
-            <blockquote class="flex-wrapper__blockquote flex-wrapper__blockquote-clearfix blockquote">
-                <p class="blockquote__quote quote">
-                    <span class="quote__span quote__span--width">
-                        <span lang="en" class="quote__span">GAME OVER</span> — это место незабываемых впечатлений
-                    </span>
-                </p>
-                <cite class="blockquote__cite cite">
-                    <img alt="Фотография Аркадия Абакина" class="cite__img" src="styles/cite/img/creators-icon.png">
-                    <span class="cite__ceo">Аркадий Абакин, создатель игровой территории GAME OVER</span>
-                </cite>
-            </blockquote>
+
+            @if(has_data($data, 'quote'))
+                <blockquote class="about-us__quote">
+                    <p class="about-us__quote-text">
+                        <span class="about-us__quote-highlight">{!! get_data($data, 'quote.highlight') !!}</span>
+                        {!! get_data($data, 'quote.text') !!}
+                    </p>
+                    <cite class="about-us__cite">
+                        {!! get_img($data, 'quote.author.photo', 'about-us__author-photo', 'img/faces') !!}
+                        <span class="about-us__author">{!! get_data($data, 'quote.author.name') !!}, {!! get_data($data, 'quote.author.position') !!}</span>
+                    </cite>
+                </blockquote>
+            @endif
         </div>
     </div>
 </section>

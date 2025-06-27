@@ -1,0 +1,226 @@
+.header {
+    padding: 30px 0 0 0;
+
+    &.sticky {
+        position: fixed;
+        background: var(--main-background-color, #1B1A1B);
+        top: 0;
+        width: 100%;
+        z-index: 111;
+        padding: 30px 0 30px 0;
+        animation: slideDown 0.6s forwards;
+    }
+
+    &_zindex {
+        z-index: 99;
+    }
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__navigation {
+
+    &_open {
+        display: block;
+    }
+}
+
+.header__burger {
+    display: none;
+}
+
+.header__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.header__link-menu {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 22px;
+    transition: color 0.4s ease;
+
+    &:hover {
+        color: var(--neon-purple, #CD06FF);
+    }
+}
+
+.header__callback {
+    width: 280px;
+    height: 55px;
+    border: 3px solid var(--neon-purple, #CD06FF);
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: var(--main-text-color, #FFFFFF);
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &:hover {
+        background-color: var(--dark-purple, #6C0287);
+        border: 3px solid var(--dark-purple, #6C0287);
+        border-radius: 10px;
+        color: var(--main-text-color, #FFFFFF);
+    }
+
+    &:focus {
+        background-color: var(--dark-purple, #6C0287);
+        border-radius: 10px;
+        border: none;
+        color: var(--main-text-color, #FFFFFF);
+    }
+
+    &:active {
+        background-color: var(--cold-purple, #640AA3);
+        border: 1px solid var(--black-color, #000000);
+        border-radius: 10px;
+        color: var(--main-text-color, #FFFFFF);
+    }
+
+    &_visible {
+        display: block;
+        position: absolute;
+        top: calc(100% + 318px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 99;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-background-color, #1B1A1B);
+    opacity: 0.6;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1320px) {
+    .header {
+        padding: 30px 60px 0 60px;
+
+        &.sticky {
+            padding: 30px 60px;
+        }
+    }
+
+    .header__list {
+        gap: 20px;
+    }
+
+    .header__link-menu {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .header {
+        padding: 30px 40px 0 40px;
+        position: relative;
+
+        &.sticky {
+            padding: 30px 40px;
+        }
+    }
+
+    .header__logo {
+        width: 87px;
+        height: 55px;
+    }
+
+    .header__navigation {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        color: var(--main-text-color, #FFFFFF);
+        background-color: var(--main-background-color, #1B1A1B);
+        padding: 45px;
+        z-index: 1;
+    }
+
+    .header__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header__item {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .header__callback {
+        width: 229px;
+        height: 45px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        padding: 20px 20px 0 20px;
+
+        &.sticky {
+            padding: 20px 20px;
+        }
+    }
+
+    .header__burger {
+        display: block;
+    }
+
+    .header__logo {
+        width: 66px;
+        height: 42px;
+    }
+
+    .header__link-menu {
+        font-size: 14px;
+    }
+
+    .header__callback {
+        display: none;
+        width: 184px;
+        height: 37px;
+        font-size: 14px;
+        line-height: 24px;
+
+        &_visible {
+            display: block;
+            position: absolute;
+            top: calc(100% + 318px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99;
+        }
+    }
+
+    .header__navigation {
+        padding: 45px 45px 100px 45px;
+    }
+}

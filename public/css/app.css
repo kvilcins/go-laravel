@@ -40,7 +40,7 @@ html {
 }
 
 body {
-  background-color: var(--main-background-color, #1B1A1B);
+  background: linear-gradient(to bottom, rgba(205, 6, 255, 0.15) 0%, transparent 100%), linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 50%, #1b1a1b 100%);
   color: var(--main-text-color, #FFFFFF);
   font-family: Arial, sans-serif;
   font-size: 20px;
@@ -92,7 +92,24 @@ h2 {
   font-weight: 700;
   font-size: 40px;
   line-height: 50px;
-  margin: 0 0 40px 0;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 80px;
+  opacity: 0;
+  animation: titleAppear 1s ease-out forwards;
+}
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(45deg, #CD06FF, #FF06CD);
+  border-radius: 2px;
+  animation: lineExpand 1s ease-out 0.5s forwards;
+  scale: 0 1;
 }
 
 p {
@@ -140,7 +157,7 @@ p {
     font-size: 16px;
   }
 }
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 767px) {
   h1 {
     font-size: 25px;
   }
@@ -663,19 +680,8 @@ template {
   }
 }
 .footer {
-  background: linear-gradient(180deg, #1b1a1b 0%, #2a1b2a 50%, #370a37 100%);
   position: relative;
   overflow: hidden;
-}
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(205, 6, 255, 0.1) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(108, 2, 135, 0.1) 0%, transparent 40%);
-  opacity: 0.6;
 }
 
 .contacts {
@@ -1117,7 +1123,6 @@ template {
 .about-us {
   padding: 100px 0;
   position: relative;
-  background: radial-gradient(ellipse at 10% 10%, rgba(205, 6, 255, 0.05) 0%, transparent 60%), radial-gradient(ellipse at 90% 90%, rgba(108, 2, 135, 0.05) 0%, transparent 60%), linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 100%);
   overflow: hidden;
 }
 .about-us::before {
@@ -1127,30 +1132,8 @@ template {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(45deg, transparent 0px, transparent 2px, rgba(205, 6, 255, 0.02) 2px, rgba(205, 6, 255, 0.02) 4px);
   opacity: 0.5;
   animation: patternMove 10s linear infinite;
-}
-
-.about-us__title {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 80px;
-  opacity: 0;
-  animation: titleAppear 1s ease-out forwards;
-}
-.about-us__title::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(45deg, #CD06FF, #FF06CD);
-  border-radius: 2px;
-  animation: lineExpand 1s ease-out 0.5s forwards;
-  scale: 0 1;
 }
 
 .about-us__content {
@@ -1553,19 +1536,6 @@ template {
 }
 .booking {
   padding: 80px 0;
-  background: linear-gradient(135deg, #1b1a1b 0%, #2a252a 100%);
-}
-
-.booking__title {
-  text-align: center;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 60px;
-  background: linear-gradient(45deg, #CD06FF, #FF06CD);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .booking__form {
@@ -1911,26 +1881,6 @@ template {
 .entertainment {
   padding: 80px 0;
   position: relative;
-  background: linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 100%);
-}
-.entertainment::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(205, 6, 255, 0.05) 0%, transparent 50%);
-  opacity: 0.8;
-}
-
-.entertainment__title {
-  white-space: pre-line;
-  position: relative;
-  z-index: 2;
-  margin-bottom: 60px;
-  opacity: 0;
-  animation: slideInDown 1s ease-out forwards;
 }
 
 .entertainment__list {
@@ -2169,7 +2119,6 @@ template {
 .faq {
   padding: 100px 0;
   position: relative;
-  background: radial-gradient(ellipse at 15% 15%, rgba(205, 6, 255, 0.06) 0%, transparent 60%), radial-gradient(ellipse at 85% 85%, rgba(108, 2, 135, 0.06) 0%, transparent 60%), linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 100%);
   overflow: hidden;
 }
 .faq::before {
@@ -2179,31 +2128,8 @@ template {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(0deg, transparent 0px, transparent 50px, rgba(205, 6, 255, 0.02) 50px, rgba(205, 6, 255, 0.02) 52px);
   opacity: 0.5;
   animation: verticalMove 12s linear infinite;
-}
-
-.faq__title {
-  text-align: center;
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-  animation: titleSlideIn 1s ease-out forwards;
-}
-.faq__title::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(45deg, #CD06FF, #FF06CD);
-  border-radius: 2px;
-  animation: lineExpand 1s ease-out 0.5s forwards;
-  scale: 0 1;
 }
 
 .faq__list {
@@ -2518,7 +2444,6 @@ template {
 .feedbacks {
   padding: 100px 0;
   position: relative;
-  background: radial-gradient(ellipse at 25% 25%, rgba(205, 6, 255, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 75% 75%, rgba(108, 2, 135, 0.08) 0%, transparent 60%), linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 100%);
   overflow: hidden;
 }
 .feedbacks::before {
@@ -2528,31 +2453,8 @@ template {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(90deg, transparent 0px, transparent 100px, rgba(205, 6, 255, 0.02) 100px, rgba(205, 6, 255, 0.02) 102px);
   opacity: 0.5;
   animation: linesMove 15s linear infinite;
-}
-
-.feedbacks__title {
-  text-align: center;
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-  animation: titleFadeIn 1s ease-out forwards;
-}
-.feedbacks__title::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(45deg, #CD06FF, #FF06CD);
-  border-radius: 2px;
-  animation: lineGrow 1s ease-out 0.5s forwards;
-  scale: 0 1;
 }
 
 .feedbacks__slider {
@@ -2903,9 +2805,6 @@ template {
 }
 .main-banner {
   position: relative;
-  min-height: 100vh;
-  background: radial-gradient(ellipse at center, rgba(205, 6, 255, 0.15) 0%, transparent 70%), linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 50%, #1b1a1b 100%);
-  overflow: hidden;
 }
 .main-banner::before {
   content: "";
@@ -2914,7 +2813,6 @@ template {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(205, 6, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(108, 2, 135, 0.1) 0%, transparent 50%);
   animation: backgroundPulse 8s ease-in-out infinite;
 }
 .main-banner__container {
@@ -2939,10 +2837,11 @@ template {
   height: 762px;
   display: inline-block;
   position: absolute;
-  top: 63px;
+  bottom: -62px;
   left: 500px;
   opacity: 0.9;
   animation: floatImage 6s ease-in-out infinite;
+  mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 70%, transparent 100%);
 }
 .main-banner__subtitle {
   text-transform: uppercase;

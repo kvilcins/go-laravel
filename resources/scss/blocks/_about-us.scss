@@ -1,10 +1,6 @@
 .about-us {
     padding: 100px 0;
     position: relative;
-    background:
-        radial-gradient(ellipse at 10% 10%, rgba(205, 6, 255, 0.05) 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 90%, rgba(108, 2, 135, 0.05) 0%, transparent 60%),
-        linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 100%);
     overflow: hidden;
 
     &::before {
@@ -14,37 +10,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: repeating-linear-gradient(
-                45deg,
-                transparent 0px,
-                transparent 2px,
-                rgba(205, 6, 255, 0.02) 2px,
-                rgba(205, 6, 255, 0.02) 4px
-        );
         opacity: 0.5;
         animation: patternMove 10s linear infinite;
-    }
-}
-
-.about-us__title {
-    position: relative;
-    z-index: 2;
-    margin-bottom: 80px;
-    opacity: 0;
-    animation: titleAppear 1s ease-out forwards;
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
-        border-radius: 2px;
-        animation: lineExpand 1s ease-out 0.5s forwards;
-        scale: 0 1;
     }
 }
 
@@ -129,7 +96,6 @@
         }
     }
 
-    // Анимация появления для каждого элемента
     @for $i from 1 through 7 {
         &:nth-child(#{$i}) {
             animation: itemFloat 1s ease-out #{$i * 0.1}s forwards;
@@ -137,7 +103,6 @@
         }
     }
 
-    // Позиционирование элементов в сетке
     &--vr {
         grid-row: 1 / 2;
         grid-column: 1 / 7;

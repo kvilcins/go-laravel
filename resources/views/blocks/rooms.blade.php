@@ -1,6 +1,6 @@
 <section class="room" id="room">
     <div class="container">
-        <h2 class="room__title">{!! $title !!}</h2>
+        <h2 class="room__title h2">{!! $title !!}</h2>
         <ul class="room__list">
             @foreach($items as $item)
                 <li class="room__item room__item--{!! get_data($item, 'class') !!}">

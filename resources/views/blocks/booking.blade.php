@@ -1,6 +1,6 @@
 <section class="booking" id="booking">
     <div class="container">
-        <h2 class="booking__title">Забронировать зал просто</h2>
+        <h2 class="booking__title h2">Забронировать зал просто</h2>
         <form class="booking__form" action="https://jsonplaceholder.typicode.com/posts" method="POST">
             <fieldset class="booking__fieldset booking__fieldset--halls">
                 <legend class="booking__legend">Выбери зал</legend>

@@ -1,20 +1,6 @@
 .footer {
-    background: linear-gradient(180deg, #1b1a1b 0%, #2a1b2a 50%, #370a37 100%);
     position: relative;
     overflow: hidden;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background:
-            radial-gradient(circle at 20% 20%, rgba(205, 6, 255, 0.1) 0%, transparent 40%),
-            radial-gradient(circle at 80% 80%, rgba(108, 2, 135, 0.1) 0%, transparent 40%);
-        opacity: 0.6;
-    }
 }
 
 .contacts {

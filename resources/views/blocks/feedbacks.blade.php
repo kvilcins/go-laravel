@@ -1,6 +1,6 @@
 <section class="feedbacks" id="feedbacks">
     <div class="container">
-        <h2 class="feedbacks__title">{!! get_data($data, 'title', 'Отзывы посетителей') !!}</h2>
+        <h2 class="feedbacks__title h2">{!! get_data($data, 'title', 'Отзывы посетителей') !!}</h2>
         <div class="feedbacks__slider">
             <div class="feedbacks__wrapper">
                 <div class="feedbacks__track">

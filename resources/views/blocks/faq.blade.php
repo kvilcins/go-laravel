@@ -1,6 +1,6 @@
 <section class="faq" id="faq">
     <div class="container">
-        <h2 class="faq__title">{!! get_data($data, 'title', '') !!}</h2>
+        <h2 class="faq__title h2">{!! get_data($data, 'title', '') !!}</h2>
         <ul class="faq__list">
             @foreach(get_data($data, 'questions', []) as $index => $question)
                 <li class="faq__item" data-faq-item="{{ $index }}">

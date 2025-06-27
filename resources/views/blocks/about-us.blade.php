@@ -1,6 +1,6 @@
 <section class="about-us" id="about-us">
     <div class="container">
-        <h2 class="about-us__title">{!! get_data($data, 'title', 'О нас') !!}</h2>
+        <h2 class="about-us__title h2">{!! get_data($data, 'title', 'О нас') !!}</h2>
         <div class="about-us__content">
             <div class="about-us__gallery">
                 @foreach(get_data($data, 'gallery', []) as $item)

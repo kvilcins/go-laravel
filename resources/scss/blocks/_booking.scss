@@ -1,18 +1,5 @@
 .booking {
     padding: 80px 0;
-    background: linear-gradient(135deg, #1b1a1b 0%, #2a252a 100%);
-}
-
-.booking__title {
-    text-align: center;
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 60px;
-    background: linear-gradient(45deg, #CD06FF, #FF06CD);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glow 2s ease-in-out infinite alternate;
 }
 
 .booking__form {

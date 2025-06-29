@@ -81,20 +81,17 @@
         }
 
         .entertainment__description {
-            transform: translateY(-10px);
             text-shadow: 0 0 20px rgba(205, 6, 255, 0.8);
             color: var(--neon-purple, #CD06FF);
         }
     }
 
-    // Анимация появления элементов с задержкой
     @for $i from 1 through 6 {
         &:nth-child(#{$i}) {
             animation: slideInUp 0.8s ease-out #{$i * 0.1}s forwards;
         }
     }
 
-    // Модификаторы для разных типов развлечений
     &--vr {
         &:hover {
             box-shadow:

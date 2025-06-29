@@ -65,7 +65,7 @@
 
         .faq__content {
             max-height: 200px;
-            padding: 0 30px 30px;
+            padding: 30px;
             opacity: 1;
         }
     }
@@ -110,11 +110,6 @@
             transform: scale(1.1);
             background: rgba(205, 6, 255, 0.2);
         }
-    }
-
-    &:focus {
-        outline: 2px solid var(--neon-purple, #CD06FF);
-        outline-offset: 2px;
     }
 }
 
@@ -285,7 +280,7 @@
 
     .faq__item--active {
         .faq__content {
-            padding: 0 25px 25px;
+            padding: 25px;
         }
     }
 }

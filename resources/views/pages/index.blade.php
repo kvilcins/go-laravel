@@ -92,7 +92,8 @@
             ]
         ])
 
-        @include('blocks.booking')
+        @include('blocks.booking', ['rooms' => $rooms, 'entertainments' => $entertainments])
+
         @include('blocks.about-us', [
             'data' => [
                 'title' => 'О нас',

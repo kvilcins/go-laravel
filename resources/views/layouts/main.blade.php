@@ -12,5 +12,7 @@
 
 @include('components.partials.footer')
 
+@include('modals.callback')
+
 </body>
 </html>

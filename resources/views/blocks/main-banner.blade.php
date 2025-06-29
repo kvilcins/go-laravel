@@ -1,5 +1,5 @@
 <section class="main-banner">
-    <div class="container main-banner__container">
+    <div class="main-banner__container">
         <div class="main-banner__text-wrap">
             <p class="main-banner__subtitle">{!! get_data($data, 'subtitle', '') !!}</p>
             <h1 class="main-banner__title">{!! get_data($data, 'title', '') !!}</h1>

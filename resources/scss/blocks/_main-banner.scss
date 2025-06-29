@@ -85,7 +85,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        flex-basis: 193px;
+        flex-basis: 210px;
         transition: transform 0.3s ease;
 
         &:hover {
@@ -98,10 +98,19 @@
         padding: 0;
         position: relative;
 
+        font-weight: 900;
+        font-size: 100px;
+        line-height: 141px;
+        color: var(--neon-purple, #CD06FF);
+        font-variant: small-caps;
+        margin: 0;
+        text-shadow: 0 0 30px rgba(205, 6, 255, 0.8);
+        animation: numberPulse 2s ease-in-out infinite;
+
         &::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
@@ -112,28 +121,6 @@
 
         &:hover::after {
             width: 100%;
-        }
-
-        &--purple {
-            font-weight: 900;
-            font-size: 100px;
-            line-height: 141px;
-            color: var(--neon-purple, #CD06FF);
-            font-variant: small-caps;
-            margin: 0;
-            text-shadow: 0 0 30px rgba(205, 6, 255, 0.8);
-            animation: numberPulse 2s ease-in-out infinite;
-        }
-
-        &--small-caps {
-            font-weight: 900;
-            font-size: 75px;
-            line-height: 106px;
-            color: var(--neon-purple, #CD06FF);
-            font-variant: small-caps;
-            margin: 0;
-            text-shadow: 0 0 30px rgba(205, 6, 255, 0.8);
-            animation: numberPulse 2s ease-in-out infinite 0.5s;
         }
     }
 
@@ -196,7 +183,6 @@
 
         &:focus {
             outline: 2px solid var(--neon-purple, #CD06FF);
-            outline-offset: 4px;
         }
 
         &:active {
@@ -217,12 +203,6 @@
         z-index: 99;
         opacity: 0;
         animation: fadeInBounce 1s ease-out 2s forwards;
-
-        &:focus {
-            outline: 2px solid var(--neon-purple, #CD06FF);
-            outline-offset: 4px;
-            border-radius: 50%;
-        }
     }
 
     &__scroll-icon {

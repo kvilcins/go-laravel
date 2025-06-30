@@ -1,11 +1,43 @@
 /*!******************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./resources/scss/app.scss ***!
   \******************************************************************************************************************/
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap);
-/*!**********************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./resources/scss/app.scss (1) ***!
-  \**********************************************************************************************************************/
 @charset "UTF-8";
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-Regular.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-Medium.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-SemiBold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-Bold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-ExtraBold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../fonts/Inter_24pt-Black.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 900;
+}
 html {
   box-sizing: border-box;
   position: relative;
@@ -468,34 +500,32 @@ template {
 .admin-sidebar {
   width: 250px;
   background: linear-gradient(135deg, #6C0287, #CD06FF);
-  color: white;
+  color: #ffffff;
   padding: 20px 0;
   position: fixed;
   height: 100vh;
   overflow-y: auto;
 }
-
 .admin-sidebar__title {
   padding: 0 20px 30px;
   font-size: 24px;
-  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .admin-nav {
   padding: 20px 0;
 }
-
 .admin-nav__item {
   display: block;
   padding: 12px 20px;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
-  transition: background-color 0.2s;
+  transition: all ease-in-out 0.3s;
 }
-
-.admin-nav__item:hover,
-.admin-nav__item--active {
+.admin-nav__item:hover, .admin-nav__item--active {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -506,32 +536,29 @@ template {
 }
 
 .admin-header {
-  background: white;
+  background: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
-
 .admin-header__title {
   font-size: 28px;
   color: #6C0287;
   margin-bottom: 5px;
 }
-
 .admin-header__subtitle {
   color: #666;
   font-size: 14px;
 }
 
 .admin-card {
-  background: white;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 20px;
 }
-
 .admin-card__header {
   padding: 20px;
   background: #f8f9fa;
@@ -540,12 +567,12 @@ template {
   justify-content: space-between;
   align-items: center;
 }
-
 .admin-card__title {
   font-size: 18px;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
+  font-style: normal;
 }
-
 .admin-card__content {
   padding: 20px;
 }
@@ -554,21 +581,20 @@ template {
   width: 100%;
   border-collapse: collapse;
 }
-
 .admin-table th,
 .admin-table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
-
 .admin-table th {
   background: #f8f9fa;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
+  font-style: normal;
   color: #666;
   font-size: 14px;
 }
-
 .admin-table td {
   font-size: 14px;
 }
@@ -580,36 +606,32 @@ template {
   border-radius: 4px;
   text-decoration: none;
   font-size: 14px;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
+  font-style: normal;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all ease-in-out 0.3s;
   text-align: center;
 }
-
 .btn--primary {
   background: #6C0287;
-  color: white;
+  color: #ffffff;
 }
-
 .btn--primary:hover {
   background: #5a0270;
 }
-
 .btn--secondary {
   background: #6c757d;
-  color: white;
+  color: #ffffff;
 }
-
 .btn--success {
   background: #28a745;
-  color: white;
+  color: #ffffff;
 }
-
 .btn--danger {
   background: #dc3545;
-  color: white;
+  color: #ffffff;
 }
-
 .btn--small {
   padding: 4px 8px;
   font-size: 12px;
@@ -620,14 +642,14 @@ template {
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 12px;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
+  font-style: normal;
 }
-
 .badge--success {
   background: #d4edda;
   color: #155724;
 }
-
 .badge--danger {
   background: #f8d7da;
   color: #721c24;
@@ -638,7 +660,6 @@ template {
   border-radius: 4px;
   margin-bottom: 20px;
 }
-
 .alert--success {
   background: #d4edda;
   color: #155724;
@@ -653,20 +674,20 @@ template {
 }
 
 .stat-card {
-  background: white;
+  background: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
 .stat-card__number {
   font-size: 32px;
-  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   color: #6C0287;
   margin-bottom: 5px;
 }
-
 .stat-card__label {
   color: #666;
   font-size: 14px;
@@ -679,7 +700,9 @@ template {
 .form-label {
   display: block;
   margin-bottom: 5px;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
+  font-style: normal;
   color: #333;
 }
 
@@ -690,7 +713,6 @@ template {
   border-radius: 4px;
   font-size: 14px;
 }
-
 .form-input:focus {
   outline: none;
   border-color: #6C0287;
@@ -702,7 +724,6 @@ template {
   justify-content: center;
   margin-top: 20px;
 }
-
 .pagination a,
 .pagination span {
   padding: 8px 12px;
@@ -712,10 +733,9 @@ template {
   color: #666;
   text-decoration: none;
 }
-
 .pagination .current {
   background: #6C0287;
-  color: white;
+  color: #ffffff;
   border-color: #6C0287;
 }
 

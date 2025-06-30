@@ -286,6 +286,22 @@
     }
 }
 
+.booking__message {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+
+    &--success {
+        background-color: #4caf50;
+        color: white;
+    }
+
+    &--error {
+        background-color: #f44336;
+        color: white;
+    }
+}
+
 @keyframes glow {
     from {
         text-shadow: 0 0 20px rgba(205, 6, 255, 0.5);

@@ -5,6 +5,8 @@ namespace App\Services;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CallbackRequestMail;
 use App\Mail\CallbackConfirmationMail;
+use App\Mail\BookingRequestMail;
+use App\Mail\BookingConfirmationMail;
 
 class MailService
 {

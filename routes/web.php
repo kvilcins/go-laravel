@@ -5,7 +5,6 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\BookingController;
 
-
 // Homepage
 Route::get('/', [MainController::class, 'index'])->name('home');
 
@@ -14,7 +13,11 @@ Route::post('/callback', [CallbackController::class, 'send'])->name('callback.se
 
 // Booking controller
 Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.form');
-Route::post('/booking', [BookingController::class, 'submitForm'])->name('booking.submit');
 
-Route::post('/booking/available-slots', [BookingController::class, 'availableSlots']);
-Route::post('/booking/check-availability', [BookingController::class, 'checkAvailability']);
+// AJAX API for booking
+Route::post('/api/booking', [BookingController::class, 'submitFormApi'])->name('booking.api');
+Route::get('/booking/available-dates', [BookingController::class, 'getAvailableDates']);
+Route::post('/booking/available-slots', [BookingController::class, 'getAvailableSlots']);
+
+// Fallback in case if JS doesn't work
+Route::post('/booking', [BookingController::class, 'submitForm'])->name('booking.submit');

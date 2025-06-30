@@ -1,6 +1,46 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <section class="booking" id="booking">
     <div class="container">
         <h2 class="booking__title h2">Забронировать зал просто</h2>
+
+        @if(session('success'))
+            <div class="booking__message booking__message--success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="booking__message booking__message--error">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="booking__message booking__message--error">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="booking__message booking__message--success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="booking__message booking__message--error">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form class="booking__form" method="POST" action="{{ route('booking.submit') }}">
             @csrf
             <fieldset class="booking__fieldset booking__fieldset--halls">

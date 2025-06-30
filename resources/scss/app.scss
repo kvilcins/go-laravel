@@ -1,7 +1,11 @@
+@import './fonts/fonts';
+
 @import './global/vars';
 @import './global/mixins';
 @import './global/global';
 @import './normalize';
+
+@import './admin/admin';
 
 @import './components/partials/header';
 @import './components/partials/footer';

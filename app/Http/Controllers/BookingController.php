@@ -169,12 +169,7 @@ class BookingController extends Controller
 
     private function prepareEmailData($validated)
     {
-        $rooms = [
-            1 => '80s-vibes',
-            2 => 'star-wars',
-            3 => 'wild-west',
-            4 => 'neon-style'
-        ];
+        $rooms = DB::table('rooms')->pluck('slug', 'id')->toArray();
 
         return [
             'hall' => $rooms[$validated['room_id']] ?? 'unknown',

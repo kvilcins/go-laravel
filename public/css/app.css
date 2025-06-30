@@ -1585,7 +1585,7 @@ template {
 .booking__hall-input:checked + .booking__hall-visual::after {
   opacity: 1;
 }
-.booking__hall-input--80s + .booking__hall-visual {
+.booking__hall-input--80s-vibes + .booking__hall-visual {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../img/80s-vibes.jpg);
   background-size: cover;
   background-position: center;

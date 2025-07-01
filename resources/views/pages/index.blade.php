@@ -22,10 +22,10 @@
                 ],
                 'button' => [
                     'text' => 'Забронировать',
-                    'url' => '#booking'
+                    'url' => 'booking'
                 ],
                 'scroll_link' => [
-                    'url' => '#entertainment'
+                    'url' => 'entertainment'
                 ]
             ]
         ])

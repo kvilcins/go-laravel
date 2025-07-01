@@ -1,4 +1,4 @@
-<section class="entertainment" id="entertainment">
+<section class="entertainment" data-scroll-target="entertainment">
     <div class="container">
         <h2 class="entertainment__title h2">{!! $title !!}</h2>
         <ul class="entertainment__list">

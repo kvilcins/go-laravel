@@ -10,13 +10,13 @@ html {
 }
 
 body {
+    @include font($Inter-400);
     background:
-        linear-gradient(to bottom, rgba(205, 6, 255, 0.15) 0%, transparent 100%),
-        linear-gradient(135deg, #1b1a1b 0%, #2a1b2a 50%, #1b1a1b 100%);
-    color: var(--main-text-color, #FFFFFF);
+        linear-gradient(to bottom, rgba($neon-purple, 0.15) 0%, transparent 100%),
+        $body-background-complex;
+    color: $main-text-color;
     font-family: Arial, sans-serif;
     font-size: 20px;
-    font-weight: 400;
     min-height: 100vh;
     margin: 0 auto;
 }
@@ -59,12 +59,11 @@ h1 {
 }
 
 h2 {
+    @include font($Inter-700);
     text-align: center;
     text-transform: uppercase;
-    font-weight: 700;
     font-size: 40px;
     line-height: 50px;
-
     position: relative;
     z-index: 2;
     margin-bottom: 80px;
@@ -79,7 +78,7 @@ h2 {
         transform: translateX(-50%);
         width: 80px;
         height: 3px;
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
+        background: $title-underline-gradient;
         border-radius: 2px;
         animation: lineExpand 1s ease-out 0.5s forwards;
         scale: 0 1;
@@ -93,6 +92,10 @@ p {
 .container {
     max-width: 1180px;
     margin: 0 auto;
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and (max-width: 1320px) {
@@ -115,7 +118,7 @@ p {
     }
 
     circle {
-        stroke: var(--dark-purple, #6C0287);
+        stroke: $dark-purple;
         stroke-width: 1;
     }
 }

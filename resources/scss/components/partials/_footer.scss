@@ -25,7 +25,7 @@
         transform: translateX(-50%);
         width: 80px;
         height: 3px;
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
+        background: $title-underline-gradient;
         border-radius: 2px;
         animation: lineExpand 1s ease-out 0.5s forwards;
         scale: 0 1;
@@ -63,19 +63,19 @@
     transition: all 0.3s ease;
     padding: 20px;
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba($white-color, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba($white-color, 0.1);
 
     &:hover {
         transform: translateX(10px);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(205, 6, 255, 0.3);
-        box-shadow: 0 10px 30px rgba(205, 6, 255, 0.2);
+        background: rgba($white-color, 0.08);
+        border-color: rgba($neon-purple, 0.3);
+        box-shadow: 0 10px 30px rgba($neon-purple, 0.2);
 
         .footer__icon {
-            background: linear-gradient(45deg, #CD06FF, #FF06CD);
-            color: #FFFFFF;
+            background: $title-underline-gradient;
+            color: $white-color;
             transform: scale(1.1);
         }
     }
@@ -85,12 +85,12 @@
     width: 50px;
     height: 50px;
     min-width: 50px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba($white-color, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba($white-color, 0.8);
     transition: all 0.3s ease;
 
     svg {
@@ -106,20 +106,20 @@
 }
 
 .footer__city {
+    @include font($Inter-600);
     font-size: 18px;
-    font-weight: 600;
-    color: #FFFFFF;
+    color: $white-color;
 }
 
 .footer__street {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba($white-color, 0.8);
 }
 
 .footer__link {
+    @include font($Inter-500);
     font-size: 18px;
-    font-weight: 500;
-    color: #FFFFFF;
+    color: $white-color;
     text-decoration: none;
     transition: color 0.3s ease;
     display: flex;
@@ -127,7 +127,7 @@
     min-height: 50px;
 
     &:hover {
-        color: var(--neon-purple, #CD06FF);
+        color: $neon-purple;
     }
 }
 
@@ -152,12 +152,12 @@
 .footer__social-link {
     width: 60px;
     height: 60px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba($white-color, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba($white-color, 0.8);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-decoration: none;
     position: relative;
@@ -170,7 +170,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
+        background: $title-underline-gradient;
         opacity: 0;
         transition: opacity 0.3s ease;
         border-radius: 50%;
@@ -186,8 +186,8 @@
 
     &:hover {
         transform: translateY(-8px) scale(1.1);
-        box-shadow: 0 15px 35px rgba(205, 6, 255, 0.4);
-        color: #FFFFFF;
+        box-shadow: 0 15px 35px rgba($neon-purple, 0.4);
+        color: $white-color;
 
         &::before {
             opacity: 1;
@@ -235,10 +235,10 @@
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 50px rgba($black-color, 0.3);
+    background: rgba($white-color, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba($white-color, 0.1);
     height: 400px;
 
     &::before {
@@ -248,7 +248,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(205, 6, 255, 0.1) 0%, rgba(255, 6, 205, 0.1) 100%);
+        background: linear-gradient(135deg, rgba($neon-purple, 0.1) 0%, rgba(255, 6, 205, 0.1) 100%);
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 2;
@@ -274,9 +274,9 @@
 }
 
 .footer__copyright {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba($black-color, 0.3);
     backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba($white-color, 0.1);
     padding: 30px 0;
     position: relative;
     z-index: 2;
@@ -292,12 +292,12 @@
 
 .footer__copyright-text {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba($white-color, 0.7);
     margin: 0;
 }
 
 .footer__designer-link {
-    color: var(--neon-purple, #CD06FF);
+    color: $neon-purple;
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
@@ -309,17 +309,50 @@
         left: 0;
         width: 0;
         height: 1px;
-        background: var(--neon-purple, #CD06FF);
+        background: $neon-purple;
         transition: width 0.3s ease;
     }
 
     &:hover {
-        color: #FFFFFF;
-        text-shadow: 0 0 10px rgba(205, 6, 255, 0.5);
+        color: $white-color;
+        text-shadow: 0 0 10px rgba($neon-purple, 0.5);
 
         &::after {
             width: 100%;
         }
+    }
+}
+
+.scroll-to-top {
+    font-size: 20px;
+    color: $main-text-color;
+
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 999;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: $dark-grey;
+    border: none;
+    border-radius: 50%;
+
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background-color: darken($dark-grey, 10%);
+    }
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+
+        transform: translateY(0);
     }
 }
 

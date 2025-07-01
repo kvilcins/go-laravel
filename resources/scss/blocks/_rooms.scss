@@ -26,7 +26,7 @@
 
     &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 20px 1px var(--dark-purple, #6C0287);
+        box-shadow: 0 0 20px 1px $dark-purple;
     }
 }
 
@@ -41,9 +41,9 @@
 }
 
 .room__description {
+    @include font($Inter-700);
     position: absolute;
     text-transform: uppercase;
-    font-weight: 700;
     font-size: 70px;
     white-space: pre-line;
     text-align: center;

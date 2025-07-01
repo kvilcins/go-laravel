@@ -5010,6 +5010,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /***/ }),
 
+/***/ "./resources/js/modules/fixed-header.js":
+/*!**********************************************!*\
+  !*** ./resources/js/modules/fixed-header.js ***!
+  \**********************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 100 && currentScroll > lastScroll) {
+      header.classList.add('header--fixed');
+    } else if (currentScroll < 100) {
+      header.classList.remove('header--fixed');
+    }
+    lastScroll = currentScroll;
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/mobile-menu.js":
+/*!*********************************************!*\
+  !*** ./resources/js/modules/mobile-menu.js ***!
+  \*********************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', () => {
+  const burger = document.getElementById('burger-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const openMenu = () => {
+    mobileMenu.classList.remove('hidden');
+    setTimeout(() => mobileMenu.classList.add('open'), 10);
+    burger.classList.remove('burger-behind');
+  };
+  const closeMenu = () => {
+    mobileMenu.classList.remove('open');
+    burger.classList.add('burger-behind');
+    setTimeout(() => {
+      mobileMenu.classList.add('hidden');
+      burger.classList.remove('burger-behind');
+    }, 300);
+  };
+  burger?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  document.addEventListener('click', e => {
+    if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !burger.contains(e.target)) {
+      closeMenu();
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/modules/modal.js":
 /*!***************************************!*\
   !*** ./resources/js/modules/modal.js ***!
@@ -5115,6 +5171,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/scroll-to-top.js":
+/*!***********************************************!*\
+  !*** ./resources/js/modules/scroll-to-top.js ***!
+  \***********************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollBtn = document.getElementById('scroll-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 });
 
 /***/ }),
@@ -5298,6 +5379,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initFeedbacksSlider();
 });
 
+/***/ }),
+
+/***/ "./resources/js/modules/smooth-scroll.js":
+/*!***********************************************!*\
+  !*** ./resources/js/modules/smooth-scroll.js ***!
+  \***********************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollElements = document.querySelectorAll('[data-scroll-to]');
+  scrollElements.forEach(element => {
+    element.addEventListener('click', e => {
+      e.preventDefault();
+      const targetValue = element.getAttribute('data-scroll-to');
+      if (targetValue) {
+        const targetElement = document.querySelector(`[data-scroll-target="${targetValue}"]`);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+});
+
 /***/ })
 
 /******/ 	});
@@ -5388,6 +5496,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_modal__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/booking */ "./resources/js/modules/booking.js");
 /* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_modules_booking__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/fixed-header */ "./resources/js/modules/fixed-header.js");
+/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_modules_fixed_header__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mobile-menu */ "./resources/js/modules/mobile-menu.js");
+/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/scroll-to-top */ "./resources/js/modules/scroll-to-top.js");
+/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/smooth-scroll */ "./resources/js/modules/smooth-scroll.js");
+/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
+
 
 
 

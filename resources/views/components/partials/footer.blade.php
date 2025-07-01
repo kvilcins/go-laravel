@@ -3,7 +3,7 @@
 @endphp
 
 <footer class="footer">
-    <section class="footer__contacts" id="contacts">
+    <section class="footer__contacts" data-scroll-target="footer">
         <div class="container">
             <h2 class="footer__title">{!! get_data($data, 'title', 'Контакты') !!}</h2>
             <div class="footer__content">
@@ -88,4 +88,8 @@
             </div>
         </div>
     </div>
+
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Back to top">
+        ↑
+    </button>
 </footer>

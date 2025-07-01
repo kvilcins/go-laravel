@@ -1,4 +1,4 @@
-<section class="about-us" id="about-us">
+<section class="about-us" data-scroll-target="about-us">
     <div class="container">
         <h2 class="about-us__title h2">{!! get_data($data, 'title', 'О нас') !!}</h2>
         <div class="about-us__content">

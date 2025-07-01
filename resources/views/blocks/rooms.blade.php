@@ -1,4 +1,4 @@
-<section class="room" id="room">
+<section class="room" data-scroll-target="rooms">
     <div class="container">
         <h2 class="room__title h2">{!! $title !!}</h2>
         <ul class="room__list">

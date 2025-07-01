@@ -18,9 +18,9 @@
 }
 
 .booking__legend {
+    @include font($Inter-600);
     font-size: 32px;
-    font-weight: 600;
-    color: #FFFFFF;
+    color: $white-color;
     margin-bottom: 30px;
     text-align: center;
     width: 100%;
@@ -44,7 +44,7 @@
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(205, 6, 255, 0.3);
+        box-shadow: 0 15px 40px rgba($neon-purple, 0.3);
     }
 }
 
@@ -54,8 +54,8 @@
     pointer-events: none;
 
     &:checked + .booking__hall-visual {
-        border: 3px solid #CD06FF;
-        box-shadow: 0 0 30px rgba(205, 6, 255, 0.6);
+        border: 3px solid $neon-purple;
+        box-shadow: 0 0 30px rgba($neon-purple, 0.6);
         transform: scale(1.02);
 
         &::after {
@@ -64,31 +64,32 @@
     }
 
     &--80s-vibes + .booking__hall-visual {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../img/rooms/80s-vibes.jpg');
+        background: linear-gradient(rgba($black-color,0.4), rgba($black-color,0.4)), url('../img/rooms/80s-vibes.jpg');
         background-size: cover;
         background-position: center;
     }
 
     &--star-wars + .booking__hall-visual {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../img/rooms/star-wars.jpg');
+        background: linear-gradient(rgba($black-color,0.4), rgba($black-color,0.4)), url('../img/rooms/star-wars.jpg');
         background-size: cover;
         background-position: center;
     }
 
     &--wild-west + .booking__hall-visual {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../img/rooms/wild-west.jpg');
+        background: linear-gradient(rgba($black-color,0.4), rgba($black-color,0.4)), url('../img/rooms/wild-west.jpg');
         background-size: cover;
         background-position: center;
     }
 
     &--neon-style + .booking__hall-visual {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../img/rooms/neon-style.jpg');
+        background: linear-gradient(rgba($black-color,0.4), rgba($black-color,0.4)), url('../img/rooms/neon-style.jpg');
         background-size: cover;
         background-position: center;
     }
 }
 
 .booking__hall-visual {
+    @include font($Inter-700);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,10 +97,9 @@
     border: 2px solid transparent;
     border-radius: 15px;
     font-size: 24px;
-    font-weight: 700;
-    color: #FFFFFF;
+    color: $white-color;
     text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 4px rgba($black-color,0.8);
     transition: all 0.3s ease;
     position: relative;
 
@@ -110,7 +110,7 @@
         right: 15px;
         width: 30px;
         height: 30px;
-        background: #CD06FF;
+        background: $neon-purple;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -122,11 +122,11 @@
 }
 
 .booking__content {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba($white-color, 0.05);
     border-radius: 20px;
     padding: 40px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba($white-color, 0.1);
 }
 
 .booking__sub-fieldset {
@@ -136,9 +136,9 @@
 }
 
 .booking__sub-legend {
+    @include font($Inter-500);
     font-size: 20px;
-    font-weight: 500;
-    color: #FFFFFF;
+    color: $white-color;
     margin-bottom: 15px;
 }
 
@@ -159,25 +159,25 @@
     pointer-events: none;
 
     &:checked + .booking__option-text {
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
-        color: #FFFFFF;
+        background: $title-underline-gradient;
+        color: $white-color;
         transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(205, 6, 255, 0.4);
+        box-shadow: 0 5px 15px rgba($neon-purple, 0.4);
     }
 }
 
 .booking__option-text {
     display: block;
     padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba($white-color, 0.1);
+    border: 1px solid rgba($white-color, 0.2);
     border-radius: 25px;
-    color: #FFFFFF;
+    color: $white-color;
     font-size: 16px;
     transition: all 0.3s ease;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba($white-color, 0.15);
         transform: translateY(-2px);
     }
 }
@@ -207,30 +207,30 @@
 }
 
 .booking__input-text {
+    @include font($Inter-500);
     font-size: 16px;
-    color: #FFFFFF;
-    font-weight: 500;
+    color: $white-color;
 }
 
 .booking__select,
 .booking__input {
     padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba($white-color, 0.1);
+    border: 1px solid rgba($white-color, 0.2);
     border-radius: 10px;
-    color: #FFFFFF;
+    color: $white-color;
     font-size: 16px;
     transition: all 0.3s ease;
 
     &:focus {
         outline: none;
-        border-color: #CD06FF;
-        box-shadow: 0 0 15px rgba(205, 6, 255, 0.3);
-        background: rgba(255, 255, 255, 0.15);
+        border-color: $neon-purple;
+        box-shadow: 0 0 15px rgba($neon-purple, 0.3);
+        background: rgba($white-color, 0.15);
     }
 
     &::placeholder {
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba($white-color, 0.6);
     }
 }
 
@@ -238,23 +238,23 @@
     cursor: pointer;
 
     option {
-        background: #1b1a1b;
-        color: #FFFFFF;
+        background: $main-background-color;
+        color: $white-color;
     }
 }
 
 .booking__submit {
+    @include font($Inter-700);
     width: 100%;
     max-width: 400px;
     margin: 40px auto 0;
     display: block;
     padding: 18px 40px;
-    background: linear-gradient(45deg, #CD06FF, #FF06CD);
+    background: $title-underline-gradient;
     border: none;
     border-radius: 50px;
-    color: #FFFFFF;
+    color: $white-color;
     font-size: 20px;
-    font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -268,13 +268,13 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba($white-color,0.3), transparent);
         transition: left 0.5s ease;
     }
 
     &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(205, 6, 255, 0.4);
+        box-shadow: 0 15px 40px rgba($neon-purple, 0.4);
 
         &::before {
             left: 100%;
@@ -292,22 +292,22 @@
     border-radius: 5px;
 
     &--success {
-        background-color: #4caf50;
-        color: white;
+        background-color: $success-green;
+        color: $white-color;
     }
 
     &--error {
-        background-color: #f44336;
-        color: white;
+        background-color: $danger-red;
+        color: $white-color;
     }
 }
 
 @keyframes glow {
     from {
-        text-shadow: 0 0 20px rgba(205, 6, 255, 0.5);
+        text-shadow: 0 0 20px rgba($neon-purple, 0.5);
     }
     to {
-        text-shadow: 0 0 30px rgba(205, 6, 255, 0.8), 0 0 40px rgba(255, 6, 205, 0.3);
+        text-shadow: 0 0 30px rgba($neon-purple, 0.8), 0 0 40px rgba(255, 6, 205, 0.3);
     }
 }
 

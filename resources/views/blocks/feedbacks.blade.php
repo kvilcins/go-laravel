@@ -1,4 +1,4 @@
-<section class="feedbacks" id="feedbacks">
+<section class="feedbacks" data-scroll-target="feedbacks">
     <div class="container">
         <h2 class="feedbacks__title h2">{!! get_data($data, 'title', 'Отзывы посетителей') !!}</h2>
         <div class="feedbacks__slider">

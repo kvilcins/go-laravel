@@ -26,9 +26,9 @@
 }
 
 .faq__item {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba($white-color, 0.05);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba($white-color, 0.1);
     border-radius: 20px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -43,19 +43,19 @@
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(205, 6, 255, 0.2);
-        border-color: rgba(205, 6, 255, 0.3);
+        box-shadow: 0 15px 35px rgba($neon-purple, 0.2);
+        border-color: rgba($neon-purple, 0.3);
     }
 
     &--active {
         .faq__button {
-            background: linear-gradient(135deg, rgba(205, 6, 255, 0.2) 0%, rgba(255, 6, 205, 0.2) 100%);
-            color: #FFFFFF;
+            background: linear-gradient(135deg, rgba($neon-purple, 0.2) 0%, rgba(255, 6, 205, 0.2) 100%);
+            color: $white-color;
         }
 
         .faq__icon {
-            background: linear-gradient(45deg, #CD06FF, #FF06CD);
-            color: #FFFFFF;
+            background: $title-underline-gradient;
+            color: $white-color;
             transform: rotate(45deg);
         }
 
@@ -92,7 +92,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(205, 6, 255, 0.1) 0%, rgba(255, 6, 205, 0.1) 100%);
+        background: linear-gradient(135deg, rgba($neon-purple, 0.1) 0%, rgba(255, 6, 205, 0.1) 100%);
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -103,20 +103,20 @@
         }
 
         .faq__question {
-            color: var(--neon-purple, #CD06FF);
+            color: var(--neon-purple, $neon-purple);
         }
 
         .faq__icon {
             transform: scale(1.1);
-            background: rgba(205, 6, 255, 0.2);
+            background: rgba($neon-purple, 0.2);
         }
     }
 }
 
 .faq__question {
+    @include font($Inter-600);
     font-size: 20px;
-    font-weight: 600;
-    color: #FFFFFF;
+    color: $white-color;
     transition: color 0.3s ease;
     position: relative;
     z-index: 1;
@@ -126,7 +126,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba($white-color, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,7 +139,7 @@
 .faq__svg {
     width: 24px;
     height: 24px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba($white-color, 0.8);
     transition: all 0.4s ease;
 }
 
@@ -152,20 +152,20 @@
 
 .faq__item--active {
     .faq__icon {
-        background: linear-gradient(45deg, #CD06FF, #FF06CD);
-        color: #FFFFFF;
+        background: $title-underline-gradient;
+        color: $white-color;
         transform: rotate(180deg);
     }
 
     .faq__svg {
-        color: #FFFFFF;
+        color: $white-color;
     }
 }
 
 .faq__svg {
     width: 24px;
     height: 24px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba($white-color, 0.8);
     transition: color 0.3s ease;
 }
 
@@ -189,13 +189,13 @@
     overflow: hidden;
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba($black-color, 0.2);
 }
 
 .faq__answer {
     font-size: 16px;
     line-height: 24px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba($white-color, 0.9);
     margin: 0;
     position: relative;
 
@@ -206,7 +206,7 @@
         top: 0;
         width: 4px;
         height: 100%;
-        background: linear-gradient(to bottom, #CD06FF, #FF06CD);
+        background: $title-underline-gradient;
         border-radius: 2px;
         margin-right: 15px;
     }

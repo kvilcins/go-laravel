@@ -1,5 +1,5 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<section class="booking" id="booking">
+<section class="booking" data-scroll-target="booking">
     <div class="container">
         <h2 class="booking__title h2">Забронировать зал просто</h2>
 

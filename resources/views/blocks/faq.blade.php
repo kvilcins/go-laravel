@@ -1,4 +1,4 @@
-<section class="faq" id="faq">
+<section class="faq" data-scroll-target="faq">
     <div class="container">
         <h2 class="faq__title h2">{!! get_data($data, 'title', '') !!}</h2>
         <ul class="faq__list">

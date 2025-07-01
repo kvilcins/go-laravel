@@ -34,7 +34,7 @@
             <a href="{{ route('admin.bookings') }}" class="btn btn--primary" style="margin-right: 10px;">
                 Просмотреть бронирования
             </a>
-            <a href="{{ route('admin.create-date') }}" class="btn btn--success">
+            <a href="{{ route('admin.store-date') }}" class="btn btn--success">
                 Добавить новую дату
             </a>
         </div>

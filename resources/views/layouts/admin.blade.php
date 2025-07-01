@@ -27,7 +27,7 @@
                 <a href="{{ route('admin.room-availability') }}" class="admin-nav__item {{ request()->routeIs('admin.room-availability') ? 'admin-nav__item--active' : '' }}">
                     🏠 Доступность комнат
                 </a>
-                <a href="{{ route('home') }}" class="admin-nav__item">
+                <a href="{{ route('home') }}" class="admin-nav__item" target="_blank">
                     🌐 На сайт
                 </a>
             </nav>

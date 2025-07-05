@@ -5,8 +5,12 @@
 @import './global/global';
 @import './normalize';
 
-@import './admin/dashboard';
+@import './admin/admin';
+@import './admin/forms';
+@import './admin/stats';
+@import './admin/ui-components';
 
+@import './components/slider';
 @import './components/partials/header';
 @import './components/partials/footer';
 

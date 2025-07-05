@@ -1,5 +1,5 @@
 <main class="main {!! $class ?? '' !!}">
-    <div class="container {!! $containerClass ?? '' !!}">
+    <div class="{!! $containerClass ?? '' !!}">
         {!! $slot !!}
     </div>
 </main>

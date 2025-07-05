@@ -10,234 +10,234 @@
         bottom: 0;
         animation: backgroundPulse 8s ease-in-out infinite;
     }
+}
 
-    &__container {
-        display: flex;
-        justify-content: center;
-        position: relative;
-        z-index: 2;
-    }
+.main-banner__container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
 
-    &__text-wrap {
-        position: relative;
-        height: 823px;
-        max-width: 1180px;
-        margin: 0 auto;
-        flex-basis: 1174px;
-        padding-top: 100px;
+.main-banner__text-wrap {
+    position: relative;
+    height: 823px;
+    max-width: 1180px;
+    margin: 0 auto;
+    flex-basis: 1174px;
+    padding-top: 100px;
 
-        &:after {
-            content: '';
-            background-image: url('../img/main-banner.png');
-            background-size: 675px 762px;
-            width: 675px;
-            height: 762px;
-            display: inline-block;
-            position: absolute;
-            bottom: -62px;
-            left: 500px;
-            opacity: 0.9;
-            animation: floatImage 6s ease-in-out infinite;
-            mask-image: linear-gradient(to bottom, rgba($black-color, 1) 70%, transparent 100%);
-        }
-    }
-
-    &__subtitle {
-        @include font($Inter-900);
-        text-transform: uppercase;
-        font-size: 150px;
-        letter-spacing: -15px;
-        line-height: 100%;
-        margin: 0;
-        padding: 0;
-        background: $title-underline-gradient;
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientShift 3s ease-in-out infinite;
-        text-shadow: 0 0 50px rgba($neon-purple, 0.5);
-    }
-
-    &__title {
-        @include font($Inter-400);
-        font-size: 28px;
-        padding: 0 0 0 100px;
-        line-height: 50px;
-        margin: 0 0 30px 0;
-        text-align: left;
-        text-transform: unset;
-        opacity: 0;
-        animation: slideInLeft 1s ease-out 0.5s forwards;
-    }
-
-    &__advantages {
-        display: flex;
-        flex-direction: row;
-        gap: 40px;
-        margin: 0 0 150px 0;
-        opacity: 0;
-        animation: slideInUp 1s ease-out 1s forwards;
-    }
-
-    &__advantage {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        flex-basis: 210px;
-        transition: transform 0.3s ease;
-
-        &:hover {
-            transform: translateY(-10px);
-        }
-    }
-
-    &__advantage-number {
-        @include font($Inter-900);
-        margin: 0;
-        padding: 0;
-        position: relative;
-        font-size: 100px;
-        line-height: 141px;
-        color: var(--neon-purple, $neon-purple);
-        font-variant: small-caps;
-        text-shadow: 0 0 30px rgba($neon-purple, 0.8);
-        animation: numberPulse 2s ease-in-out infinite;
-
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: $title-underline-gradient;
-            transition: width 0.3s ease;
-        }
-
-        &:hover::after {
-            width: 100%;
-        }
-    }
-
-    &__advantage-text {
-        margin: 0;
-        padding: 0;
-        transition: color 0.3s ease;
-
-        .main-banner__advantage:hover & {
-            color: $neon-purple;
-        }
-    }
-
-    &__link {
-        display: inline-block;
-        opacity: 0;
-        animation: slideInUp 1s ease-out 1.5s forwards;
-    }
-
-    &__button {
-        @include font($Inter-700);
-        background: linear-gradient(45deg, $dark-purple, $cold-purple);
-        border: none;
-        border-radius: 50px;
-        width: 374px;
-        height: 80px;
-        box-shadow:
-            0 0 30px rgba($neon-purple, 0.4),
-            inset 0 1px 0 rgba($white-color, 0.1);
-        font-size: 26px;
-        line-height: 30px;
-        text-transform: uppercase;
-        color: $main-text-color;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba($white-color, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        &:hover {
-            transform: translateY(-5px);
-            box-shadow:
-                0 15px 40px rgba($neon-purple, 0.6),
-                inset 0 1px 0 rgba($white-color, 0.2);
-
-            &::before {
-                left: 100%;
-            }
-        }
-
-        &:focus {
-            outline: 2px solid $neon-purple;
-        }
-
-        &:active {
-            transform: translateY(-2px);
-            box-shadow:
-                0 8px 20px rgba($neon-purple, 0.4),
-                inset 0 1px 0 rgba($white-color, 0.1);
-        }
-    }
-
-    &__scroll {
+    &:after {
+        content: '';
+        background-image: url('../img/main-banner.png');
+        background-size: 675px 762px;
+        width: 675px;
+        height: 762px;
         display: inline-block;
         position: absolute;
-        background-color: transparent;
-        border: none;
-        top: 646px;
-        left: 536px;
-        z-index: 99;
-        opacity: 0;
-        animation: fadeInBounce 1s ease-out 2s forwards;
+        bottom: -62px;
+        left: 500px;
+        opacity: 0.9;
+        animation: floatImage 6s ease-in-out infinite;
+        mask-image: linear-gradient(to bottom, rgba($black-color, 1) 70%, transparent 100%);
+    }
+}
+
+.main-banner__subtitle {
+    @include font($Inter-900);
+    text-transform: uppercase;
+    font-size: 150px;
+    letter-spacing: -15px;
+    line-height: 100%;
+    margin: 0;
+    padding: 0;
+    background: $title-underline-gradient;
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-shadow: 0 0 50px rgba($neon-purple, 0.5);
+}
+
+.main-banner__title {
+    @include font($Inter-400);
+    font-size: 28px;
+    padding: 0 0 0 100px;
+    line-height: 50px;
+    margin: 0 0 30px 0;
+    text-align: left;
+    text-transform: unset;
+    opacity: 0;
+    animation: slideInLeft 1s ease-out 0.5s forwards;
+}
+
+.main-banner__advantages {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin: 0 0 150px 0;
+    opacity: 0;
+    animation: slideInUp 1s ease-out 1s forwards;
+}
+
+.main-banner__advantage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex-basis: 210px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-10px);
+    }
+}
+
+.main-banner__advantage-number {
+    @include font($Inter-900);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-size: 100px;
+    line-height: 141px;
+    color: var(--neon-purple, $neon-purple);
+    font-variant: small-caps;
+    text-shadow: 0 0 30px rgba($neon-purple, 0.8);
+    animation: numberPulse 2s ease-in-out infinite;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: $title-underline-gradient;
+        transition: width 0.3s ease;
     }
 
-    &__scroll-icon {
-        border: 2px solid rgba($white-color, 0.6);
-        border-radius: 50%;
-        transition: all 0.4s ease;
-        animation: scrollPulse 2s ease-in-out infinite;
+    &:hover::after {
+        width: 100%;
+    }
+}
 
-        &:hover {
-            border-color: $neon-purple;
-            background: rgba($neon-purple, 0.1);
-            transform: scale(1.1);
+.main-banner__advantage-text {
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s ease;
 
-            .main-banner__scroll-rect {
-                fill: $neon-purple;
-            }
+    .main-banner__advantage:hover & {
+        color: $neon-purple;
+    }
+}
+
+.main-banner__link {
+    display: inline-block;
+    opacity: 0;
+    animation: slideInUp 1s ease-out 1.5s forwards;
+}
+
+.main-banner__button {
+    @include font($Inter-700);
+    background: linear-gradient(45deg, $dark-purple, $cold-purple);
+    border: none;
+    border-radius: 50px;
+    width: 374px;
+    height: 80px;
+    box-shadow:
+        0 0 30px rgba($neon-purple, 0.4),
+        inset 0 1px 0 rgba($white-color, 0.1);
+    font-size: 26px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: $main-text-color;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba($white-color, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow:
+            0 15px 40px rgba($neon-purple, 0.6),
+            inset 0 1px 0 rgba($white-color, 0.2);
+
+        &::before {
+            left: 100%;
         }
+    }
 
-        &:active {
-            background: $neon-purple;
-            border-color: $neon-purple;
-            transform: scale(0.95);
+    &:focus {
+        outline: 2px solid $neon-purple;
+    }
 
-            .main-banner__scroll-rect {
-                fill: $main-text-color;
-            }
+    &:active {
+        transform: translateY(-2px);
+        box-shadow:
+            0 8px 20px rgba($neon-purple, 0.4),
+            inset 0 1px 0 rgba($white-color, 0.1);
+    }
+}
+
+.main-banner__scroll {
+    display: inline-block;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: 646px;
+    left: 536px;
+    z-index: 99;
+    opacity: 0;
+    animation: fadeInBounce 1s ease-out 2s forwards;
+}
+
+.main-banner__scroll-icon {
+    border: 2px solid rgba($white-color, 0.6);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    animation: scrollPulse 2s ease-in-out infinite;
+
+    &:hover {
+        border-color: $neon-purple;
+        background: rgba($neon-purple, 0.1);
+        transform: scale(1.1);
+
+        .main-banner__scroll-rect {
+            fill: $neon-purple;
         }
     }
 
-    &__scroll-circle {
-        fill: transparent;
-    }
+    &:active {
+        background: $neon-purple;
+        border-color: $neon-purple;
+        transform: scale(0.95);
 
-    &__scroll-rect {
-        fill: rgba($white-color, 0.8);
-        transition: fill 0.3s ease;
+        .main-banner__scroll-rect {
+            fill: $main-text-color;
+        }
     }
+}
+
+.main-banner__scroll-circle {
+    fill: transparent;
+}
+
+.main-banner__scroll-rect {
+    fill: rgba($white-color, 0.8);
+    transition: fill 0.3s ease;
 }
 
 @keyframes backgroundPulse {
@@ -288,8 +288,12 @@
 }
 
 @keyframes floatImage {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(1deg); }
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(1deg);
+    }
 }
 
 @keyframes numberPulse {
@@ -321,6 +325,7 @@
         &__text-wrap {
             flex-basis: 904px;
             height: 583px;
+            padding-top: 80px;
 
             &:after {
                 background-size: 453px 520px;
@@ -338,81 +343,93 @@
         }
 
         &__title {
-            padding: 0 0 0 100px;
-            font-size: 22px;
-            line-height: 30px;
-            margin: 0 0 30px 0;
+            padding: 0 0 0 80px;
+            font-size: 24px;
+            line-height: 40px;
+            margin: 0 0 25px 0;
         }
 
         &__advantages {
-            margin: 0 0 80px 0;
+            margin: 0 0 100px 0;
+            gap: 35px;
+        }
+
+        &__advantage-number {
+            font-size: 85px;
+            line-height: 120px;
         }
 
         &__button {
-            border-radius: 10px;
+            border-radius: 25px;
             margin: 0 0 0 40px;
-            width: 296px;
-            height: 64px;
+            width: 320px;
+            height: 70px;
             font-size: 22px;
-            line-height: 30px;
+            line-height: 28px;
         }
 
         &__scroll {
-            width: 67px;
-            height: 67px;
-            top: 471px;
-            left: 432px;
+            width: 60px;
+            height: 60px;
+            top: 450px;
+            left: 400px;
         }
     }
 }
 
 @media screen and (max-width: 1023px) {
     .main-banner {
-        padding: 30px 40px 40px 40px;
+        padding: 40px 30px 50px 30px;
 
         &__text-wrap {
-            flex-basis: 688px;
-            height: 537px;
+            flex-basis: 100%;
+            max-width: 700px;
+            height: auto;
+            padding-top: 60px;
+            text-align: center;
 
             &:after {
-                background-size: 409px 479px;
-                width: 409px;
-                height: 479px;
-                top: 57px;
-                left: 283px;
+                display: none;
             }
         }
 
         &__subtitle {
-            font-size: 86px;
-            line-height: 86px;
-            letter-spacing: -8px;
+            font-size: 80px;
+            line-height: 80px;
+            letter-spacing: -6px;
+            margin: 0 0 20px 0;
         }
 
         &__title {
-            padding: 0 0 0 60px;
-            font-size: 18px;
-            line-height: 24px;
-            margin: 0 0 50px 0;
+            padding: 0;
+            font-size: 20px;
+            line-height: 28px;
+            margin: 0 0 40px 0;
+            text-align: center;
         }
 
         &__advantages {
-            gap: 32px;
+            justify-content: center;
+            margin: 0 0 60px 0;
+            gap: 30px;
+        }
+
+        &__advantage {
+            flex-basis: auto;
+        }
+
+        &__advantage-number {
+            font-size: 70px;
+            line-height: 100px;
         }
 
         &__button {
-            margin: unset;
-            border-radius: 4px;
-            width: 214px;
-            height: 46px;
-            font-size: 16px;
+            margin: 0;
+            border-radius: 15px;
+            width: 280px;
+            height: 60px;
+            font-size: 18px;
             line-height: 24px;
-
-            &:hover,
-            &:focus,
-            &:active {
-                border-radius: 4px;
-            }
         }
 
         &__scroll {
@@ -423,47 +440,99 @@
 
 @media screen and (max-width: 767px) {
     .main-banner {
-        padding: 20px 20px 30px 20px;
+        padding: 30px 20px 40px 20px;
 
         &__text-wrap {
-            flex-basis: 280px;
-            height: 204px;
-
-            &:after {
-                background-size: cover;
-                width: 161px;
-                height: 179px;
-                top: 23px;
-                left: 119px;
-            }
+            padding-top: 40px;
         }
 
         &__subtitle {
-            font-size: 35px;
-            line-height: 35px;
+            font-size: 48px;
+            line-height: 48px;
             letter-spacing: -3px;
-            margin: 0 0 6px 0;
+            margin: 0 0 15px 0;
         }
 
         &__title {
-            font-size: 10px;
-            line-height: 14px;
-            padding: 0 0 0 15px;
-            margin: 0 0 10px 0;
+            font-size: 16px;
+            line-height: 22px;
+            margin: 0 0 30px 0;
+        }
+
+        &__advantages {
+            flex-direction: column;
+            align-items: center;
+            margin: 0 0 40px 0;
+            gap: 20px;
+        }
+
+        &__advantage {
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+        }
+
+        &__advantage-number {
+            font-size: 50px;
+            line-height: 60px;
+        }
+
+        &__advantage-text {
+            font-size: 14px;
+            text-align: left;
+        }
+
+        &__button {
+            width: 240px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 20px;
+            border-radius: 12px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-banner {
+        padding: 20px 15px 30px 15px;
+
+        &__text-wrap {
+            padding-top: 30px;
+        }
+
+        &__subtitle {
+            font-size: 36px;
+            line-height: 36px;
+            letter-spacing: -2px;
+            margin: 0 0 12px 0;
+        }
+
+        &__title {
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 0 25px 0;
         }
 
         &__advantages {
             margin: 0 0 30px 0;
-            gap: 20px;
+            gap: 15px;
+        }
+
+        &__advantage-number {
+            font-size: 40px;
+            line-height: 50px;
+        }
+
+        &__advantage-text {
+            font-size: 12px;
         }
 
         &__button {
-            margin: unset;
-            border-radius: 4px;
-            width: 117px;
-            height: 27px;
-            font-size: 10px;
-            line-height: 12px;
+            width: 200px;
+            height: 45px;
+            font-size: 14px;
+            line-height: 18px;
+            border-radius: 10px;
         }
     }
 }

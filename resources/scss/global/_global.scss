@@ -52,13 +52,14 @@ section {
     padding: 50px 0 50px 0;
 }
 
-h1 {
+h1, .h1 {
     font-size: 45px;
     text-transform: uppercase;
     text-align: center;
+    margin: 0;
 }
 
-h2 {
+h2, .h2 {
     @include font($Inter-700);
     text-align: center;
     text-transform: uppercase;
@@ -66,8 +67,7 @@ h2 {
     line-height: 50px;
     position: relative;
     z-index: 2;
-    margin-bottom: 80px;
-    opacity: 0;
+    margin: 0 0 80px 0;
     animation: titleAppear 1s ease-out forwards;
 
     &::after {
@@ -103,14 +103,19 @@ p {
         padding: 35px 60px 35px 60px;
     }
 
-    h1 {
+    .container {
+        max-width: 942px;
+        padding: 0 20px;
+    }
+
+    h1, .h1 {
         font-size: 35px;
     }
 
-    h2 {
+    h2, .h2 {
         font-size: 30px;
         line-height: 40px;
-        margin: 0 0 36px 0;
+        margin: 0 0 50px 0;
     }
 
     p {
@@ -128,14 +133,18 @@ p {
         padding: 35px 40px 35px 40px;
     }
 
-    h1 {
+    .container {
+        max-width: 700px;
+        padding: 0 15px;
+    }
+
+    h1, .h1 {
         font-size: 28px;
     }
 
-    h2 {
+    h2, .h2 {
         font-size: 24px;
         line-height: 36px;
-        margin: 0 0 30px 0;
     }
 
     p {
@@ -144,14 +153,18 @@ p {
 }
 
 @media screen and (max-width: 767px) {
-    h1 {
+    h1, .h1 {
         font-size: 25px;
     }
 
-    h2 {
+    h2, .h2 {
         font-size: 18px;
-        line-height: 18px;
-        margin: 0 0 15px 0;
+        line-height: 20px;
+        margin: 0 0 40px 0;
+    }
+
+    .container {
+        max-width: 480px;
     }
 
     p {

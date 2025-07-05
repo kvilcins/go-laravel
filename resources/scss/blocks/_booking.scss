@@ -15,6 +15,10 @@
     &--halls {
         margin-bottom: 60px;
     }
+
+    &--datetime {
+        margin-top: 40px;
+    }
 }
 
 .booking__legend {
@@ -182,10 +186,6 @@
     }
 }
 
-.booking__fieldset--datetime {
-    margin-top: 40px;
-}
-
 .booking__datetime {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -289,15 +289,18 @@
 .booking__message {
     padding: 15px 20px;
     margin-bottom: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 16px;
 
     &--success {
-        background-color: $success-green;
+        background-color: rgba($success-green, 0.9);
+        border: 1px solid $success-green;
         color: $white-color;
     }
 
     &--error {
-        background-color: $danger-red;
+        background-color: rgba($danger-red, 0.9);
+        border: 1px solid $danger-red;
         color: $white-color;
     }
 }
@@ -311,31 +314,95 @@
     }
 }
 
+@media screen and (max-width: 1320px) {
+    .booking {
+        padding: 70px 0;
+    }
+
+    .booking__legend {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .booking__content {
+        padding: 35px;
+        border-radius: 16px;
+    }
+
+    .booking__halls {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 18px;
+    }
+
+    .booking__hall-label {
+        height: 180px;
+    }
+
+    .booking__datetime {
+        gap: 35px;
+    }
+}
+
 @media screen and (max-width: 1023px) {
     .booking {
         padding: 60px 0;
     }
 
-    .booking__title {
-        font-size: 36px;
-        margin-bottom: 40px;
+    .booking__legend {
+        font-size: 26px;
+        margin-bottom: 20px;
     }
 
     .booking__content {
         padding: 30px;
-    }
-
-    .booking__datetime {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        border-radius: 15px;
     }
 
     .booking__halls {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .booking__hall-label {
+        height: 160px;
     }
 
     .booking__hall-visual {
         font-size: 20px;
+
+        &::after {
+            width: 25px;
+            height: 25px;
+            font-size: 16px;
+            top: 12px;
+            right: 12px;
+        }
+    }
+
+    .booking__datetime {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .booking__options {
+        gap: 12px;
+    }
+
+    .booking__option-text {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+
+    .booking__select,
+    .booking__input {
+        padding: 12px 18px;
+        font-size: 15px;
+    }
+
+    .booking__submit {
+        padding: 16px 35px;
+        font-size: 18px;
+        max-width: 350px;
     }
 }
 
@@ -344,50 +411,178 @@
         padding: 40px 0;
     }
 
-    .booking__title {
-        font-size: 28px;
-        margin-bottom: 30px;
+    .booking__legend {
+        font-size: 22px;
+        margin-bottom: 18px;
     }
 
-    .booking__legend {
-        font-size: 24px;
-        margin-bottom: 20px;
+    .booking__fieldset {
+        margin-bottom: 30px;
+
+        &--halls {
+            margin-bottom: 40px;
+        }
     }
 
     .booking__content {
         padding: 20px;
+        border-radius: 12px;
     }
 
     .booking__halls {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 12px;
+        margin-bottom: 30px;
     }
 
     .booking__hall-label {
-        height: 150px;
+        height: 140px;
+        border-radius: 12px;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
     }
 
     .booking__hall-visual {
         font-size: 18px;
+        border-radius: 12px;
+
+        &::after {
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+    .booking__sub-legend {
+        font-size: 18px;
+        margin-bottom: 12px;
     }
 
     .booking__options {
-        gap: 10px;
+        gap: 8px;
     }
 
     .booking__option-text {
-        padding: 10px 16px;
+        padding: 8px 14px;
         font-size: 14px;
+        border-radius: 20px;
     }
 
     .booking__select,
     .booking__input {
-        padding: 12px 16px;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .booking__input-text {
         font-size: 14px;
     }
 
     .booking__submit {
-        font-size: 18px;
-        padding: 15px 30px;
+        padding: 14px 30px;
+        font-size: 16px;
+        max-width: 300px;
+        margin-top: 30px;
+        border-radius: 40px;
+    }
+
+    .booking__message {
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .booking {
+        padding: 30px 0;
+    }
+
+    .booking__legend {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .booking__content {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .booking__halls {
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .booking__hall-label {
+        height: 120px;
+        border-radius: 10px;
+    }
+
+    .booking__hall-visual {
+        font-size: 16px;
+        border-radius: 10px;
+
+        &::after {
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            top: 8px;
+            right: 8px;
+        }
+    }
+
+    .booking__sub-fieldset {
+        margin-bottom: 20px;
+    }
+
+    .booking__sub-legend {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .booking__options {
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .booking__option-text {
+        padding: 6px 12px;
+        font-size: 13px;
+        border-radius: 18px;
+    }
+
+    .booking__selects,
+    .booking__inputs {
+        gap: 15px;
+    }
+
+    .booking__select,
+    .booking__input {
+        padding: 8px 12px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .booking__input-text {
+        font-size: 13px;
+    }
+
+    .booking__submit {
+        padding: 12px 25px;
+        font-size: 15px;
+        max-width: 250px;
+        margin-top: 25px;
+        border-radius: 35px;
+    }
+
+    .booking__message {
+        padding: 10px 12px;
+        font-size: 13px;
+        border-radius: 5px;
+        margin-bottom: 15px;
     }
 }

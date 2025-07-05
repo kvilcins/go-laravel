@@ -1,0 +1,368 @@
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    @include font($Inter-700);
+    width: 250px;
+    background: $admin-sidebar-gradient;
+    color: $white-color;
+    padding: 20px 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+
+    &__title {
+        @include font($Inter-700);
+        padding: 0 20px 30px;
+        font-size: 24px;
+        border-bottom: 1px solid $sidebar-border;
+    }
+}
+
+.admin-nav {
+    padding: 20px 0;
+
+    &__item {
+        display: block;
+        padding: 12px 20px;
+        color: $white-color;
+        text-decoration: none;
+        @include transition();
+
+        &:hover,
+        &--active {
+            background-color: $sidebar-overlay;
+        }
+    }
+}
+
+.admin-content {
+    margin-left: 250px;
+    flex: 1;
+    padding: 30px;
+}
+
+.admin-header {
+    background: $white-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: $admin-shadow;
+    margin-bottom: 30px;
+
+    &__title {
+        font-size: 28px;
+        color: $dark-purple;
+        margin-bottom: 5px;
+    }
+
+    &__subtitle {
+        color: $text-muted;
+        font-size: 14px;
+    }
+}
+
+.admin-card {
+    background: $white-color;
+    color: $dark-grey;
+    border-radius: 8px;
+    box-shadow: $admin-shadow;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    &__header {
+        padding: 20px;
+        background: $light-grey;
+        border-bottom: 1px solid $border-light;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        @include font($Inter-600);
+        font-size: 18px;
+    }
+
+    &__content {
+        padding: 20px;
+    }
+
+    &--spaced {
+        margin-bottom: 30px;
+    }
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid $border-light;
+    }
+
+    th {
+        @include font($Inter-600);
+        background: $light-grey;
+        color: $text-muted;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+}
+
+.admin-actions {
+    display: flex;
+    gap: 5px;
+
+    &__form {
+        display: inline;
+    }
+}
+
+.admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+
+    &--detailed {
+        text-align: center;
+        padding: 40px;
+    }
+
+    &__title {
+        margin-bottom: 15px;
+    }
+
+    &__subtitle {
+        color: #666;
+        font-size: 14px;
+    }
+}
+
+.admin-hint {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.admin-toggle-form {
+    display: inline;
+}
+
+@media screen and (max-width: 1320px) {
+    .admin-content {
+        padding: 20px;
+    }
+
+    .admin-header {
+        padding: 15px;
+
+        &__title {
+            font-size: 24px;
+        }
+    }
+
+    .admin-card {
+        &__header {
+            padding: 15px;
+        }
+
+        &__content {
+            padding: 15px;
+        }
+    }
+
+    .admin-table {
+        th,
+        td {
+            padding: 8px;
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+
+        &__title {
+            padding: 15px 20px 20px;
+            font-size: 20px;
+        }
+    }
+
+    .admin-nav {
+        padding: 15px 0;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+
+        &__item {
+            flex-shrink: 0;
+            padding: 8px 15px;
+            margin-right: 5px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    }
+
+    .admin-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .admin-header {
+        &__title {
+            font-size: 22px;
+        }
+
+        &__subtitle {
+            font-size: 13px;
+        }
+    }
+
+    .admin-card {
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        &__title {
+            font-size: 16px;
+        }
+    }
+
+    .admin-actions {
+        flex-direction: column;
+        gap: 5px;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .admin-table {
+        font-size: 12px;
+
+        th,
+        td {
+            padding: 6px 4px;
+        }
+
+        th {
+            font-size: 11px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-sidebar {
+        &__title {
+            font-size: 18px;
+            padding: 10px 15px 15px;
+        }
+    }
+
+    .admin-nav {
+        padding: 10px 0;
+
+        &__item {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    }
+
+    .admin-content {
+        padding: 10px;
+    }
+
+    .admin-header {
+        padding: 10px;
+        margin-bottom: 15px;
+
+        &__title {
+            font-size: 18px;
+        }
+
+        &__subtitle {
+            font-size: 12px;
+        }
+    }
+
+    .admin-card {
+        margin-bottom: 15px;
+
+        &__header {
+            padding: 10px;
+        }
+
+        &__content {
+            padding: 10px;
+        }
+
+        &__title {
+            font-size: 14px;
+        }
+
+        &--spaced {
+            margin-bottom: 15px;
+        }
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+
+        table {
+            width: 100%;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 4px 2px;
+            font-size: 11px;
+        }
+
+        th {
+            font-size: 10px;
+        }
+    }
+
+    .admin-hint {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .admin-empty {
+        padding: 20px;
+
+        &--detailed {
+            padding: 20px;
+        }
+
+        &__title {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        &__subtitle {
+            font-size: 12px;
+        }
+    }
+}

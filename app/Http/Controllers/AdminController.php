@@ -26,7 +26,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
-        return view('admin.components.callbacks', compact('requests'));
+        return view('admin.callbacks', compact('requests'));
     }
 
     public function bookings()
@@ -37,7 +37,7 @@ class AdminController extends Controller
 
         $rooms = DB::table('rooms')->pluck('label', 'id')->toArray();
 
-        return view('admin.components.bookings', compact('bookings', 'rooms'));
+        return view('admin.bookings', compact('bookings', 'rooms'));
     }
 
     public function availableDates()
@@ -46,7 +46,7 @@ class AdminController extends Controller
             ->orderBy('date', 'asc')
             ->paginate(20);
 
-        return view('admin.components.available-dates', compact('dates'));
+        return view('admin.available-dates', compact('dates'));
     }
 
     public function roomAvailability()
@@ -62,7 +62,7 @@ class AdminController extends Controller
 
         $rooms = DB::table('rooms')->pluck('label', 'id')->toArray();
 
-        return view('admin.components.room-availability', compact('availability', 'rooms'));
+        return view('admin.room-availability', compact('availability', 'rooms'));
     }
 
     public function storeDate(Request $request)

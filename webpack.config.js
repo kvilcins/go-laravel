@@ -1,6 +1,7 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,10 +19,17 @@ export default {
     module: {
         rules: [
             {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 }
             },
             {
@@ -30,6 +38,13 @@ export default {
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
                 ]
             },
             {
@@ -49,6 +64,7 @@ export default {
         ]
     },
     plugins: [
+        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css'
         }),
@@ -62,7 +78,10 @@ export default {
         })
     ],
     resolve: {
-        extensions: ['.js', '.scss']
+        extensions: ['.js', '.vue', '.scss'],
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js'
+        }
     },
     devtool: 'source-map',
     mode: 'production'

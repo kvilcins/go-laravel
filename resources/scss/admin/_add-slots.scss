@@ -1,0 +1,29 @@
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    .form-label {
+        margin-bottom: 0;
+
+        &--checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #f9fafb;
+            }
+
+            input:checked + & {
+                background-color: #dbeafe;
+                border-color: #3b82f6;
+            }
+        }
+    }
+}

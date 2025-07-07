@@ -30,6 +30,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/available-dates', [AdminController::class, 'availableDates'])->name('available-dates');
     Route::get('/available-dates/create', [AdminController::class, 'createDate'])->name('create-date');
     Route::get('/room-availability', [AdminController::class, 'roomAvailability'])->name('room-availability');
+
+    Route::post('/room-availability', [AdminController::class, 'storeRoomAvailability'])->name('store-room-availability');
+    Route::get('/room-availability/bulk', [AdminController::class, 'createBulkAvailability'])->name('create-bulk-availability');
+    Route::post('/room-availability/bulk', [AdminController::class, 'storeBulkAvailability'])->name('store-bulk-availability');
+
     Route::post('/available-dates', [AdminController::class, 'storeDate'])->name('store-date');
     Route::patch('/available-dates/{id}/toggle', [AdminController::class, 'toggleDate'])->name('toggle-date');
     Route::delete('/available-dates/{id}', [AdminController::class, 'deleteDate'])->name('delete-date');

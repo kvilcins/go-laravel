@@ -1,6 +1,7 @@
 import './bootstrap';
 
 import './admin/delete';
+import './admin/filters';
 
 import './modules/slider';
 import './modules/accordion';

@@ -4771,15 +4771,95 @@ const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
   \**************************************/
 /***/ (() => {
 
-const confirmDelete = (message = 'Вы уверены, что хотите удалить?') => {
+var confirmDelete = function confirmDelete() {
+  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Вы уверены, что хотите удалить?';
   return confirm(message);
 };
-document.querySelectorAll('form[data-confirm]').forEach(form => {
-  form.addEventListener('submit', e => {
+document.querySelectorAll('form[data-confirm]').forEach(function (form) {
+  form.addEventListener('submit', function (e) {
     if (!confirmDelete(form.dataset.confirm)) {
       e.preventDefault();
     }
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/filters.js":
+/*!***************************************!*\
+  !*** ./resources/js/admin/filters.js ***!
+  \***************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', function () {
+  var adminFiltersForm = document.querySelector('.admin-filters-form');
+  if (!adminFiltersForm) {
+    return;
+  }
+  var clearFiltersBtn = document.getElementById('clearFilters');
+  if (clearFiltersBtn && adminFiltersForm) {
+    clearFiltersBtn.addEventListener('click', function () {
+      var selects = adminFiltersForm.querySelectorAll('select');
+      selects.forEach(function (select) {
+        select.value = '';
+      });
+      adminFiltersForm.submit();
+    });
+  }
+  var urlParams = new URLSearchParams(window.location.search);
+  var hasFilters = Array.from(urlParams.keys()).some(function (key) {
+    return ['room_id', 'admin_date', 'admin_time_slot_id', 'availability'].includes(key) && urlParams.get(key);
+  });
+  if (clearFiltersBtn) {
+    if (hasFilters) {
+      clearFiltersBtn.style.display = 'block';
+    } else {
+      clearFiltersBtn.style.display = 'none';
+    }
+  }
+  var adminTimeSelect = document.querySelector('select[name="admin_time_slot_id"]');
+  if (adminTimeSelect) {
+    adminTimeSelect.setAttribute('data-protected', 'true');
+    adminTimeSelect.removeAttribute('disabled');
+    var protectTimeSelect = function protectTimeSelect() {
+      if (adminTimeSelect.hasAttribute('disabled')) {
+        adminTimeSelect.removeAttribute('disabled');
+      }
+      var firstOption = adminTimeSelect.querySelector('option[value=""]');
+      if (firstOption && (firstOption.textContent.includes('Сначала') || firstOption.textContent.includes('Загрузка'))) {
+        firstOption.textContent = 'Все времена';
+      }
+    };
+    var observer = new MutationObserver(function () {
+      protectTimeSelect();
+    });
+    observer.observe(adminTimeSelect, {
+      attributes: true,
+      childList: true,
+      subtree: true
+    });
+    protectTimeSelect();
+    setInterval(protectTimeSelect, 500);
+  }
+  var adminDateSelect = document.querySelector('select[name="admin_date"]');
+  if (adminDateSelect) {
+    adminDateSelect.setAttribute('data-protected', 'true');
+    var protectDateSelect = function protectDateSelect() {
+      if (adminDateSelect.hasAttribute('disabled')) {
+        adminDateSelect.removeAttribute('disabled');
+      }
+    };
+    var dateObserver = new MutationObserver(function () {
+      protectDateSelect();
+    });
+    dateObserver.observe(adminDateSelect, {
+      attributes: true
+    });
+    protectDateSelect();
+  }
+  var style = document.createElement('style');
+  style.textContent = "\n        select[data-protected=\"true\"] {\n            pointer-events: auto !important;\n        }\n        select[data-protected=\"true\"]:disabled {\n            opacity: 1 !important;\n            pointer-events: auto !important;\n            background-color: white !important;\n            color: black !important;\n        }\n    ";
+  document.head.appendChild(style);
 });
 
 /***/ }),
@@ -4805,19 +4885,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \*******************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const initFaqAccordion = () => {
-    const faqItems = document.querySelectorAll('.faq__item');
+document.addEventListener('DOMContentLoaded', function () {
+  var initFaqAccordion = function initFaqAccordion() {
+    var faqItems = document.querySelectorAll('.faq__item');
     if (!faqItems.length) return;
-    const closeAllExcept = exceptItem => {
-      faqItems.forEach(item => {
+    var closeAllExcept = function closeAllExcept(exceptItem) {
+      faqItems.forEach(function (item) {
         if (item !== exceptItem) {
           item.classList.remove('faq__item--active');
         }
       });
     };
-    const toggleItem = item => {
-      const isActive = item.classList.contains('faq__item--active');
+    var toggleItem = function toggleItem(item) {
+      var isActive = item.classList.contains('faq__item--active');
       if (isActive) {
         item.classList.remove('faq__item--active');
       } else {
@@ -4825,13 +4905,13 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.add('faq__item--active');
       }
     };
-    faqItems.forEach(item => {
-      const button = item.querySelector('.faq__button');
+    faqItems.forEach(function (item) {
+      var button = item.querySelector('.faq__button');
       if (button) {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', function () {
           toggleItem(item);
         });
-        button.addEventListener('keydown', e => {
+        button.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             toggleItem(item);
@@ -4854,46 +4934,53 @@ document.addEventListener('DOMContentLoaded', () => {
   \*****************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const roomInputs = document.querySelectorAll('input[name="room_id"]');
-  const dateSelect = document.querySelector('select[name="date"]');
-  const timeSelect = document.querySelector('select[name="time_slot_id"]');
-  const bookingForm = document.querySelector('.booking__form');
-  const loadAvailableDates = () => {
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+document.addEventListener('DOMContentLoaded', function () {
+  var roomInputs = document.querySelectorAll('input[name="room_id"]');
+  var dateSelect = document.querySelector('select[name="date"]');
+  var timeSelect = document.querySelector('select[name="time_slot_id"]');
+  var bookingForm = document.querySelector('.booking__form');
+  var loadAvailableDates = function loadAvailableDates() {
     if (!dateSelect) return;
-    fetch('/booking/available-dates').then(response => response.json()).then(data => {
+    fetch('/booking/available-dates').then(function (response) {
+      return response.json();
+    }).then(function (data) {
       if (data.error) {
         dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
         return;
       }
       dateSelect.innerHTML = '<option value="">Дата</option>';
-      data.dates.forEach(date => {
-        const option = document.createElement('option');
+      data.dates.forEach(function (date) {
+        var option = document.createElement('option');
         option.value = date.value;
         option.textContent = date.label;
         dateSelect.appendChild(option);
       });
-    }).catch(error => {
+    })["catch"](function (error) {
       console.error('Error loading dates:', error);
       if (dateSelect) {
         dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
       }
     });
   };
-  const showTimeMessage = text => {
+  var showTimeMessage = function showTimeMessage(text) {
     if (!timeSelect) return;
-    timeSelect.innerHTML = `<option value="">${text}</option>`;
+    timeSelect.innerHTML = "<option value=\"\">".concat(text, "</option>");
     timeSelect.disabled = true;
   };
-  const loadAvailableSlots = () => {
-    const selectedRoom = document.querySelector('input[name="room_id"]:checked');
-    const selectedDate = dateSelect ? dateSelect.value : '';
+  var loadAvailableSlots = function loadAvailableSlots() {
+    var _document$querySelect, _document$querySelect2;
+    var selectedRoom = document.querySelector('input[name="room_id"]:checked');
+    var selectedDate = dateSelect ? dateSelect.value : '';
     if (!selectedRoom || !selectedDate) {
       showTimeMessage('Сначала выберите комнату и дату');
       return;
     }
     showTimeMessage('Загрузка...');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || document.querySelector('input[name="_token"]')?.value;
+    var csrfToken = ((_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.getAttribute('content')) || ((_document$querySelect2 = document.querySelector('input[name="_token"]')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.value);
     fetch('/booking/available-slots', {
       method: 'POST',
       headers: {
@@ -4904,7 +4991,9 @@ document.addEventListener('DOMContentLoaded', () => {
         room_id: selectedRoom.value,
         date: selectedDate
       })
-    }).then(response => response.json()).then(data => {
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
       if (data.error) {
         showTimeMessage('Ошибка загрузки');
         return;
@@ -4912,8 +5001,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!timeSelect) return;
       timeSelect.innerHTML = '<option value="">Выберите время</option>';
       if (Array.isArray(data.available_times) && data.available_times.length > 0) {
-        data.available_times.forEach(slot => {
-          const option = document.createElement('option');
+        data.available_times.forEach(function (slot) {
+          var option = document.createElement('option');
           option.value = slot.value;
           option.textContent = slot.label;
           timeSelect.appendChild(option);
@@ -4922,89 +5011,110 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         showTimeMessage('Нет доступных слотов');
       }
-    }).catch(error => {
+    })["catch"](function (error) {
       console.error('Error loading slots:', error);
       showTimeMessage('Ошибка загрузки');
     });
   };
-  const showNotification = (message, type = 'success') => {
-    const notification = document.createElement('div');
-    notification.className = `notification notification--${type}`;
+  var showNotification = function showNotification(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+    var notification = document.createElement('div');
+    notification.className = "notification notification--".concat(type);
     notification.textContent = message;
-    notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: ${type === 'success' ? '#4caf50' : '#f44336'};
-            color: white;
-            border-radius: 5px;
-            z-index: 10000;
-            font-weight: 500;
-        `;
+    notification.style.cssText = "\n            position: fixed;\n            top: 20px;\n            right: 20px;\n            padding: 15px 20px;\n            background: ".concat(type === 'success' ? '#4caf50' : '#f44336', ";\n            color: white;\n            border-radius: 5px;\n            z-index: 10000;\n            font-weight: 500;\n        ");
     document.body.appendChild(notification);
-    setTimeout(() => {
+    setTimeout(function () {
       notification.remove();
     }, 5000);
   };
   loadAvailableDates();
-  roomInputs.forEach(input => {
+  roomInputs.forEach(function (input) {
     input.addEventListener('change', loadAvailableSlots);
   });
   if (dateSelect) {
     dateSelect.addEventListener('change', loadAvailableSlots);
   }
   if (bookingForm) {
-    bookingForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const submitButton = bookingForm.querySelector('.booking__submit');
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Отправка...';
-      submitButton.disabled = true;
-      const formData = new FormData(bookingForm);
-      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || document.querySelector('input[name="_token"]')?.value;
-      try {
-        const response = await fetch('/api/booking', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-CSRF-TOKEN': csrfToken,
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
+    bookingForm.addEventListener('submit', /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
+        var _document$querySelect3, _document$querySelect4;
+        var submitButton, originalText, formData, csrfToken, response, responseText, result, _t, _t2;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              e.preventDefault();
+              submitButton = bookingForm.querySelector('.booking__submit');
+              originalText = submitButton.textContent;
+              submitButton.textContent = 'Отправка...';
+              submitButton.disabled = true;
+              formData = new FormData(bookingForm);
+              csrfToken = ((_document$querySelect3 = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect3 === void 0 ? void 0 : _document$querySelect3.getAttribute('content')) || ((_document$querySelect4 = document.querySelector('input[name="_token"]')) === null || _document$querySelect4 === void 0 ? void 0 : _document$querySelect4.value);
+              _context.p = 1;
+              _context.n = 2;
+              return fetch('/api/booking', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'X-CSRF-TOKEN': csrfToken,
+                  'Accept': 'application/json',
+                  'X-Requested-With': 'XMLHttpRequest'
+                }
+              });
+            case 2:
+              response = _context.v;
+              console.log('Response status:', response.status);
+              console.log('Response headers:', response.headers.get('content-type'));
+              _context.n = 3;
+              return response.text();
+            case 3:
+              responseText = _context.v;
+              console.log('Raw response:', responseText);
+              _context.p = 4;
+              result = JSON.parse(responseText);
+              _context.n = 6;
+              break;
+            case 5:
+              _context.p = 5;
+              _t = _context.v;
+              console.error('JSON parse error:', _t);
+              console.error('Response was:', responseText.substring(0, 500));
+              throw new Error('Сервер вернул некорректный ответ');
+            case 6:
+              if (response.ok && result.success) {
+                showNotification(result.message || 'Бронирование успешно создано!', 'success');
+                bookingForm.reset();
+                if (timeSelect) {
+                  timeSelect.innerHTML = '<option value="">Сначала выберите дату и зал</option>';
+                  timeSelect.disabled = true;
+                }
+                if (dateSelect) dateSelect.selectedIndex = 0;
+                roomInputs.forEach(function (input) {
+                  return input.checked = false;
+                });
+              } else {
+                showNotification(result.message || 'Ошибка при бронировании', 'error');
+              }
+              _context.n = 8;
+              break;
+            case 7:
+              _context.p = 7;
+              _t2 = _context.v;
+              console.error('Booking error:', _t2);
+              showNotification('Ошибка при отправке формы', 'error');
+            case 8:
+              _context.p = 8;
+              submitButton.textContent = originalText;
+              submitButton.disabled = false;
+              return _context.f(8);
+            case 9:
+              return _context.a(2);
           }
-        });
-        console.log('Response status:', response.status);
-        console.log('Response headers:', response.headers.get('content-type'));
-        const responseText = await response.text();
-        console.log('Raw response:', responseText);
-        let result;
-        try {
-          result = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error('JSON parse error:', parseError);
-          console.error('Response was:', responseText.substring(0, 500));
-          throw new Error('Сервер вернул некорректный ответ');
-        }
-        if (response.ok && result.success) {
-          showNotification(result.message || 'Бронирование успешно создано!', 'success');
-          bookingForm.reset();
-          if (timeSelect) {
-            timeSelect.innerHTML = '<option value="">Сначала выберите дату и зал</option>';
-            timeSelect.disabled = true;
-          }
-          if (dateSelect) dateSelect.selectedIndex = 0;
-          roomInputs.forEach(input => input.checked = false);
-        } else {
-          showNotification(result.message || 'Ошибка при бронировании', 'error');
-        }
-      } catch (error) {
-        console.error('Booking error:', error);
-        showNotification('Ошибка при отправке формы', 'error');
-      } finally {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      }
-    });
+        }, _callee, null, [[4, 5], [1, 7, 8, 9]]);
+      }));
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
   }
 });
 
@@ -5016,11 +5126,11 @@ document.addEventListener('DOMContentLoaded', () => {
   \**********************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
+document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('header');
+  var lastScroll = 0;
+  window.addEventListener('scroll', function () {
+    var currentScroll = window.scrollY;
     if (currentScroll > 100 && currentScroll > lastScroll) {
       header.classList.add('header--fixed');
     } else if (currentScroll < 100) {
@@ -5038,26 +5148,28 @@ document.addEventListener('DOMContentLoaded', () => {
   \*********************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const burger = document.getElementById('burger-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const closeBtn = document.getElementById('mobile-menu-close');
-  const openMenu = () => {
+document.addEventListener('DOMContentLoaded', function () {
+  var burger = document.getElementById('burger-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var closeBtn = document.getElementById('mobile-menu-close');
+  var openMenu = function openMenu() {
     mobileMenu.classList.remove('hidden');
-    setTimeout(() => mobileMenu.classList.add('open'), 10);
+    setTimeout(function () {
+      return mobileMenu.classList.add('open');
+    }, 10);
     burger.classList.remove('burger-behind');
   };
-  const closeMenu = () => {
+  var closeMenu = function closeMenu() {
     mobileMenu.classList.remove('open');
     burger.classList.add('burger-behind');
-    setTimeout(() => {
+    setTimeout(function () {
       mobileMenu.classList.add('hidden');
       burger.classList.remove('burger-behind');
     }, 300);
   };
-  burger?.addEventListener('click', openMenu);
-  closeBtn?.addEventListener('click', closeMenu);
-  document.addEventListener('click', e => {
+  burger === null || burger === void 0 || burger.addEventListener('click', openMenu);
+  closeBtn === null || closeBtn === void 0 || closeBtn.addEventListener('click', closeMenu);
+  document.addEventListener('click', function (e) {
     if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !burger.contains(e.target)) {
       closeMenu();
     }
@@ -5072,104 +5184,123 @@ document.addEventListener('DOMContentLoaded', () => {
   \***************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modalTriggers = document.querySelectorAll('[data-modal-open]');
-  const modalCloseButtons = document.querySelectorAll('[data-modal-close]');
-  const modals = document.querySelectorAll('.modal');
-  const callbackForm = document.querySelector('.modal__form');
-  const openModal = modalName => {
-    const modal = document.querySelector(`[data-modal="${modalName}"]`);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+document.addEventListener('DOMContentLoaded', function () {
+  var modalTriggers = document.querySelectorAll('[data-modal-open]');
+  var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+  var modals = document.querySelectorAll('.modal');
+  var callbackForm = document.querySelector('.modal__form');
+  var openModal = function openModal(modalName) {
+    var modal = document.querySelector("[data-modal=\"".concat(modalName, "\"]"));
     if (modal) {
       modal.classList.add('modal--active');
       document.body.style.overflow = 'hidden';
     }
   };
-  const closeModal = modal => {
+  var closeModal = function closeModal(modal) {
     modal.classList.remove('modal--active');
     document.body.style.overflow = '';
   };
-  const closeAllModals = () => {
-    modals.forEach(modal => {
+  var closeAllModals = function closeAllModals() {
+    modals.forEach(function (modal) {
       closeModal(modal);
     });
   };
-  const showNotification = (message, type = 'success') => {
-    const notification = document.createElement('div');
-    notification.className = `notification notification--${type}`;
+  var showNotification = function showNotification(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+    var notification = document.createElement('div');
+    notification.className = "notification notification--".concat(type);
     notification.textContent = message;
-    notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: ${type === 'success' ? '#4caf50' : '#f44336'};
-            color: white;
-            border-radius: 5px;
-            z-index: 10000;
-            font-weight: 500;
-        `;
+    notification.style.cssText = "\n            position: fixed;\n            top: 20px;\n            right: 20px;\n            padding: 15px 20px;\n            background: ".concat(type === 'success' ? '#4caf50' : '#f44336', ";\n            color: white;\n            border-radius: 5px;\n            z-index: 10000;\n            font-weight: 500;\n        ");
     document.body.appendChild(notification);
-    setTimeout(() => {
+    setTimeout(function () {
       notification.remove();
     }, 5000);
   };
-  modalTriggers.forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const modalName = trigger.getAttribute('data-modal-open');
+  modalTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var modalName = trigger.getAttribute('data-modal-open');
       openModal(modalName);
     });
   });
-  modalCloseButtons.forEach(closeButton => {
-    closeButton.addEventListener('click', () => {
-      const modal = closeButton.closest('.modal');
+  modalCloseButtons.forEach(function (closeButton) {
+    closeButton.addEventListener('click', function () {
+      var modal = closeButton.closest('.modal');
       if (modal) {
         closeModal(modal);
       }
     });
   });
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeAllModals();
     }
   });
-  modals.forEach(modal => {
-    modal.addEventListener('click', e => {
+  modals.forEach(function (modal) {
+    modal.addEventListener('click', function (e) {
       if (e.target === modal || e.target.hasAttribute('data-modal-close')) {
         closeModal(modal);
       }
     });
   });
   if (callbackForm) {
-    callbackForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const submitButton = callbackForm.querySelector('.modal__submit');
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Отправка...';
-      submitButton.disabled = true;
-      const formData = new FormData(callbackForm);
-      try {
-        const response = await fetch('/callback', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    callbackForm.addEventListener('submit', /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
+        var submitButton, originalText, formData, response, result, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              e.preventDefault();
+              submitButton = callbackForm.querySelector('.modal__submit');
+              originalText = submitButton.textContent;
+              submitButton.textContent = 'Отправка...';
+              submitButton.disabled = true;
+              formData = new FormData(callbackForm);
+              _context.p = 1;
+              _context.n = 2;
+              return fetch('/callback', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+              });
+            case 2:
+              response = _context.v;
+              _context.n = 3;
+              return response.json();
+            case 3:
+              result = _context.v;
+              if (result.success) {
+                showNotification('Заявка успешно отправлена!', 'success');
+                callbackForm.reset();
+                closeAllModals();
+              } else {
+                showNotification(result.message || 'Ошибка при отправке', 'error');
+              }
+              _context.n = 5;
+              break;
+            case 4:
+              _context.p = 4;
+              _t = _context.v;
+              showNotification('Ошибка при отправке заявки', 'error');
+            case 5:
+              _context.p = 5;
+              submitButton.textContent = originalText;
+              submitButton.disabled = false;
+              return _context.f(5);
+            case 6:
+              return _context.a(2);
           }
-        });
-        const result = await response.json();
-        if (result.success) {
-          showNotification('Заявка успешно отправлена!', 'success');
-          callbackForm.reset();
-          closeAllModals();
-        } else {
-          showNotification(result.message || 'Ошибка при отправке', 'error');
-        }
-      } catch (error) {
-        showNotification('Ошибка при отправке заявки', 'error');
-      } finally {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      }
-    });
+        }, _callee, null, [[1, 4, 5, 6]]);
+      }));
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
   }
 });
 
@@ -5181,16 +5312,16 @@ document.addEventListener('DOMContentLoaded', () => {
   \***********************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const scrollBtn = document.getElementById('scroll-to-top');
-  window.addEventListener('scroll', () => {
+document.addEventListener('DOMContentLoaded', function () {
+  var scrollBtn = document.getElementById('scroll-to-top');
+  window.addEventListener('scroll', function () {
     if (window.scrollY > 300) {
       scrollBtn.classList.add('visible');
     } else {
       scrollBtn.classList.remove('visible');
     }
   });
-  scrollBtn.addEventListener('click', () => {
+  scrollBtn.addEventListener('click', function () {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -5206,18 +5337,20 @@ document.addEventListener('DOMContentLoaded', () => {
   \****************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const initUniversalSlider = (sliderSelector, options = {}) => {
-    const slider = document.querySelector(sliderSelector);
+document.addEventListener('DOMContentLoaded', function () {
+  var initUniversalSlider = function initUniversalSlider(sliderSelector) {
+    var _sliderSelector$match;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var slider = document.querySelector(sliderSelector);
     if (!slider) return;
-    const track = slider.querySelector('.slider__track');
-    const slides = slider.querySelectorAll('.slider__slide');
-    const prevBtn = slider.querySelector('.slider__btn--prev');
-    const nextBtn = slider.querySelector('.slider__btn--next');
-    const dotsContainer = slider.querySelector('.slider__dots');
-    const totalSlides = slides.length;
+    var track = slider.querySelector('.slider__track');
+    var slides = slider.querySelectorAll('.slider__slide');
+    var prevBtn = slider.querySelector('.slider__btn--prev');
+    var nextBtn = slider.querySelector('.slider__btn--next');
+    var dotsContainer = slider.querySelector('.slider__dots');
+    var totalSlides = slides.length;
     if (!track || totalSlides === 0) return;
-    const config = {
+    var config = {
       autoplay: true,
       autoplayDelay: 4000,
       pauseOnHover: true,
@@ -5226,37 +5359,37 @@ document.addEventListener('DOMContentLoaded', () => {
       enableKeyboard: true,
       enableTouch: true
     };
-    let currentSlide = 0;
-    let autoplayInterval = null;
-    let isAutoplayPaused = false;
-    const componentPrefix = sliderSelector.match(/feedbacks|room/)?.[0] || 'slider';
-    const createDots = () => {
+    var currentSlide = 0;
+    var autoplayInterval = null;
+    var isAutoplayPaused = false;
+    var componentPrefix = ((_sliderSelector$match = sliderSelector.match(/feedbacks|room/)) === null || _sliderSelector$match === void 0 ? void 0 : _sliderSelector$match[0]) || 'slider';
+    var createDots = function createDots() {
       if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('button');
-        dot.className = `slider__dot ${componentPrefix}__dot`;
+      for (var i = 0; i < totalSlides; i++) {
+        var dot = document.createElement('button');
+        dot.className = "slider__dot ".concat(componentPrefix, "__dot");
         dot.type = 'button';
         dot.setAttribute('data-slide', i);
-        dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`);
-        if (i === 0) dot.classList.add('slider__dot--active', `${componentPrefix}__dot--active`);
+        dot.setAttribute('aria-label', "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u043B\u0430\u0439\u0434\u0443 ".concat(i + 1));
+        if (i === 0) dot.classList.add('slider__dot--active', "".concat(componentPrefix, "__dot--active"));
         dotsContainer.appendChild(dot);
       }
     };
-    const updateSlider = () => {
-      const translateX = -currentSlide * 100;
-      track.style.transform = `translateX(${translateX}%)`;
+    var updateSlider = function updateSlider() {
+      var translateX = -currentSlide * 100;
+      track.style.transform = "translateX(".concat(translateX, "%)");
       if (dotsContainer) {
-        dotsContainer.querySelectorAll('.slider__dot').forEach((dot, index) => {
-          const isActive = index === currentSlide;
+        dotsContainer.querySelectorAll('.slider__dot').forEach(function (dot, index) {
+          var isActive = index === currentSlide;
           dot.classList.toggle('slider__dot--active', isActive);
-          dot.classList.toggle(`${componentPrefix}__dot--active`, isActive);
+          dot.classList.toggle("".concat(componentPrefix, "__dot--active"), isActive);
           dot.setAttribute('aria-pressed', isActive);
         });
       }
       if (prevBtn && nextBtn) {
-        const disabled = totalSlides <= 1;
-        [prevBtn, nextBtn].forEach(btn => {
+        var disabled = totalSlides <= 1;
+        [prevBtn, nextBtn].forEach(function (btn) {
           btn.style.opacity = disabled ? '0.3' : '1';
           btn.style.pointerEvents = disabled ? 'none' : 'auto';
           btn.disabled = disabled;
@@ -5264,65 +5397,70 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       slider.dispatchEvent(new CustomEvent('sliderChange', {
         detail: {
-          currentSlide,
-          totalSlides
+          currentSlide: currentSlide,
+          totalSlides: totalSlides
         }
       }));
     };
-    const nextSlide = () => {
+    var nextSlide = function nextSlide() {
       currentSlide = (currentSlide + 1) % totalSlides;
       updateSlider();
     };
-    const prevSlide = () => {
+    var prevSlide = function prevSlide() {
       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       updateSlider();
     };
-    const goToSlide = index => {
+    var goToSlide = function goToSlide(index) {
       if (index >= 0 && index < totalSlides && index !== currentSlide) {
         currentSlide = index;
         updateSlider();
       }
     };
-    const stopAutoplay = () => {
+    var stopAutoplay = function stopAutoplay() {
       if (autoplayInterval) {
         clearInterval(autoplayInterval);
         autoplayInterval = null;
       }
     };
-    const startAutoplay = () => {
+    var startAutoplay = function startAutoplay() {
       if (!config.autoplay || totalSlides <= 1 || isAutoplayPaused) return;
       stopAutoplay();
-      autoplayInterval = setInterval(() => {
+      autoplayInterval = setInterval(function () {
         if (!isAutoplayPaused) nextSlide();
       }, config.autoplayDelay);
     };
-    const pauseAutoplay = (duration = config.pauseOnInteraction) => {
+    var pauseAutoplay = function pauseAutoplay() {
+      var duration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : config.pauseOnInteraction;
       if (!config.autoplay) return;
       stopAutoplay();
-      setTimeout(() => {
+      setTimeout(function () {
         if (!isAutoplayPaused) startAutoplay();
       }, duration);
     };
-    nextBtn?.addEventListener('click', () => {
+    nextBtn === null || nextBtn === void 0 || nextBtn.addEventListener('click', function () {
       nextSlide();
       pauseAutoplay();
     });
-    prevBtn?.addEventListener('click', () => {
+    prevBtn === null || prevBtn === void 0 || prevBtn.addEventListener('click', function () {
       prevSlide();
       pauseAutoplay();
     });
-    dotsContainer?.addEventListener('click', e => {
-      const target = e.target.closest('.slider__dot');
+    dotsContainer === null || dotsContainer === void 0 || dotsContainer.addEventListener('click', function (e) {
+      var target = e.target.closest('.slider__dot');
       if (!target) return;
-      const index = parseInt(target.getAttribute('data-slide'));
+      var index = parseInt(target.getAttribute('data-slide'));
       goToSlide(index);
       pauseAutoplay();
     });
     if (config.enableKeyboard) {
-      let isFocused = false;
-      slider.addEventListener('mouseenter', () => isFocused = true);
-      slider.addEventListener('mouseleave', () => isFocused = false);
-      document.addEventListener('keydown', e => {
+      var isFocused = false;
+      slider.addEventListener('mouseenter', function () {
+        return isFocused = true;
+      });
+      slider.addEventListener('mouseleave', function () {
+        return isFocused = false;
+      });
+      document.addEventListener('keydown', function (e) {
         if (!isFocused) return;
         if (e.key === 'ArrowLeft') {
           e.preventDefault();
@@ -5336,19 +5474,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     if (config.enableTouch) {
-      let touchStartX = 0;
-      let touchEndX = 0;
-      let isSwiping = false;
-      track.addEventListener('touchstart', e => {
+      var touchStartX = 0;
+      var touchEndX = 0;
+      var isSwiping = false;
+      track.addEventListener('touchstart', function (e) {
         touchStartX = e.touches[0].clientX;
         isSwiping = true;
       }, {
         passive: true
       });
-      track.addEventListener('touchend', e => {
+      track.addEventListener('touchend', function (e) {
         if (!isSwiping) return;
         touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
+        var diff = touchStartX - touchEndX;
         if (Math.abs(diff) > config.swipeThreshold) {
           if (diff > 0) nextSlide();else prevSlide();
           pauseAutoplay();
@@ -5359,28 +5497,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     if (config.pauseOnHover) {
-      slider.addEventListener('mouseenter', () => {
+      slider.addEventListener('mouseenter', function () {
         isAutoplayPaused = true;
         stopAutoplay();
       });
-      slider.addEventListener('mouseleave', () => {
+      slider.addEventListener('mouseleave', function () {
         isAutoplayPaused = false;
         startAutoplay();
       });
     }
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener('visibilitychange', function () {
       if (document.hidden) stopAutoplay();else if (!isAutoplayPaused && config.autoplay) startAutoplay();
     });
     window.addEventListener('resize', updateSlider);
-    const sliderAPI = {
+    var sliderAPI = {
       next: nextSlide,
       prev: prevSlide,
       goTo: goToSlide,
       start: startAutoplay,
       stop: stopAutoplay,
       pause: pauseAutoplay,
-      getCurrentSlide: () => currentSlide,
-      getTotalSlides: () => totalSlides,
+      getCurrentSlide: function getCurrentSlide() {
+        return currentSlide;
+      },
+      getTotalSlides: function getTotalSlides() {
+        return totalSlides;
+      },
       destroy: stopAutoplay
     };
     slider.sliderAPI = sliderAPI;
@@ -5408,14 +5550,14 @@ document.addEventListener('DOMContentLoaded', () => {
   \***********************************************/
 /***/ (() => {
 
-document.addEventListener('DOMContentLoaded', () => {
-  const scrollElements = document.querySelectorAll('[data-scroll-to]');
-  scrollElements.forEach(element => {
-    element.addEventListener('click', e => {
+document.addEventListener('DOMContentLoaded', function () {
+  var scrollElements = document.querySelectorAll('[data-scroll-to]');
+  scrollElements.forEach(function (element) {
+    element.addEventListener('click', function (e) {
       e.preventDefault();
-      const targetValue = element.getAttribute('data-scroll-to');
+      var targetValue = element.getAttribute('data-scroll-to');
       if (targetValue) {
-        const targetElement = document.querySelector(`[data-scroll-target="${targetValue}"]`);
+        var targetElement = document.querySelector("[data-scroll-target=\"".concat(targetValue, "\"]"));
         if (targetElement) {
           targetElement.scrollIntoView({
             behavior: 'smooth',
@@ -5509,22 +5651,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _admin_delete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/delete */ "./resources/js/admin/delete.js");
 /* harmony import */ var _admin_delete__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_admin_delete__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider */ "./resources/js/modules/slider.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_slider__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./resources/js/modules/accordion.js");
-/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_modal__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/booking */ "./resources/js/modules/booking.js");
-/* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_modules_booking__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/fixed-header */ "./resources/js/modules/fixed-header.js");
-/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_modules_fixed_header__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mobile-menu */ "./resources/js/modules/mobile-menu.js");
-/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_modules_mobile_menu__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/scroll-to-top */ "./resources/js/modules/scroll-to-top.js");
-/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/smooth-scroll */ "./resources/js/modules/smooth-scroll.js");
-/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _admin_filters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/filters */ "./resources/js/admin/filters.js");
+/* harmony import */ var _admin_filters__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_admin_filters__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/slider */ "./resources/js/modules/slider.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_slider__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/accordion */ "./resources/js/modules/accordion.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_accordion__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./resources/js/modules/modal.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_modules_modal__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/booking */ "./resources/js/modules/booking.js");
+/* harmony import */ var _modules_booking__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_modules_booking__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/fixed-header */ "./resources/js/modules/fixed-header.js");
+/* harmony import */ var _modules_fixed_header__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_modules_fixed_header__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mobile-menu */ "./resources/js/modules/mobile-menu.js");
+/* harmony import */ var _modules_mobile_menu__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_mobile_menu__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/scroll-to-top */ "./resources/js/modules/scroll-to-top.js");
+/* harmony import */ var _modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_scroll_to_top__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/smooth-scroll */ "./resources/js/modules/smooth-scroll.js");
+/* harmony import */ var _modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_modules_smooth_scroll__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 

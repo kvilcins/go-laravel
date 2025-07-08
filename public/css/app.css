@@ -6018,5 +6018,21 @@ template {
     height: 50px;
   }
 }
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  color: white;
+  border-radius: 5px;
+  z-index: 10000;
+  font-weight: 500;
+}
+.notification--success {
+  background: #4caf50;
+}
+.notification--error {
+  background: #f44336;
+}
 
 /*# sourceMappingURL=app.css.map*/

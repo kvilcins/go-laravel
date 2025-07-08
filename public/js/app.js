@@ -4772,7 +4772,7 @@ const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
 /***/ (() => {
 
 var confirmDelete = function confirmDelete() {
-  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Вы уверены, что хотите удалить?';
+  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Are you sure you want to delete?';
   return confirm(message);
 };
 document.querySelectorAll('form[data-confirm]').forEach(function (form) {
@@ -4826,8 +4826,8 @@ document.addEventListener('DOMContentLoaded', function () {
         adminTimeSelect.removeAttribute('disabled');
       }
       var firstOption = adminTimeSelect.querySelector('option[value=""]');
-      if (firstOption && (firstOption.textContent.includes('Сначала') || firstOption.textContent.includes('Загрузка'))) {
-        firstOption.textContent = 'Все времена';
+      if (firstOption && (firstOption.textContent.includes('First') || firstOption.textContent.includes('Loading'))) {
+        firstOption.textContent = 'All times';
       }
     };
     var observer = new MutationObserver(function () {
@@ -4949,10 +4949,10 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.json();
     }).then(function (data) {
       if (data.error) {
-        dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
+        dateSelect.innerHTML = '<option value="">Error loading dates</option>';
         return;
       }
-      dateSelect.innerHTML = '<option value="">Дата</option>';
+      dateSelect.innerHTML = '<option value="">Date</option>';
       data.dates.forEach(function (date) {
         var option = document.createElement('option');
         option.value = date.value;
@@ -4962,7 +4962,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })["catch"](function (error) {
       console.error('Error loading dates:', error);
       if (dateSelect) {
-        dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
+        dateSelect.innerHTML = '<option value="">Error loading dates</option>';
       }
     });
   };
@@ -4976,10 +4976,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var selectedRoom = document.querySelector('input[name="room_id"]:checked');
     var selectedDate = dateSelect ? dateSelect.value : '';
     if (!selectedRoom || !selectedDate) {
-      showTimeMessage('Сначала выберите комнату и дату');
+      showTimeMessage('First select room and date');
       return;
     }
-    showTimeMessage('Загрузка...');
+    showTimeMessage('Loading...');
     var csrfToken = ((_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.getAttribute('content')) || ((_document$querySelect2 = document.querySelector('input[name="_token"]')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.value);
     fetch('/booking/available-slots', {
       method: 'POST',
@@ -4995,11 +4995,11 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.json();
     }).then(function (data) {
       if (data.error) {
-        showTimeMessage('Ошибка загрузки');
+        showTimeMessage('Loading error');
         return;
       }
       if (!timeSelect) return;
-      timeSelect.innerHTML = '<option value="">Выберите время</option>';
+      timeSelect.innerHTML = '<option value="">Select time</option>';
       if (Array.isArray(data.available_times) && data.available_times.length > 0) {
         data.available_times.forEach(function (slot) {
           var option = document.createElement('option');
@@ -5009,11 +5009,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         timeSelect.disabled = false;
       } else {
-        showTimeMessage('Нет доступных слотов');
+        showTimeMessage('No available slots');
       }
     })["catch"](function (error) {
       console.error('Error loading slots:', error);
-      showTimeMessage('Ошибка загрузки');
+      showTimeMessage('Loading error');
     });
   };
   var showNotification = function showNotification(message) {
@@ -5045,7 +5045,7 @@ document.addEventListener('DOMContentLoaded', function () {
               e.preventDefault();
               submitButton = bookingForm.querySelector('.booking__submit');
               originalText = submitButton.textContent;
-              submitButton.textContent = 'Отправка...';
+              submitButton.textContent = 'Sending...';
               submitButton.disabled = true;
               formData = new FormData(bookingForm);
               csrfToken = ((_document$querySelect3 = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect3 === void 0 ? void 0 : _document$querySelect3.getAttribute('content')) || ((_document$querySelect4 = document.querySelector('input[name="_token"]')) === null || _document$querySelect4 === void 0 ? void 0 : _document$querySelect4.value);
@@ -5078,13 +5078,13 @@ document.addEventListener('DOMContentLoaded', function () {
               _t = _context.v;
               console.error('JSON parse error:', _t);
               console.error('Response was:', responseText.substring(0, 500));
-              throw new Error('Сервер вернул некорректный ответ');
+              throw new Error('Server returned invalid response');
             case 6:
               if (response.ok && result.success) {
-                showNotification(result.message || 'Бронирование успешно создано!', 'success');
+                showNotification(result.message || 'Booking successfully created!', 'success');
                 bookingForm.reset();
                 if (timeSelect) {
-                  timeSelect.innerHTML = '<option value="">Сначала выберите дату и зал</option>';
+                  timeSelect.innerHTML = '<option value="">First select date and room</option>';
                   timeSelect.disabled = true;
                 }
                 if (dateSelect) dateSelect.selectedIndex = 0;
@@ -5092,7 +5092,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   return input.checked = false;
                 });
               } else {
-                showNotification(result.message || 'Ошибка при бронировании', 'error');
+                showNotification(result.message || 'Booking error', 'error');
               }
               _context.n = 8;
               break;
@@ -5100,7 +5100,7 @@ document.addEventListener('DOMContentLoaded', function () {
               _context.p = 7;
               _t2 = _context.v;
               console.error('Booking error:', _t2);
-              showNotification('Ошибка при отправке формы', 'error');
+              showNotification('Form submission error', 'error');
             case 8:
               _context.p = 8;
               submitButton.textContent = originalText;
@@ -5214,7 +5214,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var notification = document.createElement('div');
     notification.className = "notification notification--".concat(type);
     notification.textContent = message;
-    notification.style.cssText = "\n            position: fixed;\n            top: 20px;\n            right: 20px;\n            padding: 15px 20px;\n            background: ".concat(type === 'success' ? '#4caf50' : '#f44336', ";\n            color: white;\n            border-radius: 5px;\n            z-index: 10000;\n            font-weight: 500;\n        ");
     document.body.appendChild(notification);
     setTimeout(function () {
       notification.remove();
@@ -5256,7 +5255,7 @@ document.addEventListener('DOMContentLoaded', function () {
               e.preventDefault();
               submitButton = callbackForm.querySelector('.modal__submit');
               originalText = submitButton.textContent;
-              submitButton.textContent = 'Отправка...';
+              submitButton.textContent = 'Sending...';
               submitButton.disabled = true;
               formData = new FormData(callbackForm);
               _context.p = 1;
@@ -5275,18 +5274,18 @@ document.addEventListener('DOMContentLoaded', function () {
             case 3:
               result = _context.v;
               if (result.success) {
-                showNotification('Заявка успешно отправлена!', 'success');
+                showNotification('Request sent successfully!', 'success');
                 callbackForm.reset();
                 closeAllModals();
               } else {
-                showNotification(result.message || 'Ошибка при отправке', 'error');
+                showNotification(result.message || 'Sending error', 'error');
               }
               _context.n = 5;
               break;
             case 4:
               _context.p = 4;
               _t = _context.v;
-              showNotification('Ошибка при отправке заявки', 'error');
+              showNotification('Request submission error', 'error');
             case 5:
               _context.p = 5;
               submitButton.textContent = originalText;
@@ -5371,7 +5370,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dot.className = "slider__dot ".concat(componentPrefix, "__dot");
         dot.type = 'button';
         dot.setAttribute('data-slide', i);
-        dot.setAttribute('aria-label', "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u043B\u0430\u0439\u0434\u0443 ".concat(i + 1));
+        dot.setAttribute('aria-label', "Go to slide ".concat(i + 1));
         if (i === 0) dot.classList.add('slider__dot--active', "".concat(componentPrefix, "__dot--active"));
         dotsContainer.appendChild(dot);
       }

@@ -19,7 +19,7 @@ class CallbackRequestMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Новая заявка на обратный звонок')
+        return $this->subject('New callback request')
             ->view('emails.callback-request')
             ->with('data', $this->data);
     }

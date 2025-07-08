@@ -19,7 +19,7 @@ class BookingRequestMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Новое бронирование')
+        return $this->subject('New booking request')
             ->view('emails.booking-request')
             ->with('data', $this->data);
     }

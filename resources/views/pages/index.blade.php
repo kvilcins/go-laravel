@@ -56,7 +56,7 @@
                 [
                     'class' => 'movies',
                     'image' => 'entertainment/movies.jpg',
-                    'description' => 'Movie services Netflix, IVI, MegoGo, КиноПоиск, Okko'
+                    'description' => 'Movie services Netflix, Disney+, Hulu, Amazon Prime, HBO Max'
                 ],
                 [
                     'class' => 'ps',
@@ -142,7 +142,7 @@
                     'highlight' => 'GAME OVER',
                     'text' => ' — is a place of unforgettable experiences',
                     'author' => [
-                        'name' => 'Arkady Abakin',
+                        'name' => 'Michael Rodriguez',
                         'position' => 'creator of GAME OVER gaming territory',
                         'photo' => 'creators-icon.png'
                     ]
@@ -155,22 +155,22 @@
                 'title' => 'Customer reviews',
                 'reviews' => [
                     [
-                        'name' => 'Max Samoylov',
+                        'name' => 'Alex Thompson',
                         'photo' => 'maxim.png',
                         'text' => 'We celebrated a birthday here with a group of friends, everything was very cool! VR headsets are just amazing, I have never been in such complete gaming immersion. Service is top notch!',
-                        'alt' => 'Photo Max Samoylov'
+                        'alt' => 'Photo Alex Thompson'
                     ],
                     [
-                        'name' => 'Oksana Grigorieva',
+                        'name' => 'Sarah Williams',
                         'photo' => 'oksana.png',
                         'text' => 'We were in the Wild West room, sang karaoke to Shakira, it was a great corporate event! There are no similar establishments in our city',
-                        'alt' => 'Photo Oksana Grigorieva'
+                        'alt' => 'Photo Sarah Williams'
                     ],
                     [
-                        'name' => 'Nikita Yashchenko',
+                        'name' => 'Jake Martinez',
                         'photo' => 'nikita.png',
                         'text' => 'The VR headset game lagged a bit, but otherwise everything was fine. Cool design of the room in Star Wars style, got into the atmosphere of space',
-                        'alt' => 'Photo Nikita Yashchenko'
+                        'alt' => 'Photo Jake Martinez'
                     ]
                 ]
             ]
@@ -186,7 +186,7 @@
                     ],
                     [
                         'question' => 'Can I get a refund for my booking?',
-                        'answer' => 'Yes, call us at 8 (950) 930 - 28 - 93 or email GameOver@gmail.com'
+                        'answer' => 'Yes, call us at (305) 555-1234 or email GameOver@gmail.com'
                     ],
                     [
                         'question' => 'Which room is the most popular?',
@@ -194,7 +194,7 @@
                     ],
                     [
                         'question' => 'How to get a VIP card?',
-                        'answer' => 'You can call us at 8 (950) 930 - 28 - 93 or email GameOver@gmail.com'
+                        'answer' => 'You can call us at (305) 555-1234 or email GameOver@gmail.com'
                     ],
                     [
                         'question' => 'How long does one booking session last?',

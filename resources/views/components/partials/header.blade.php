@@ -22,7 +22,7 @@
                 </li>
             </ul>
         </nav>
-        <button type="button" class="header__callback" data-modal-open="callback">Request Callback</button>
+        <button type="button" class="header__callback" data-modal-open="callback">Request a call</button>
 
         <button class="header__burger burger" id="burger-toggle" aria-label="Open menu">
             <span class="burger__line"></span>

@@ -19,7 +19,7 @@ class CallbackConfirmationMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Ваша заявка принята')
+        return $this->subject('Your request has been received')
             ->view('emails.callback-confirmation')
             ->with('data', $this->data);
     }

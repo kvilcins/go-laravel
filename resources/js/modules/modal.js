@@ -28,18 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         notification.className = `notification notification--${type}`;
         notification.textContent = message;
 
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: ${type === 'success' ? '#4caf50' : '#f44336'};
-            color: white;
-            border-radius: 5px;
-            z-index: 10000;
-            font-weight: 500;
-        `;
-
         document.body.appendChild(notification);
 
         setTimeout(() => {
@@ -84,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitButton = callbackForm.querySelector('.modal__submit');
             const originalText = submitButton.textContent;
 
-            submitButton.textContent = 'Отправка...';
+            submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
 
             const formData = new FormData(callbackForm);
@@ -101,14 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    showNotification('Заявка успешно отправлена!', 'success');
+                    showNotification('Request sent successfully!', 'success');
                     callbackForm.reset();
                     closeAllModals();
                 } else {
-                    showNotification(result.message || 'Ошибка при отправке', 'error');
+                    showNotification(result.message || 'Sending error', 'error');
                 }
             } catch (error) {
-                showNotification('Ошибка при отправке заявки', 'error');
+                showNotification('Request submission error', 'error');
             } finally {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;

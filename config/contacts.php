@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'title' => 'Контакты',
+    'title' => 'Contacts',
     'address' => [
-        'city' => 'г. Москва',
-        'street' => 'ул. Усачёва, 29 к3',
+        'city' => 'Miami, FL',
+        'street' => '1234 Collins Ave, Suite 567',
     ],
     'phone' => [
-        'link' => '+79509302893',
-        'display' => '8 (950) 930 - 28 - 93',
+        'link' => '+13055551234',
+        'display' => '(305) 555-1234',
     ],
     'email' => 'GameOver@gmail.com',
     'social' => [
@@ -32,7 +32,7 @@ return [
         ]
     ],
     'map' => [
-        'embed_url' => 'https://yandex.ru/map-widget/v1/?um=constructor%3Ab1a1a71e943e08b7ddf9dc0c182b4f0a9efe4e620b70e2a9ab98d95cac57e565&source=constructor'
+        'embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3594.123456789012!2d-80.1234567890123!3d25.7890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ3JzIwLjQiTiA4MMKwMDcnMjQuNSJX!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus'
     ],
     'copyright' => [
         'company' => 'Game Over',

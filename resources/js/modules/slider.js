@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dot.className = `slider__dot ${componentPrefix}__dot`;
                 dot.type = 'button';
                 dot.setAttribute('data-slide', i);
-                dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`);
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
                 if (i === 0) dot.classList.add('slider__dot--active', `${componentPrefix}__dot--active`);
                 dotsContainer.appendChild(dot);
             }

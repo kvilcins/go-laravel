@@ -46,7 +46,7 @@ class CallbackController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Заявка успешно отправлена'
+                'message' => 'Request sent successfully'
             ]);
 
         } catch (\Exception $e) {
@@ -73,7 +73,7 @@ class CallbackController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Заявка принята! (сохранено в резервное хранилище)'
+                'message' => 'Request accepted! (saved to backup storage)'
             ]);
         }
     }

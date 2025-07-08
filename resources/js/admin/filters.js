@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const firstOption = adminTimeSelect.querySelector('option[value=""]');
-            if (firstOption && (firstOption.textContent.includes('Сначала') || firstOption.textContent.includes('Загрузка'))) {
-                firstOption.textContent = 'Все времена';
+            if (firstOption && (firstOption.textContent.includes('First') || firstOption.textContent.includes('Loading'))) {
+                firstOption.textContent = 'All times';
             }
         };
 

@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
+                    dateSelect.innerHTML = '<option value="">Error loading dates</option>';
                     return;
                 }
-                dateSelect.innerHTML = '<option value="">Дата</option>';
+                dateSelect.innerHTML = '<option value="">Date</option>';
                 data.dates.forEach(date => {
                     const option = document.createElement('option');
                     option.value = date.value;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error loading dates:', error);
                 if (dateSelect) {
-                    dateSelect.innerHTML = '<option value="">Ошибка загрузки дат</option>';
+                    dateSelect.innerHTML = '<option value="">Error loading dates</option>';
                 }
             });
     };
@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDate = dateSelect ? dateSelect.value : '';
 
         if (!selectedRoom || !selectedDate) {
-            showTimeMessage('Сначала выберите комнату и дату');
+            showTimeMessage('First select room and date');
             return;
         }
 
-        showTimeMessage('Загрузка...');
+        showTimeMessage('Loading...');
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
             || document.querySelector('input[name="_token"]')?.value;
@@ -64,13 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    showTimeMessage('Ошибка загрузки');
+                    showTimeMessage('Loading error');
                     return;
                 }
 
                 if (!timeSelect) return;
 
-                timeSelect.innerHTML = '<option value="">Выберите время</option>';
+                timeSelect.innerHTML = '<option value="">Select time</option>';
 
                 if (Array.isArray(data.available_times) && data.available_times.length > 0) {
                     data.available_times.forEach(slot => {
@@ -81,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     timeSelect.disabled = false;
                 } else {
-                    showTimeMessage('Нет доступных слотов');
+                    showTimeMessage('No available slots');
                 }
             })
             .catch(error => {
                 console.error('Error loading slots:', error);
-                showTimeMessage('Ошибка загрузки');
+                showTimeMessage('Loading error');
             });
     };
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitButton = bookingForm.querySelector('.booking__submit');
             const originalText = submitButton.textContent;
 
-            submitButton.textContent = 'Отправка...';
+            submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
 
             const formData = new FormData(bookingForm);
@@ -161,26 +161,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (parseError) {
                     console.error('JSON parse error:', parseError);
                     console.error('Response was:', responseText.substring(0, 500));
-                    throw new Error('Сервер вернул некорректный ответ');
+                    throw new Error('Server returned invalid response');
                 }
 
                 if (response.ok && result.success) {
-                    showNotification(result.message || 'Бронирование успешно создано!', 'success');
+                    showNotification(result.message || 'Booking successfully created!', 'success');
 
                     bookingForm.reset();
 
                     if (timeSelect) {
-                        timeSelect.innerHTML = '<option value="">Сначала выберите дату и зал</option>';
+                        timeSelect.innerHTML = '<option value="">First select date and room</option>';
                         timeSelect.disabled = true;
                     }
                     if (dateSelect) dateSelect.selectedIndex = 0;
                     roomInputs.forEach(input => input.checked = false);
                 } else {
-                    showNotification(result.message || 'Ошибка при бронировании', 'error');
+                    showNotification(result.message || 'Booking error', 'error');
                 }
             } catch (error) {
                 console.error('Booking error:', error);
-                showNotification('Ошибка при отправке формы', 'error');
+                showNotification('Form submission error', 'error');
             } finally {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;

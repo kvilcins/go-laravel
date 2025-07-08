@@ -131,7 +131,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect()->route('admin.available-dates')->with('success', 'Дата добавлена успешно');
+        return redirect()->route('admin.available-dates')->with('success', 'Date added successfully');
     }
 
     public function toggleDate($id)
@@ -147,7 +147,7 @@ class AdminController extends Controller
                 ]);
         }
 
-        return redirect()->route('admin.available-dates')->with('success', 'Статус даты изменен');
+        return redirect()->route('admin.available-dates')->with('success', 'Date status changed');
     }
 
     public function storeRoomAvailability(Request $request)
@@ -166,7 +166,7 @@ class AdminController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->withErrors(['error' => 'Такой слот уже существует']);
+            return redirect()->back()->withErrors(['error' => 'This slot already exists']);
         }
 
         DB::table('room_availability')->insert([
@@ -178,7 +178,7 @@ class AdminController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Слот доступности добавлен успешно');
+        return redirect()->back()->with('success', 'Availability slot added successfully');
     }
 
     public function createBulkAvailability()
@@ -228,9 +228,9 @@ class AdminController extends Controller
             }
         }
 
-        $message = "Добавлено слотов: {$inserted}";
+        $message = "Slots added: {$inserted}";
         if ($skipped > 0) {
-            $message .= ", пропущено (уже существуют): {$skipped}";
+            $message .= ", skipped (already exist): {$skipped}";
         }
 
         return redirect()->route('admin.room-availability')->with('success', $message);
@@ -239,7 +239,7 @@ class AdminController extends Controller
     public function deleteDate($id)
     {
         DB::table('available_dates')->where('id', $id)->delete();
-        return redirect()->route('admin.available-dates')->with('success', 'Дата удалена');
+        return redirect()->route('admin.available-dates')->with('success', 'Date deleted');
     }
 
     public function toggleRoomAvailability($id)
@@ -255,20 +255,20 @@ class AdminController extends Controller
                 ]);
         }
 
-        return redirect()->back()->with('success', 'Доступность изменена');
+        return redirect()->back()->with('success', 'Availability changed');
     }
 
     public function deleteCallback($id)
     {
         DB::table('callback_requests')->where('id', $id)->delete();
-        return redirect()->route('admin.callback-requests')->with('success', 'Заявка удалена');
+        return redirect()->route('admin.callback-requests')->with('success', 'Request deleted');
     }
 
     public function deleteBooking($id)
     {
         DB::table('booking_entertainment')->where('booking_id', $id)->delete();
         DB::table('bookings')->where('id', $id)->delete();
-        return redirect()->route('admin.bookings')->with('success', 'Бронирование удалено');
+        return redirect()->route('admin.bookings')->with('success', 'Booking deleted');
     }
 
     public function createDate()

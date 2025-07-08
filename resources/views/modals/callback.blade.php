@@ -7,7 +7,7 @@
             </svg>
         </button>
         <div class="modal__header">
-            <h2 class="modal__title">Request Callback</h2>
+            <h2 class="modal__title">Request a call</h2>
         </div>
         <div class="modal__body">
             <form class="modal__form" action="#" method="POST">

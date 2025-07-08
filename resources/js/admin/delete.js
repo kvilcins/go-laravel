@@ -1,4 +1,4 @@
-const confirmDelete = (message = 'Вы уверены, что хотите удалить?') => {
+const confirmDelete = (message = 'Are you sure you want to delete?') => {
     return confirm(message);
 };
 

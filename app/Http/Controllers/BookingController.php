@@ -37,7 +37,7 @@ class BookingController extends Controller
             if (empty($tableExists)) {
                 \Log::error('Table available_dates does not exist');
                 return response()->json([
-                    'error' => 'Таблица дат не найдена'
+                    'error' => 'Dates table not found'
                 ], 500);
             }
 
@@ -67,7 +67,7 @@ class BookingController extends Controller
             ]);
 
             return response()->json([
-                'error' => 'Ошибка загрузки дат: ' . $e->getMessage()
+                'error' => 'Error loading dates: ' . $e->getMessage()
             ], 500);
         }
     }
@@ -112,7 +112,7 @@ class BookingController extends Controller
 
             if (!$dateRecord) {
                 return response()->json([
-                    'error' => 'Дата недоступна'
+                    'error' => 'Date not available'
                 ], 404);
             }
 
@@ -161,7 +161,7 @@ class BookingController extends Controller
             ]);
 
             return response()->json([
-                'error' => 'Ошибка загрузки данных',
+                'error' => 'Error loading data',
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -232,7 +232,7 @@ class BookingController extends Controller
                 ]);
             }
 
-            return redirect()->route('booking.form')->with('success', 'Бронирование успешно создано! Мы свяжемся с вами для подтверждения.');
+            return redirect()->route('booking.form')->with('success', 'Booking successfully created! We will contact you for confirmation.');
 
         } catch (\Exception $e) {
             \Log::error('Database error in submitForm: ' . $e->getMessage());
@@ -263,7 +263,7 @@ class BookingController extends Controller
             $bookings[] = $bookingData;
             file_put_contents($filePath, json_encode($bookings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-            return redirect()->route('booking.form')->with('success', 'Бронирование принято! Мы свяжемся с вами для подтверждения. (сохранено в резервное хранилище)');
+            return redirect()->route('booking.form')->with('success', 'Booking accepted! We will contact you for confirmation. (saved to backup storage)');
         }
     }
 
@@ -292,7 +292,7 @@ class BookingController extends Controller
             \Log::info('API validation failed', ['errors' => $validator->errors()->toArray()]);
             return response()->json([
                 'success' => false,
-                'message' => 'Ошибка валидации: ' . $validator->errors()->first()
+                'message' => 'Validation error: ' . $validator->errors()->first()
             ], 422);
         }
 
@@ -329,14 +329,14 @@ class BookingController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Бронирование успешно создано! Мы свяжемся с вами для подтверждения.'
+                'message' => 'Booking successfully created! We will contact you for confirmation.'
             ]);
 
         } catch (\Exception $e) {
             \Log::error('API database error: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Ошибка при сохранении бронирования. Попробуйте позже.'
+                'message' => 'Error saving booking. Please try again later.'
             ], 500);
         }
     }

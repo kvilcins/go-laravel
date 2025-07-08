@@ -7,21 +7,21 @@
         @include('blocks.main-banner', [
             'data' => [
                 'subtitle' => 'Game Over',
-                'title' => 'Новый формат игр и отдыха',
+                'title' => 'New format of games and entertainment',
                 'advantages' => [
                     [
                         'text' => '4',
                         'class' => 'main-banner__advantage-number--purple',
-                        'description' => 'Тематических зала'
+                        'description' => 'Themed rooms'
                     ],
                     [
                         'text' => 'new',
                         'class' => 'main-banner__advantage-number--small-caps',
-                        'description' => 'Новейшая аппаратура'
+                        'description' => 'Latest equipment'
                     ]
                 ],
                 'button' => [
-                    'text' => 'Забронировать',
+                    'text' => 'Book now',
                     'url' => 'booking'
                 ],
                 'scroll_link' => [
@@ -31,32 +31,32 @@
         ])
 
         @include('blocks.entertainment', [
-            'title' => 'У нас есть все для классного отдыха с друзьями!',
+            'title' => 'We have everything for an awesome time with friends!',
             'items' => [
                 [
                     'class' => 'vr',
                     'image' => 'entertainment/vr.jpg',
-                    'description' => 'VR очки'
+                    'description' => 'VR headsets'
                 ],
                 [
                     'class' => 'audio',
                     'image' => 'entertainment/audio.jpg',
-                    'description' => 'Аудио-система 5.1 с отличным звуком'
+                    'description' => '5.1 audio system with excellent sound'
                 ],
                 [
                     'class' => 'karaoke',
                     'image' => 'entertainment/karaoke.jpg',
-                    'description' => 'Караоке (4 микрофона)'
+                    'description' => 'Karaoke (4 microphones)'
                 ],
                 [
                     'class' => 'games',
                     'image' => 'entertainment/games.jpg',
-                    'description' => 'Настольные игры'
+                    'description' => 'Board games'
                 ],
                 [
                     'class' => 'movies',
                     'image' => 'entertainment/movies.jpg',
-                    'description' => 'Кино-сервисы Netflix, IVI, MegoGo, КиноПоиск, Okko'
+                    'description' => 'Movie services Netflix, IVI, MegoGo, КиноПоиск, Okko'
                 ],
                 [
                     'class' => 'ps',
@@ -67,7 +67,7 @@
         ])
 
         @include('blocks.rooms', [
-            'title' => 'Наши залы',
+            'title' => 'Our rooms',
             'items' => [
                 [
                     'class' => '80s',
@@ -96,54 +96,54 @@
 
         @include('blocks.about-us', [
             'data' => [
-                'title' => 'О нас',
+                'title' => 'About us',
                 'gallery' => [
                     [
                         'class' => 'vr',
                         'image' => 'about-us-1.jpg',
-                        'alt' => 'VR игры'
+                        'alt' => 'VR games'
                     ],
                     [
                         'class' => 'games',
                         'image' => 'about-us-2.jpg',
-                        'alt' => 'Настольные игры'
+                        'alt' => 'Board games'
                     ],
                     [
                         'class' => 'fifa',
                         'image' => 'about-us-3.jpg',
-                        'alt' => 'FIFA игра'
+                        'alt' => 'FIFA game'
                     ],
                     [
                         'class' => 'pad',
                         'image' => 'about-us-4.jpg',
-                        'alt' => 'Игровой контроллер'
+                        'alt' => 'Game controller'
                     ],
                     [
                         'class' => 'controller',
                         'image' => 'about-us-5.jpg',
-                        'alt' => 'Геймпад'
+                        'alt' => 'Gamepad'
                     ],
                     [
                         'class' => 'karaoke',
                         'image' => 'about-us-6.jpg',
-                        'alt' => 'Караоке система'
+                        'alt' => 'Karaoke system'
                     ],
                     [
                         'class' => 'vr2',
                         'image' => 'about-us-7.jpg',
-                        'alt' => 'VR очки'
+                        'alt' => 'VR headsets'
                     ]
                 ],
                 'descriptions' => [
-                    'Для наших гостей мы создали концептуально новое игровое пространство виртуальной реальности в центральной части города.',
-                    'Каждый день мы стараемся создавать для вас самую лучшую игровую атмосферу и радовать Вас топовыми игровыми разработками со всего мира.'
+                    'For our guests, we have created a conceptually new virtual reality gaming space in the central part of the city.',
+                    'Every day we strive to create the best gaming atmosphere for you and delight you with top gaming developments from around the world.'
                 ],
                 'quote' => [
                     'highlight' => 'GAME OVER',
-                    'text' => ' — это место незабываемых впечатлений',
+                    'text' => ' — is a place of unforgettable experiences',
                     'author' => [
-                        'name' => 'Аркадий Абакин',
-                        'position' => 'создатель игровой территории GAME OVER',
+                        'name' => 'Arkady Abakin',
+                        'position' => 'creator of GAME OVER gaming territory',
                         'photo' => 'creators-icon.png'
                     ]
                 ]
@@ -152,25 +152,25 @@
 
         @include('blocks.feedbacks', [
             'data' => [
-                'title' => 'Отзывы посетителей',
+                'title' => 'Customer reviews',
                 'reviews' => [
                     [
-                        'name' => 'Макс Самойлов',
+                        'name' => 'Max Samoylov',
                         'photo' => 'maxim.png',
-                        'text' => 'Отмечали здесь день рождения с компанией друзей, все было очень круто! VR очки это просто бомба, никогда еще я не был в таком полном игровом погружении. Сервис на высоте!',
-                        'alt' => 'Фото Макс Самойлов'
+                        'text' => 'We celebrated a birthday here with a group of friends, everything was very cool! VR headsets are just amazing, I have never been in such complete gaming immersion. Service is top notch!',
+                        'alt' => 'Photo Max Samoylov'
                     ],
                     [
-                        'name' => 'Оксана Григорьева',
+                        'name' => 'Oksana Grigorieva',
                         'photo' => 'oksana.png',
-                        'text' => 'Были в комнате Дикий Запад, пели в караоке под Шакиру, отличный получился корпоратив! У нас в городе больше нет подобных заведений',
-                        'alt' => 'Фото Оксана Григорьева'
+                        'text' => 'We were in the Wild West room, sang karaoke to Shakira, it was a great corporate event! There are no similar establishments in our city',
+                        'alt' => 'Photo Oksana Grigorieva'
                     ],
                     [
-                        'name' => 'Никита Ященко',
+                        'name' => 'Nikita Yashchenko',
                         'photo' => 'nikita.png',
-                        'text' => 'Немного подвисала игра в VR очках, а так все норм. Крутое оформление комнаты в стиле звездных войн, попал в атмосферу космоса',
-                        'alt' => 'Фото Никита Ященко'
+                        'text' => 'The VR headset game lagged a bit, but otherwise everything was fine. Cool design of the room in Star Wars style, got into the atmosphere of space',
+                        'alt' => 'Photo Nikita Yashchenko'
                     ]
                 ]
             ]
@@ -178,27 +178,27 @@
 
         @include('blocks.faq', [
             'data' => [
-                'title' => 'Частые вопросы',
+                'title' => 'Frequently asked questions',
                 'questions' => [
                     [
-                        'question' => 'Можно ли забронировать комнату онлайн?',
-                        'answer' => 'Да, можно воспользоваться нашей формой бронирования.'
+                        'question' => 'Can I book a room online?',
+                        'answer' => 'Yes, you can use our booking form.'
                     ],
                     [
-                        'question' => 'Могут ли мне вернуть деньги за бронь?',
-                        'answer' => 'Да, позвоните нам по номеру телефона 8 (950) 930 - 28 - 93 или напишите на почту GameOver@gmail.com'
+                        'question' => 'Can I get a refund for my booking?',
+                        'answer' => 'Yes, call us at 8 (950) 930 - 28 - 93 or email GameOver@gmail.com'
                     ],
                     [
-                        'question' => 'Какая комната самая популярная?',
-                        'answer' => 'Самая популярная комната - StarWars, к нам приходит очень много фанатов этой саги.'
+                        'question' => 'Which room is the most popular?',
+                        'answer' => 'The most popular room is StarWars, we have a lot of fans of this saga coming to us.'
                     ],
                     [
-                        'question' => 'Как получить VIP карту?',
-                        'answer' => 'Вы можете позвонить нам по номеру телефона 8 (950) 930 - 28 - 93 или написать на почту GameOver@gmail.com'
+                        'question' => 'How to get a VIP card?',
+                        'answer' => 'You can call us at 8 (950) 930 - 28 - 93 or email GameOver@gmail.com'
                     ],
                     [
-                        'question' => 'Сколько по времени занимает одна бронь?',
-                        'answer' => 'Одна бронь - это 3 часа, оплата производится пакетом независимо от количества гостей.'
+                        'question' => 'How long does one booking session last?',
+                        'answer' => 'One booking session is 3 hours, payment is made as a package regardless of the number of guests.'
                     ]
                 ]
             ]

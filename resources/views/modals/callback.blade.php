@@ -7,24 +7,24 @@
             </svg>
         </button>
         <div class="modal__header">
-            <h2 class="modal__title">Заказать звонок</h2>
+            <h2 class="modal__title">Request Callback</h2>
         </div>
         <div class="modal__body">
             <form class="modal__form" action="#" method="POST">
                 @csrf
                 <div class="modal__form-group">
-                    <input type="text" class="modal__input" name="name" placeholder="Ваше имя" required>
+                    <input type="text" class="modal__input" name="name" placeholder="Your name" required>
                 </div>
                 <div class="modal__form-group">
-                    <input type="tel" class="modal__input" name="phone" placeholder="Номер телефона" required>
+                    <input type="tel" class="modal__input" name="phone" placeholder="Phone number" required>
                 </div>
                 <div class="modal__form-group">
-                    <input type="text" class="modal__input" name="email" placeholder="Ваш email">
+                    <input type="text" class="modal__input" name="email" placeholder="Your email">
                 </div>
                 <div class="modal__form-group">
-                    <textarea class="modal__textarea" name="message" placeholder="Комментарий (необязательно)" rows="4"></textarea>
+                    <textarea class="modal__textarea" name="message" placeholder="Comment (optional)" rows="4"></textarea>
                 </div>
-                <button type="submit" class="modal__submit">Отправить</button>
+                <button type="submit" class="modal__submit">Send</button>
             </form>
         </div>
     </div>

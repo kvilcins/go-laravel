@@ -1,17 +1,17 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{!! csrf_token() !!}">
 <section class="booking" data-scroll-target="booking">
     <div class="container">
-        <h2 class="booking__title h2">Забронировать зал просто</h2>
+        <h2 class="booking__title h2">Book a room easily</h2>
 
         @if(session('success'))
             <div class="booking__message booking__message--success">
-                {{ session('success') }}
+                {!! session('success') !!}
             </div>
         @endif
 
         @if(session('error'))
             <div class="booking__message booking__message--error">
-                {{ session('error') }}
+                {!! session('error') !!}
             </div>
         @endif
 
@@ -19,42 +19,26 @@
             <div class="booking__message booking__message--error">
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li>{!! $error !!}</li>
                     @endforeach
                 </ul>
             </div>
         @endif
 
-        @if(session('success'))
-            <div class="booking__message booking__message--success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="booking__message booking__message--error">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form class="booking__form" method="POST" action="{{ route('booking.submit') }}">
+        <form class="booking__form" method="POST" action="{!! route('booking.submit') !!}">
             @csrf
             <fieldset class="booking__fieldset booking__fieldset--halls">
-                <legend class="booking__legend">Выбери зал</legend>
+                <legend class="booking__legend">Choose room</legend>
                 <div class="booking__halls">
                     @foreach($rooms as $room)
                         <label class="booking__hall-label">
                             <input
                                 type="radio"
                                 name="room_id"
-                                value="{{ $room['id'] }}"
-                                class="booking__hall-input booking__hall-input--{{ Str::slug($room['slug']) }}"
+                                value="{!! get_data($room, 'id') !!}"
+                                class="booking__hall-input booking__hall-input--{!! Str::slug(get_data($room, 'slug')) !!}"
                             >
-                            <span class="booking__hall-visual">{{ $room['label'] }}</span>
+                            <span class="booking__hall-visual">{!! get_data($room, 'label') !!}</span>
                         </label>
                     @endforeach
                 </div>
@@ -62,44 +46,44 @@
 
             <div class="booking__content">
                 <fieldset class="booking__fieldset booking__fieldset--entertainment">
-                    <legend class="booking__legend">Собери набор развлечений</legend>
+                    <legend class="booking__legend">Choose entertainment package</legend>
 
-                    @if(isset($entertainments['console']))
+                    @if(has_data($entertainments, 'console'))
                         <fieldset class="booking__sub-fieldset">
-                            <legend class="booking__sub-legend">Приставка:</legend>
+                            <legend class="booking__sub-legend">Console:</legend>
                             <div class="booking__options">
-                                @foreach($entertainments['console'] as $console)
+                                @foreach(get_data($entertainments, 'console', []) as $console)
                                     <label class="booking__option-label">
-                                        <input type="radio" name="console" value="{{ strtolower($console) }}" class="booking__option-input">
-                                        <span class="booking__option-text">{{ $console }}</span>
+                                        <input type="radio" name="console" value="{!! strtolower($console) !!}" class="booking__option-input">
+                                        <span class="booking__option-text">{!! $console !!}</span>
                                     </label>
                                 @endforeach
                             </div>
                         </fieldset>
                     @endif
 
-                    @if(isset($entertainments['board_games']))
+                    @if(has_data($entertainments, 'board_games'))
                         <fieldset class="booking__sub-fieldset">
-                            <legend class="booking__sub-legend">Настольные игры</legend>
+                            <legend class="booking__sub-legend">Board games</legend>
                             <div class="booking__options">
-                                @foreach($entertainments['board_games'] as $game)
+                                @foreach(get_data($entertainments, 'board_games', []) as $game)
                                     <label class="booking__option-label">
-                                        <input type="checkbox" name="games[]" value="{{ strtolower($game) }}" class="booking__option-input">
-                                        <span class="booking__option-text">{{ $game }}</span>
+                                        <input type="checkbox" name="games[]" value="{!! strtolower($game) !!}" class="booking__option-input">
+                                        <span class="booking__option-text">{!! $game !!}</span>
                                     </label>
                                 @endforeach
                             </div>
                         </fieldset>
                     @endif
 
-                    @if(isset($entertainments['additional']))
+                    @if(has_data($entertainments, 'additional'))
                         <fieldset class="booking__sub-fieldset">
-                            <legend class="booking__sub-legend">Дополнительно</legend>
+                            <legend class="booking__sub-legend">Additional</legend>
                             <div class="booking__options">
-                                @foreach($entertainments['additional'] as $additional)
+                                @foreach(get_data($entertainments, 'additional', []) as $additional)
                                     <label class="booking__option-label">
-                                        <input type="checkbox" name="additional[]" value="{{ strtolower($additional) }}" class="booking__option-input">
-                                        <span class="booking__option-text">{{ $additional }}</span>
+                                        <input type="checkbox" name="additional[]" value="{!! strtolower($additional) !!}" class="booking__option-input">
+                                        <span class="booking__option-text">{!! $additional !!}</span>
                                     </label>
                                 @endforeach
                             </div>
@@ -108,44 +92,44 @@
                 </fieldset>
 
                 <fieldset class="booking__fieldset booking__fieldset--datetime">
-                    <legend class="booking__legend">Выбери дату и время</legend>
+                    <legend class="booking__legend">Choose date and time</legend>
                     <div class="booking__datetime">
                         <div class="booking__selects">
                             <label class="booking__select-label">
                                 <select name="date" class="booking__select">
-                                    <option value="">Дата</option>
+                                    <option value="">Date</option>
                                 </select>
                             </label>
                             <label class="booking__select-label">
                                 <select name="time_slot_id" class="booking__select" disabled>
-                                    <option value="">Сначала выберите дату и зал</option>
+                                    <option value="">First select date and room</option>
                                 </select>
                             </label>
                             <label class="booking__select-label">
                                 <select name="amount" class="booking__select">
-                                    <option value="">Сколько человек</option>
+                                    <option value="">How many people</option>
                                     @for($i = 2; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{!! $i !!}">{!! $i !!}</option>
                                     @endfor
                                 </select>
                             </label>
                         </div>
                         <div class="booking__inputs">
                             <label class="booking__input-label">
-                                <span class="booking__input-text">Имя</span>
-                                <input type="text" name="first_name" required class="booking__input" value="{{ old('first_name') }}">
+                                <span class="booking__input-text">First Name</span>
+                                <input type="text" name="first_name" required class="booking__input" value="{!! old('first_name') !!}">
                             </label>
                             <label class="booking__input-label">
-                                <span class="booking__input-text">Телефон</span>
-                                <input type="tel" name="phone" required pattern="^\+?[7-8]-?[0-9]{3}-?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$" class="booking__input" value="{{ old('phone') }}">
+                                <span class="booking__input-text">Phone</span>
+                                <input type="tel" name="phone" required pattern="^\+?[7-8]-?[0-9]{3}-?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$" class="booking__input" value="{!! old('phone') !!}">
                             </label>
                             <label class="booking__input-label">
-                                <span class="booking__input-text">Фамилия</span>
-                                <input type="text" name="last_name" required class="booking__input" value="{{ old('last_name') }}">
+                                <span class="booking__input-text">Last Name</span>
+                                <input type="text" name="last_name" required class="booking__input" value="{!! old('last_name') !!}">
                             </label>
                             <label class="booking__input-label">
                                 <span class="booking__input-text">E-mail</span>
-                                <input type="email" name="email" class="booking__input" value="{{ old('email') }}">
+                                <input type="email" name="email" class="booking__input" value="{!! old('email') !!}">
                             </label>
                         </div>
                     </div>
@@ -155,7 +139,7 @@
                     <p class="booking__availability-text"></p>
                 </div>
 
-                <button type="submit" class="booking__submit">Забронировать</button>
+                <button type="submit" class="booking__submit">Book now</button>
             </div>
         </form>
     </div>

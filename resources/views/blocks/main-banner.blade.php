@@ -17,7 +17,7 @@
 
             @if(has_data($data, 'button'))
                 <button type="button" class="main-banner__button main-banner__link" data-scroll-to="{!! get_data($data, 'button.url', '') !!}">
-                    {!! get_data($data, 'button.text', 'Забронировать') !!}
+                    {!! get_data($data, 'button.text', 'Book now') !!}
                 </button>
             @endif
 

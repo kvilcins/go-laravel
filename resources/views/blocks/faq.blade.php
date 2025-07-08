@@ -3,7 +3,7 @@
         <h2 class="faq__title h2">{!! get_data($data, 'title', '') !!}</h2>
         <ul class="faq__list">
             @foreach(get_data($data, 'questions', []) as $index => $question)
-                <li class="faq__item" data-faq-item="{{ $index }}">
+                <li class="faq__item" data-faq-item="{!! $index !!}">
                     <button class="faq__button" type="button">
                         <span class="faq__question">{!! get_data($question, 'question') !!}</span>
                         <div class="faq__icon">

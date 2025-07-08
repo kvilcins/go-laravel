@@ -1,0 +1,39 @@
+.admin-sidebar {
+    @include font($Inter-700);
+    width: 250px;
+    background: $admin-sidebar-gradient;
+    color: $white-color;
+    padding: 20px 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+
+    &__title {
+        @include font($Inter-700);
+        padding: 0 20px 30px;
+        font-size: 24px;
+        border-bottom: 1px solid $sidebar-border;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+
+        &__title {
+            padding: 15px 20px 20px;
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-sidebar {
+        &__title {
+            font-size: 18px;
+            padding: 10px 15px 15px;
+        }
+    }
+}

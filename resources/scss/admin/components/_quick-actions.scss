@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    a,
+    span {
+        padding: 8px 12px;
+        margin: 0 2px;
+        border: 1px solid $input-border;
+        border-radius: 4px;
+        color: $text-muted;
+        text-decoration: none;
+    }
+
+    .current {
+        background: $dark-purple;
+        color: $white-color;
+        border-color: $dark-purple;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .pagination {
+        margin-top: 15px;
+
+        a,
+        span {
+            padding: 6px 8px;
+            font-size: 12px;
+        }
+    }
+}

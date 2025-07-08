@@ -6,23 +6,23 @@
         <nav class="header__navigation">
             <ul class="header__list">
                 <li class="header__item" data-scroll-to="rooms">
-                    Залы
+                    Rooms
                 </li>
                 <li class="header__item" data-scroll-to="about-us">
-                    О нас
+                    About Us
                 </li>
                 <li class="header__item" data-scroll-to="booking">
-                    Бронь
+                    Booking
                 </li>
                 <li class="header__item" data-scroll-to="feedbacks">
-                    Отзывы
+                    Reviews
                 </li>
                 <li class="header__item" data-scroll-to="footer">
-                    Контакты
+                    Contacts
                 </li>
             </ul>
         </nav>
-        <button type="button" class="header__callback" data-modal-open="callback">Заказать звонок</button>
+        <button type="button" class="header__callback" data-modal-open="callback">Request Callback</button>
 
         <button class="header__burger burger" id="burger-toggle" aria-label="Open menu">
             <span class="burger__line"></span>
@@ -39,19 +39,19 @@
             <nav class="header__navigation">
                 <ul class="header__list">
                     <li class="header__item" data-scroll-to="rooms">
-                        Залы
+                        Rooms
                     </li>
                     <li class="header__item" data-scroll-to="about-us">
-                        О нас
+                        About Us
                     </li>
                     <li class="header__item" data-scroll-to="booking">
-                        Бронь
+                        Booking
                     </li>
                     <li class="header__item" data-scroll-to="feedbacks">
-                        Отзывы
+                        Reviews
                     </li>
                     <li class="header__item" data-scroll-to="footer">
-                        Контакты
+                        Contacts
                     </li>
                 </ul>
             </nav>

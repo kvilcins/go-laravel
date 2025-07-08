@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Доступные даты')
-@section('subtitle', 'Управление доступными для бронирования датами')
+@section('title', 'Available Dates')
+@section('subtitle', 'Manage available dates for booking')
 
 @section('content')
     @include('admin.components.header', [
-        'title' => $title ?? 'Доступные даты',
-        'subtitle' => $subtitle ?? 'Управление доступными для бронирования датами'
+        'title' => $title ?? 'Available Dates',
+        'subtitle' => $subtitle ?? 'Manage available dates for booking'
     ])
 
     @include('admin.components.add-date-form')

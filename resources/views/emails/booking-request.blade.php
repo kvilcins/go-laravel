@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Новое бронирование</title>
+    <title>New Booking</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,17 +90,17 @@
 <body>
 <div class="email-container">
     <div class="email-header">
-        <h1>Новое бронирование</h1>
+        <h1>New Booking</h1>
     </div>
     <div class="email-body">
         <div class="urgent">
-            ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ
+            REQUIRES CONFIRMATION
         </div>
 
         <div class="booking-info">
             <div>
                 <div class="field">
-                    <div class="field-label">Зал:</div>
+                    <div class="field-label">Room:</div>
                     <div class="field-value">
                         @php
                             $halls = [
@@ -110,53 +110,53 @@
                                 'neon-style' => 'Neon Style'
                             ];
                         @endphp
-                        {{ $halls[$data['hall']] ?? $data['hall'] }}
+                        {!! get_data($halls, get_data($data, 'hall'), get_data($data, 'hall')) !!}
                     </div>
                 </div>
 
                 <div class="field">
-                    <div class="field-label">Дата:</div>
-                    <div class="field-value">{{ $data['date'] ?? 'Не указана' }}</div>
+                    <div class="field-label">Date:</div>
+                    <div class="field-value">{!! get_data($data, 'date', 'Not specified') !!}</div>
                 </div>
 
                 <div class="field">
-                    <div class="field-label">Время:</div>
-                    <div class="field-value">{{ $data['time'] ?? 'Не указано' }}</div>
+                    <div class="field-label">Time:</div>
+                    <div class="field-value">{!! get_data($data, 'time', 'Not specified') !!}</div>
                 </div>
 
                 <div class="field">
-                    <div class="field-label">Количество человек:</div>
-                    <div class="field-value">{{ $data['amount'] ?? $data['people_count'] ?? 'Не указано' }}</div>
+                    <div class="field-label">Number of people:</div>
+                    <div class="field-value">{!! get_data($data, 'amount', get_data($data, 'people_count', 'Not specified')) !!}</div>
                 </div>
             </div>
 
             <div>
                 <div class="field">
-                    <div class="field-label">Имя:</div>
-                    <div class="field-value">{{ $data['first-name'] ?? $data['first_name'] ?? 'Не указано' }}</div>
+                    <div class="field-label">First Name:</div>
+                    <div class="field-value">{!! get_data($data, 'first-name', get_data($data, 'first_name', 'Not specified')) !!}</div>
                 </div>
 
                 <div class="field">
-                    <div class="field-label">Фамилия:</div>
-                    <div class="field-value">{{ $data['last-name'] ?? $data['last_name'] ?? 'Не указана' }}</div>
+                    <div class="field-label">Last Name:</div>
+                    <div class="field-value">{!! get_data($data, 'last-name', get_data($data, 'last_name', 'Not specified')) !!}</div>
                 </div>
 
                 <div class="field">
-                    <div class="field-label">Телефон:</div>
-                    <div class="field-value">{{ $data['phone'] ?? 'Не указан' }}</div>
+                    <div class="field-label">Phone:</div>
+                    <div class="field-value">{!! get_data($data, 'phone', 'Not specified') !!}</div>
                 </div>
 
-                @if(!empty($data['email']))
+                @if(has_data($data, 'email'))
                     <div class="field">
                         <div class="field-label">Email:</div>
-                        <div class="field-value">{{ $data['email'] }}</div>
+                        <div class="field-value">{!! get_data($data, 'email') !!}</div>
                     </div>
                 @endif
             </div>
         </div>
 
-        @if(!empty($data['console']))
-            <div class="section-title">Выбранная приставка</div>
+        @if(has_data($data, 'console'))
+            <div class="section-title">Selected Console</div>
             <div class="field">
                 <div class="field-value">
                     @php
@@ -167,15 +167,15 @@
                             'dendy' => 'Dendy'
                         ];
                     @endphp
-                    {{ $consoles[$data['console']] ?? $data['console'] }}
+                    {!! get_data($consoles, get_data($data, 'console'), get_data($data, 'console')) !!}
                 </div>
             </div>
         @endif
 
-        @if(!empty($data['games']) && count($data['games']) > 0)
-            <div class="section-title">Настольные игры</div>
+        @if(has_data($data, 'games') && count(get_data($data, 'games', [])) > 0)
+            <div class="section-title">Board Games</div>
             <div class="options-list">
-                @foreach($data['games'] as $game)
+                @foreach(get_data($data, 'games', []) as $game)
                     @php
                         $games = [
                             'jenga' => 'Jenga',
@@ -184,33 +184,33 @@
                             'alias' => 'Alias'
                         ];
                     @endphp
-                    • {{ $games[$game] ?? $game }}<br>
+                    • {!! get_data($games, $game, $game) !!}<br>
                 @endforeach
             </div>
         @endif
 
-        @if(!empty($data['additional']) && count($data['additional']) > 0)
-            <div class="section-title">Дополнительные услуги</div>
+        @if(has_data($data, 'additional') && count(get_data($data, 'additional', [])) > 0)
+            <div class="section-title">Additional Services</div>
             <div class="options-list">
-                @foreach($data['additional'] as $item)
+                @foreach(get_data($data, 'additional', []) as $item)
                     @php
                         $additional = [
                             'karaoke' => 'Karaoke',
                             'vr' => 'VR'
                         ];
                     @endphp
-                    • {{ $additional[$item] ?? $item }}<br>
+                    • {!! get_data($additional, $item, $item) !!}<br>
                 @endforeach
             </div>
         @endif
 
         <div class="field">
-            <div class="field-label">Время подачи заявки:</div>
-            <div class="field-value">{{ now()->format('d.m.Y в H:i') }}</div>
+            <div class="field-label">Request time:</div>
+            <div class="field-value">{!! now()->format('d.m.Y \a\t H:i') !!}</div>
         </div>
     </div>
     <div class="email-footer">
-        Бронирование с сайта {{ config('app.name') }}
+        Booking from {!! config('app.name') !!} website
     </div>
 </div>
 </body>

@@ -1,0 +1,77 @@
+.admin-header {
+    background: $white-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: $admin-shadow;
+    margin-bottom: 30px;
+
+    &__title {
+        @include font($Inter-600);
+        font-size: 28px;
+        color: $dark-purple;
+        margin-bottom: 5px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, $dark-purple 0%, $neon-purple 100%);
+            border-radius: 1px;
+        }
+    }
+
+    &__subtitle {
+        @include font($Inter-400);
+        color: $text-muted;
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.5;
+        opacity: 0.8;
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    .admin-header {
+        padding: 15px;
+
+        &__title {
+            font-size: 24px;
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-header {
+        &__title {
+            font-size: 22px;
+        }
+
+        &__subtitle {
+            font-size: 13px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-header {
+        padding: 10px;
+        margin-bottom: 15px;
+
+        &__title {
+            font-size: 18px;
+
+            &::after {
+                width: 30px;
+                bottom: -6px;
+            }
+        }
+
+        &__subtitle {
+            font-size: 12px;
+        }
+    }
+}

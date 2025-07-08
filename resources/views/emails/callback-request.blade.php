@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Новая заявка на обратный звонок</title>
+    <title>New callback request</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,40 +60,40 @@
 <body>
 <div class="email-container">
     <div class="email-header">
-        <h1>Новая заявка на обратный звонок</h1>
+        <h1>New callback request</h1>
     </div>
     <div class="email-body">
         <div class="field">
-            <div class="field-label">Имя:</div>
-            <div class="field-value">{{ $data['name'] }}</div>
+            <div class="field-label">Name:</div>
+            <div class="field-value">{!! get_data($data, 'name') !!}</div>
         </div>
 
         <div class="field">
-            <div class="field-label">Телефон:</div>
-            <div class="field-value">{{ $data['phone'] }}</div>
+            <div class="field-label">Phone:</div>
+            <div class="field-value">{!! get_data($data, 'phone') !!}</div>
         </div>
 
-        @if(!empty($data['email']))
+        @if(has_data($data, 'email'))
             <div class="field">
                 <div class="field-label">Email:</div>
-                <div class="field-value">{{ $data['email'] }}</div>
+                <div class="field-value">{!! get_data($data, 'email') !!}</div>
             </div>
         @endif
 
-        @if(!empty($data['message']))
+        @if(has_data($data, 'message'))
             <div class="field">
-                <div class="field-label">Комментарий:</div>
-                <div class="field-value">{{ $data['message'] }}</div>
+                <div class="field-label">Comment:</div>
+                <div class="field-value">{!! get_data($data, 'message') !!}</div>
             </div>
         @endif
 
         <div class="field">
-            <div class="field-label">Дата и время:</div>
-            <div class="field-value">{{ now()->format('d.m.Y H:i') }}</div>
+            <div class="field-label">Date and time:</div>
+            <div class="field-value">{!! now()->format('d.m.Y H:i') !!}</div>
         </div>
     </div>
     <div class="email-footer">
-        Заявка отправлена с сайта {{ config('app.name') }}
+        Request sent from {!! config('app.name') !!} website
     </div>
 </div>
 </body>

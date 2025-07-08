@@ -5,7 +5,7 @@
 <footer class="footer">
     <section class="footer__contacts" data-scroll-target="footer">
         <div class="container">
-            <h2 class="footer__title">{!! get_data($data, 'title', 'Контакты') !!}</h2>
+            <h2 class="footer__title">{!! get_data($data, 'title', 'Contacts') !!}</h2>
             <div class="footer__content">
                 <div class="footer__info">
                     <address class="footer__address">

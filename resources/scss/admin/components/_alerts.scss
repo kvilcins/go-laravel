@@ -1,0 +1,33 @@
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    &--success {
+        background: $success-bg;
+        color: $success-text;
+        border: 1px solid $success-border;
+    }
+}
+
+.admin-hint {
+    background-color: rgba($neon-purple, 0.05);
+    border: 1px solid rgba($neon-purple, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: $dark-purple;
+    font-size: 0.875rem;
+}
+
+@media screen and (max-width: 767px) {
+    .alert {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .admin-hint {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+}

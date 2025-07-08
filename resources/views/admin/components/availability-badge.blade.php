@@ -1,5 +1,5 @@
 @if($available)
-    <span class="badge badge--success">✅ Доступно</span>
+    <span class="badge badge--success">✅ Available</span>
 @else
-    <span class="badge badge--danger">❌ Скрыто</span>
+    <span class="badge badge--danger">❌ Hidden</span>
 @endif

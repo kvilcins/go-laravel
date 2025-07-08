@@ -1,0 +1,78 @@
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid $border-light;
+    }
+
+    th {
+        @include font($Inter-600);
+        background: $light-grey;
+        color: $text-muted;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+}
+
+.table-responsive {
+    overflow-x: auto;
+
+    .admin-table {
+        min-width: 800px;
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    .admin-table {
+        th,
+        td {
+            padding: 8px;
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-table {
+        font-size: 12px;
+
+        th,
+        td {
+            padding: 6px 4px;
+        }
+
+        th {
+            font-size: 11px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+
+        table {
+            width: 100%;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 4px 2px;
+            font-size: 11px;
+        }
+
+        th {
+            font-size: 10px;
+        }
+    }
+}

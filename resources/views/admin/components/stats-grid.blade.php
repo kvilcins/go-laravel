@@ -1,21 +1,21 @@
 <div class="stats-grid">
     @include('admin.components.stat-card', [
         'number' => $stats['callback_requests'],
-        'label' => 'Всего заявок на звонок'
+        'label' => 'Total Callback Requests'
     ])
 
     @include('admin.components.stat-card', [
         'number' => $stats['bookings'],
-        'label' => 'Всего бронирований'
+        'label' => 'Total Bookings'
     ])
 
     @include('admin.components.stat-card', [
         'number' => $stats['today_callbacks'],
-        'label' => 'Заявок сегодня'
+        'label' => 'Requests Today'
     ])
 
     @include('admin.components.stat-card', [
         'number' => $stats['today_bookings'],
-        'label' => 'Бронирований сегодня'
+        'label' => 'Bookings Today'
     ])
 </div>

@@ -1,0 +1,60 @@
+.admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+
+    &--detailed {
+        text-align: center;
+        padding: 40px;
+    }
+
+    &__title {
+        margin-bottom: 15px;
+    }
+
+    &__subtitle {
+        color: #666;
+        font-size: 14px;
+    }
+}
+
+.admin-empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+
+    &__icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    &__description {
+        color: #6b7280;
+        font-size: 0.875rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-empty {
+        padding: 20px;
+
+        &--detailed {
+            padding: 20px;
+        }
+
+        &__title {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        &__subtitle {
+            font-size: 12px;
+        }
+    }
+}

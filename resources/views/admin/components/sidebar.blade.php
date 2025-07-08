@@ -6,35 +6,35 @@
         @include('admin.components.nav-item', [
             'route' => 'admin.dashboard',
             'icon' => '📊',
-            'text' => 'Дашборд'
+            'text' => 'Dashboard'
         ])
 
         @include('admin.components.nav-item', [
             'route' => 'admin.callback-requests',
             'icon' => '📞',
-            'text' => 'Заявки на звонок'
+            'text' => 'Callback Requests'
         ])
 
         @include('admin.components.nav-item', [
             'route' => 'admin.bookings',
             'icon' => '🎮',
-            'text' => 'Бронирования'
+            'text' => 'Bookings'
         ])
 
         @include('admin.components.nav-item', [
             'route' => 'admin.available-dates',
             'icon' => '📅',
-            'text' => 'Доступные даты'
+            'text' => 'Available Dates'
         ])
 
         @include('admin.components.nav-item', [
             'route' => 'admin.room-availability',
             'icon' => '🏠',
-            'text' => 'Доступность комнат'
+            'text' => 'Room Availability'
         ])
 
-        <a href="{{ route('home') }}" class="admin-nav__item" target="_blank">
-            🌐 На сайт
+        <a href="{!! route('home') !!}" class="admin-nav__item" target="_blank">
+            🌐 To Website
         </a>
     </nav>
 </aside>

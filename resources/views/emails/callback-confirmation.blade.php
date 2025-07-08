@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ваша заявка принята</title>
+    <title>Your request has been accepted</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,50 +75,50 @@
 <body>
 <div class="email-container">
     <div class="email-header">
-        <h1>Спасибо за обращение!</h1>
+        <h1>Thank you for contacting us!</h1>
     </div>
     <div class="email-body">
         <div class="success-message">
-            <strong>Ваша заявка успешно принята и будет рассмотрена в ближайшее время</strong>
+            <strong>Your request has been successfully accepted and will be reviewed shortly</strong>
         </div>
 
-        <p>Здравствуйте, {{ $data['name'] }}!</p>
+        <p>Hello, {!! get_data($data, 'name') !!}!</p>
 
-        <p>Мы получили вашу заявку на обратный звонок. Наш менеджер свяжется с вами в течение рабочего дня.</p>
+        <p>We have received your callback request. Our manager will contact you during business hours.</p>
 
-        <h3>Данные вашей заявки:</h3>
+        <h3>Your request details:</h3>
 
         <div class="field">
-            <div class="field-label">Имя:</div>
-            <div class="field-value">{{ $data['name'] }}</div>
+            <div class="field-label">Name:</div>
+            <div class="field-value">{!! get_data($data, 'name') !!}</div>
         </div>
 
         <div class="field">
-            <div class="field-label">Телефон:</div>
-            <div class="field-value">{{ $data['phone'] }}</div>
+            <div class="field-label">Phone:</div>
+            <div class="field-value">{!! get_data($data, 'phone') !!}</div>
         </div>
 
-        @if(!empty($data['message']))
+        @if(has_data($data, 'message'))
             <div class="field">
-                <div class="field-label">Ваш комментарий:</div>
-                <div class="field-value">{{ $data['message'] }}</div>
+                <div class="field-label">Your comment:</div>
+                <div class="field-value">{!! get_data($data, 'message') !!}</div>
             </div>
         @endif
 
         <div class="field">
-            <div class="field-label">Дата подачи заявки:</div>
-            <div class="field-value">{{ now()->format('d.m.Y в H:i') }}</div>
+            <div class="field-label">Request date:</div>
+            <div class="field-value">{!! now()->format('d.m.Y \a\t H:i') !!}</div>
         </div>
 
         <div class="contact-info">
-            <h3 style="margin-top: 0;">Контактная информация:</h3>
-            <p>Если у вас возникли вопросы, вы можете связаться с нами:</p>
-            <p><strong>Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
+            <h3 style="margin-top: 0;">Contact information:</h3>
+            <p>If you have any questions, you can contact us:</p>
+            <p><strong>Phone:</strong> +7 (XXX) XXX-XX-XX</p>
             <p><strong>Email:</strong> info@go-games.local</p>
         </div>
     </div>
     <div class="email-footer">
-        С уважением, команда {{ config('app.name') }}
+        Best regards, {!! config('app.name') !!} team
     </div>
 </div>
 </body>

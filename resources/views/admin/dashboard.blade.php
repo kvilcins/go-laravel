@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Дашборд')
+@section('title', 'Dashboard')
 
 @section('content')
     @include('admin.components.header', [
-        'title' => $title ?? 'Админ-панель',
-        'subtitle' => $subtitle ?? 'Управление контентом'
+        'title' => $title ?? 'Admin Panel',
+        'subtitle' => $subtitle ?? 'Content Management'
     ])
 
     @include('admin.components.stats-grid', ['stats' => $stats])

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ваше бронирование принято</title>
+    <title>Your booking has been accepted</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -111,23 +111,23 @@
 <body>
 <div class="email-container">
     <div class="email-header">
-        <h1>Ваше бронирование принято!</h1>
+        <h1>Your booking has been accepted!</h1>
     </div>
     <div class="email-body">
         <div class="success-message">
-            Спасибо за выбор нашего игрового клуба!<br>
-            Ваша заявка на бронирование принята и ожидает подтверждения
+            Thank you for choosing our gaming club!<br>
+            Your booking request has been accepted and is awaiting confirmation
         </div>
 
-        <p>Здравствуйте, {{ $data['first-name'] ?? $data['first_name'] }}!</p>
+        <p>Hello, {!! get_data($data, 'first-name', get_data($data, 'first_name')) !!}!</p>
 
-        <p>Мы получили вашу заявку на бронирование игрового зала. Наш администратор свяжется с вами в ближайшее время для подтверждения.</p>
+        <p>We have received your booking request for a gaming room. Our administrator will contact you shortly for confirmation.</p>
 
         <div class="booking-details">
-            <h3 style="margin-top: 0; color: #6C0287;">Детали вашего бронирования:</h3>
+            <h3 style="margin-top: 0; color: #6C0287;">Your booking details:</h3>
 
             <div class="detail-row">
-                <span class="detail-label">Зал:</span>
+                <span class="detail-label">Room:</span>
                 <span class="detail-value">
                         @php
                             $halls = [
@@ -137,33 +137,33 @@
                                 'neon-style' => 'Neon Style'
                             ];
                         @endphp
-                    {{ $halls[$data['hall']] ?? $data['hall'] }}
+                    {!! get_data($halls, get_data($data, 'hall'), get_data($data, 'hall')) !!}
                     </span>
             </div>
 
             <div class="detail-row">
-                <span class="detail-label">Дата:</span>
-                <span class="detail-value">{{ $data['date'] ?? 'Не указана' }}</span>
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">{!! get_data($data, 'date', 'Not specified') !!}</span>
             </div>
 
             <div class="detail-row">
-                <span class="detail-label">Время:</span>
-                <span class="detail-value">{{ $data['time'] ?? 'Не указано' }}</span>
+                <span class="detail-label">Time:</span>
+                <span class="detail-value">{!! get_data($data, 'time', 'Not specified') !!}</span>
             </div>
 
             <div class="detail-row">
-                <span class="detail-label">Количество человек:</span>
-                <span class="detail-value">{{ $data['amount'] ?? $data['people_count'] ?? 'Не указано' }}</span>
+                <span class="detail-label">Number of people:</span>
+                <span class="detail-value">{!! get_data($data, 'amount', get_data($data, 'people_count', 'Not specified')) !!}</span>
             </div>
 
             <div class="detail-row">
-                <span class="detail-label">Контактный телефон:</span>
-                <span class="detail-value">{{ $data['phone'] ?? 'Не указан' }}</span>
+                <span class="detail-label">Contact phone:</span>
+                <span class="detail-value">{!! get_data($data, 'phone', 'Not specified') !!}</span>
             </div>
         </div>
 
-        @if(!empty($data['console']))
-            <div class="section-title">Выбранная приставка</div>
+        @if(has_data($data, 'console'))
+            <div class="section-title">Selected Console</div>
             <div class="options-list">
                 @php
                     $consoles = [
@@ -173,14 +173,14 @@
                         'dendy' => 'Dendy'
                     ];
                 @endphp
-                {{ $consoles[$data['console']] ?? $data['console'] }}
+                {!! get_data($consoles, get_data($data, 'console'), get_data($data, 'console')) !!}
             </div>
         @endif
 
-        @if(!empty($data['games']) && count($data['games']) > 0)
-            <div class="section-title">Настольные игры</div>
+        @if(has_data($data, 'games') && count(get_data($data, 'games', [])) > 0)
+            <div class="section-title">Board Games</div>
             <div class="options-list">
-                @foreach($data['games'] as $game)
+                @foreach(get_data($data, 'games', []) as $game)
                     @php
                         $games = [
                             'jenga' => 'Jenga',
@@ -189,40 +189,40 @@
                             'alias' => 'Alias'
                         ];
                     @endphp
-                    • {{ $games[$game] ?? $game }}<br>
+                    • {!! get_data($games, $game, $game) !!}<br>
                 @endforeach
             </div>
         @endif
 
-        @if(!empty($data['additional']) && count($data['additional']) > 0)
-            <div class="section-title">Дополнительные услуги</div>
+        @if(has_data($data, 'additional') && count(get_data($data, 'additional', [])) > 0)
+            <div class="section-title">Additional Services</div>
             <div class="options-list">
-                @foreach($data['additional'] as $item)
+                @foreach(get_data($data, 'additional', []) as $item)
                     @php
                         $additional = [
                             'karaoke' => 'Karaoke',
                             'vr' => 'VR'
                         ];
                     @endphp
-                    • {{ $additional[$item] ?? $item }}<br>
+                    • {!! get_data($additional, $item, $item) !!}<br>
                 @endforeach
             </div>
         @endif
 
         <div class="important-note">
-            <strong>Важно:</strong> Ваше бронирование будет подтверждено после связи с администратором. Мы рекомендуем прибыть за 10-15 минут до начала сеанса.
+            <strong>Important:</strong> Your booking will be confirmed after our administrator contacts you. We recommend arriving 10-15 minutes before your session starts.
         </div>
 
         <div class="contact-info">
-            <h3>Наши контакты:</h3>
-            <p><strong>Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
+            <h3>Our contacts:</h3>
+            <p><strong>Phone:</strong> +7 (XXX) XXX-XX-XX</p>
             <p><strong>Email:</strong> info@go-games.local</p>
-            <p><strong>Адрес:</strong> г. Город, ул. Игровая, 1</p>
-            <p><strong>Режим работы:</strong> Ежедневно с 10:00 до 23:00</p>
+            <p><strong>Address:</strong> City, Gaming Street, 1</p>
+            <p><strong>Working hours:</strong> Daily from 10:00 to 23:00</p>
         </div>
     </div>
     <div class="email-footer">
-        С нетерпением ждем вас в {{ config('app.name') }}!
+        We look forward to seeing you at {!! config('app.name') !!}!
     </div>
 </div>
 </body>

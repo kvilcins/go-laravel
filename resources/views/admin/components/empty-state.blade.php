@@ -1,3 +1,3 @@
 <div class="admin-empty">
-    <p>{{ $message }}</p>
+    <p>{!! $message !!}</p>
 </div>

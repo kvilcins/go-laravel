@@ -1,0 +1,284 @@
+.form-group {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -5px;
+        width: 2px;
+        height: 0;
+        background: linear-gradient(180deg, $neon-purple 0%, $dark-purple 100%);
+        border-radius: 1px;
+        transition: height 0.3s ease;
+        opacity: 0;
+    }
+
+    &:focus-within {
+        &::before {
+            height: 100%;
+            opacity: 1;
+        }
+    }
+}
+
+.form-label {
+    @include font($Inter-500);
+    @include transition();
+    display: block;
+    color: $text-dark;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, $neon-purple 0%, $dark-purple 100%);
+        transition: width 0.3s ease;
+    }
+
+    &:hover {
+        color: $dark-purple;
+
+        &::after {
+            width: 30px;
+        }
+    }
+
+    &--checkbox {
+        @include transition();
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: linear-gradient(135deg, rgba($white-color, 0.9) 0%, rgba($light-grey, 0.5) 100%);
+        border: 2px solid rgba($dark-purple, 0.1);
+        border-radius: 8px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba($neon-purple, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, rgba($neon-purple, 0.05) 0%, rgba($dark-purple, 0.02) 100%);
+            border-color: rgba($dark-purple, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba($dark-purple, 0.1);
+
+            &::before {
+                left: 100%;
+            }
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: $dark-purple;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+
+            &:checked {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+.form-input {
+    @include font($Inter-400);
+    @include transition();
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid $input-border;
+    border-radius: 8px;
+    font-size: 14px;
+    background: linear-gradient(135deg, $white-color 0%, rgba($white-color, 0.95) 100%);
+    color: $text-dark;
+    position: relative;
+    box-shadow: 0 1px 3px rgba($black-color, 0.05);
+
+    &::placeholder {
+        color: rgba($text-muted, 0.7);
+        font-style: italic;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $dark-purple;
+        box-shadow: 0 0 0 3px rgba($dark-purple, 0.1), 0 2px 8px rgba($dark-purple, 0.15);
+        transform: translateY(-1px);
+        background: linear-gradient(135deg, $white-color 0%, rgba($neon-purple, 0.02) 100%);
+    }
+
+    &:hover {
+        border-color: rgba($dark-purple, 0.3);
+        box-shadow: 0 2px 6px rgba($black-color, 0.08);
+    }
+
+    &:invalid {
+        border-color: rgba($danger-red, 0.5);
+        box-shadow: 0 0 0 2px rgba($danger-red, 0.1);
+    }
+
+    &:valid {
+        border-color: rgba($success-green, 0.5);
+    }
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, rgba($neon-purple, 0.3) 50%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:focus-within {
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    .form-group {
+        position: relative;
+
+        &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(180deg, transparent 0%, rgba($neon-purple, 0.2) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        &:focus-within:not(:last-child)::after {
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes formGlow {
+    0%, 100% { box-shadow: 0 0 5px rgba($neon-purple, 0.2); }
+    50% { box-shadow: 0 0 20px rgba($neon-purple, 0.4); }
+}
+
+@keyframes labelShine {
+    0% { background-position: -100px; }
+    100% { background-position: calc(100% + 100px); }
+}
+
+.form-group {
+    &--required {
+        .form-label::before {
+            content: '*';
+            color: $danger-red;
+            margin-right: 4px;
+            font-weight: bold;
+        }
+    }
+
+    &--success {
+        .form-input {
+            border-color: $success-green;
+            background: linear-gradient(135deg, rgba($success-green, 0.05) 0%, $white-color 100%);
+        }
+    }
+
+    &--error {
+        .form-input {
+            border-color: $danger-red;
+            background: linear-gradient(135deg, rgba($danger-red, 0.05) 0%, $white-color 100%);
+            animation: shake 0.5s ease-in-out;
+        }
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@media screen and (max-width: 1320px) {
+    .form-group {
+        min-width: 200px;
+    }
+
+    .form-row {
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+
+        .form-group {
+            &:not(:last-child)::after {
+                display: none;
+            }
+        }
+    }
+
+    .form-group {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .form-input {
+        padding: 10px 12px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .form-label {
+        font-size: 12px;
+        margin-bottom: 5px;
+
+        &--checkbox {
+            padding: 8px 12px;
+            gap: 6px;
+
+            input[type="checkbox"] {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .form-row {
+        gap: 12px;
+    }
+}

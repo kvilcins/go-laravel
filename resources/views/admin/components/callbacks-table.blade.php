@@ -1,7 +1,7 @@
 <div class="admin-card">
     <div class="admin-card__header">
-        <h2 class="admin-card__title">Заявки на обратный звонок</h2>
-        <span class="badge badge--success">{{ $requests->total() }} заявок</span>
+        <h2 class="admin-card__title">Callback Requests</h2>
+        <span class="badge badge--success">{!! $requests->total() !!} requests</span>
     </div>
     <div class="admin-card__content">
         @if($requests->count() > 0)
@@ -9,29 +9,29 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Имя</th>
-                    <th>Телефон</th>
+                    <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
-                    <th>Сообщение</th>
-                    <th>Дата создания</th>
-                    <th>Действия</th>
+                    <th>Message</th>
+                    <th>Created Date</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($requests as $request)
                     <tr>
-                        <td>{{ $request->id }}</td>
-                        <td>{{ $request->name }}</td>
-                        <td>{{ $request->phone }}</td>
-                        <td>{{ $request->email ?? '-' }}</td>
-                        <td title="{{ $request->message }}">
-                            {{ Str::limit($request->message ?? '-', 50) }}
+                        <td>{!! get_data($request, 'id') !!}</td>
+                        <td>{!! get_data($request, 'name') !!}</td>
+                        <td>{!! get_data($request, 'phone') !!}</td>
+                        <td>{!! get_data($request, 'email', '-') !!}</td>
+                        <td title="{!! get_data($request, 'message') !!}">
+                            {!! Str::limit(get_data($request, 'message', '-'), 50) !!}
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($request->created_at)->format('d.m.Y H:i') }}</td>
+                        <td>{!! \Carbon\Carbon::parse($request->created_at)->format('d.m.Y H:i') !!}</td>
                         <td>
                             @include('admin.components.delete-button', [
                                 'route' => route('admin.delete-callback', $request->id),
-                                'confirmText' => 'Удалить эту заявку?'
+                                'confirmText' => 'Delete this request?'
                             ])
                         </td>
                     </tr>
@@ -39,10 +39,10 @@
                 </tbody>
             </table>
 
-            {{ $requests->links() }}
+            {!! $requests->links() !!}
         @else
             @include('admin.components.empty-state', [
-                'message' => 'Заявок на обратный звонок пока нет.'
+                'message' => 'No callback requests yet.'
             ])
         @endif
     </div>

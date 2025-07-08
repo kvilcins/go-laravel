@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Доступность комнат')
+@section('title', 'Room Availability')
 
 @section('content')
     @include('admin.components.header', [
-        'title' => 'Доступность комнат',
-        'subtitle' => 'Управление временными слотами для каждой комнаты'
+        'title' => 'Room Availability',
+        'subtitle' => 'Manage time slots for each room'
     ])
 
     @include('admin.components.room-availability-filters', [

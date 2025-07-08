@@ -1,0 +1,24 @@
+.admin-content {
+    margin-left: 250px;
+    flex: 1;
+    padding: 30px;
+}
+
+@media screen and (max-width: 1320px) {
+    .admin-content {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-content {
+        padding: 10px;
+    }
+}

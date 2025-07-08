@@ -1,7 +1,7 @@
 <div class="admin-card">
     <div class="admin-card__header">
-        <h2 class="admin-card__title">Бронирования</h2>
-        <span class="badge badge--success">{{ $bookings->total() }} бронирований</span>
+        <h2 class="admin-card__title">Bookings</h2>
+        <span class="badge badge--success">{!! $bookings->total() !!} bookings</span>
     </div>
     <div class="admin-card__content">
         @if($bookings->count() > 0)
@@ -9,33 +9,33 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Комната</th>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Гостей</th>
-                    <th>Имя</th>
-                    <th>Телефон</th>
+                    <th>Room</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Guests</th>
+                    <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
-                    <th>Создано</th>
-                    <th>Действия</th>
+                    <th>Created</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($bookings as $booking)
                     <tr>
-                        <td>{{ $booking->id }}</td>
-                        <td>{{ $rooms[$booking->room_id] ?? 'Неизвестно' }}</td>
-                        <td>{{ \Carbon\Carbon::parse($booking->date)->format('d.m.Y') }}</td>
-                        <td>{{ $booking->time }}</td>
-                        <td>{{ $booking->amount }}</td>
-                        <td>{{ $booking->first_name }} {{ $booking->last_name }}</td>
-                        <td>{{ $booking->phone }}</td>
-                        <td>{{ $booking->email ?? '-' }}</td>
-                        <td>{{ \Carbon\Carbon::parse($booking->created_at)->format('d.m.Y H:i') }}</td>
+                        <td>{!! get_data($booking, 'id') !!}</td>
+                        <td>{!! get_data($rooms, $booking->room_id, 'Unknown') !!}</td>
+                        <td>{!! \Carbon\Carbon::parse($booking->date)->format('d.m.Y') !!}</td>
+                        <td>{!! get_data($booking, 'time') !!}</td>
+                        <td>{!! get_data($booking, 'amount') !!}</td>
+                        <td>{!! get_data($booking, 'first_name') !!} {!! get_data($booking, 'last_name') !!}</td>
+                        <td>{!! get_data($booking, 'phone') !!}</td>
+                        <td>{!! get_data($booking, 'email', '-') !!}</td>
+                        <td>{!! \Carbon\Carbon::parse($booking->created_at)->format('d.m.Y H:i') !!}</td>
                         <td>
                             @include('admin.components.delete-button', [
                                 'route' => route('admin.delete-booking', $booking->id),
-                                'confirmText' => 'Удалить это бронирование?'
+                                'confirmText' => 'Delete this booking?'
                             ])
                         </td>
                     </tr>
@@ -43,10 +43,10 @@
                 </tbody>
             </table>
 
-            {{ $bookings->links() }}
+            {!! $bookings->links() !!}
         @else
             @include('admin.components.empty-state', [
-                'message' => 'Бронирований пока нет.'
+                'message' => 'No bookings yet.'
             ])
         @endif
     </div>

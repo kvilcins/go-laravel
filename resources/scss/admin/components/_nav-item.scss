@@ -1,0 +1,44 @@
+.admin-nav {
+    padding: 20px 0;
+
+    &__item {
+        @include transition();
+        display: block;
+        padding: 12px 20px;
+        color: $white-color;
+        text-decoration: none;
+
+        &:hover,
+        &--active {
+            background-color: $sidebar-overlay;
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-nav {
+        padding: 15px 0;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+
+        &__item {
+            flex-shrink: 0;
+            padding: 8px 15px;
+            margin-right: 5px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-nav {
+        padding: 10px 0;
+
+        &__item {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    }
+}

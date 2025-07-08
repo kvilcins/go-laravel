@@ -1,0 +1,97 @@
+.admin-card {
+    background: $white-color;
+    color: $dark-grey;
+    border-radius: 8px;
+    box-shadow: $admin-shadow;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    &__header {
+        padding: 20px;
+        background: linear-gradient(135deg, rgba($white-color, 1) 0%, rgba($light-grey, 0.3) 100%);
+        border-bottom: 2px solid rgba($dark-purple, 0.06);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__title {
+        @include font($Inter-600);
+        font-size: 18px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, $dark-purple 0%, $neon-purple 100%);
+            border-radius: 1px;
+        }
+    }
+
+    &__content {
+        padding: 20px;
+    }
+
+    &--spaced {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    .admin-card {
+        &__header {
+            padding: 15px;
+        }
+
+        &__content {
+            padding: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .admin-card {
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        &__title {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .admin-card {
+        margin-bottom: 15px;
+
+        &__header {
+            padding: 10px;
+        }
+
+        &__content {
+            padding: 10px;
+        }
+
+        &__title {
+            font-size: 14px;
+
+            &::after {
+                width: 30px;
+                bottom: -6px;
+            }
+        }
+
+        &--spaced {
+            margin-bottom: 15px;
+        }
+    }
+}

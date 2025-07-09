@@ -16,6 +16,7 @@
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Email</th>
+                    <th>Entertainments</th>
                     <th>Created</th>
                     <th>Actions</th>
                 </tr>
@@ -31,6 +32,17 @@
                         <td>{!! get_data($booking, 'first_name') !!} {!! get_data($booking, 'last_name') !!}</td>
                         <td>{!! get_data($booking, 'phone') !!}</td>
                         <td>{!! get_data($booking, 'email', '-') !!}</td>
+                        <td class="admin-table__entertainment-cell">
+                            @if(isset($bookingEntertainments[$booking->id]) && !empty($bookingEntertainments[$booking->id]))
+                                @foreach($bookingEntertainments[$booking->id] as $entertainmentId)
+                                    <span class="entertainment-tag">
+                                        {!! get_data($entertainments, $entertainmentId, 'Unknown') !!}
+                                    </span>
+                                @endforeach
+                            @else
+                                <span class="entertainment-tag entertainment-tag--empty">No entertainment</span>
+                            @endif
+                        </td>
                         <td>{!! \Carbon\Carbon::parse($booking->created_at)->format('d.m.Y H:i') !!}</td>
                         <td>
                             @include('admin.components.delete-button', [

@@ -45,7 +45,7 @@ class BookingDataSeeder extends Seeder
 
             DB::table('available_dates')->insert([
                 'date' => $date->format('Y-m-d'),
-                'formatted_date' => $date->format('d.m'),
+                'formatted_date' => $date->format('m/d/Y'),
                 'day_name' => $date->translatedFormat('D'),
                 'is_active' => true,
                 'created_at' => now(),

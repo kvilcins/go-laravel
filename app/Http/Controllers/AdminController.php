@@ -37,7 +37,17 @@ class AdminController extends Controller
 
         $rooms = DB::table('rooms')->pluck('label', 'id')->toArray();
 
-        return view('admin.bookings', compact('bookings', 'rooms'));
+        $entertainments = DB::table('entertainments')->pluck('name', 'id')->toArray();
+
+        $bookingEntertainments = [];
+        foreach ($bookings as $booking) {
+            $bookingEntertainments[$booking->id] = DB::table('booking_entertainment')
+                ->where('booking_id', $booking->id)
+                ->pluck('entertainment_id')
+                ->toArray();
+        }
+
+        return view('admin.bookings', compact('bookings', 'rooms', 'entertainments', 'bookingEntertainments'));
     }
 
     public function availableDates()
@@ -123,7 +133,7 @@ class AdminController extends Controller
             ['date' => $date->format('Y-m-d')],
             [
                 'date' => $date->format('Y-m-d'),
-                'formatted_date' => $date->format('d.m.Y'),
+                'formatted_date' => $date->format('m/d/Y'),
                 'day_name' => $date->translatedFormat('D'),
                 'is_active' => $validated['is_active'] ?? true,
                 'created_at' => now(),

@@ -1,19 +1,6 @@
 .form-group {
     position: relative;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -5px;
-        width: 2px;
-        height: 0;
-        background: linear-gradient(180deg, $neon-purple 0%, $dark-purple 100%);
-        border-radius: 1px;
-        transition: height 0.3s ease;
-        opacity: 0;
-    }
-
     &:focus-within {
         &::before {
             height: 100%;
@@ -28,25 +15,6 @@
     display: block;
     color: $text-dark;
     position: relative;
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: linear-gradient(90deg, $neon-purple 0%, $dark-purple 100%);
-        transition: width 0.3s ease;
-    }
-
-    &:hover {
-        color: $dark-purple;
-
-        &::after {
-            width: 30px;
-        }
-    }
 
     &--checkbox {
         @include transition();

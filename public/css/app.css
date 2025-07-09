@@ -596,16 +596,6 @@ template {
   margin-bottom: 5px;
   position: relative;
 }
-.admin-header__title::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #6C0287 0%, #CD06FF 100%);
-  border-radius: 1px;
-}
 .admin-header__subtitle {
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -1103,13 +1093,14 @@ template {
   font-style: normal;
   font-size: 18px;
   position: relative;
+  margin: 0 0 20px 0;
 }
 .admin-card__title::after {
   content: "";
   position: absolute;
   bottom: -8px;
   left: 0;
-  width: 40px;
+  width: 100%;
   height: 2px;
   background: linear-gradient(90deg, #6C0287 0%, #CD06FF 100%);
   border-radius: 1px;
@@ -1312,18 +1303,6 @@ template {
 .form-group {
   position: relative;
 }
-.form-group::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -5px;
-  width: 2px;
-  height: 0;
-  background: linear-gradient(180deg, #CD06FF 0%, #6C0287 100%);
-  border-radius: 1px;
-  transition: height 0.3s ease;
-  opacity: 0;
-}
 .form-group:focus-within::before {
   height: 100%;
   opacity: 1;
@@ -1337,22 +1316,6 @@ template {
   display: block;
   color: #333;
   position: relative;
-}
-.form-label::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: linear-gradient(90deg, #CD06FF 0%, #6C0287 100%);
-  transition: width 0.3s ease;
-}
-.form-label:hover {
-  color: #6C0287;
-}
-.form-label:hover::after {
-  width: 30px;
 }
 .form-label--checkbox {
   transition: all ease-in-out 0.3s;
@@ -1609,7 +1572,7 @@ template {
   transition: all ease-in-out 0.3s;
   white-space: nowrap;
   box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
-  background: linear-gradient(135deg, #28a745 0%, #20a339 100%);
+  background: #28a745;
   border: none;
   position: relative;
   overflow: hidden;
@@ -2190,6 +2153,7 @@ template {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .header__navigation_open {
@@ -2346,10 +2310,13 @@ template {
 }
 @media screen and (max-width: 1320px) {
   .header__list {
-    gap: 20px;
+    gap: 15px;
   }
   .header__item {
     font-size: 18px;
+  }
+  .header__callback {
+    width: 260px;
   }
 }
 @media screen and (max-width: 1023px) {
@@ -2715,14 +2682,14 @@ template {
 }
 
 .scroll-to-top {
-  font-size: 20px;
+  font-size: 17px;
   color: #FFFFFF;
   position: fixed;
   bottom: 40px;
   right: 20px;
   z-index: 999;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background-color: #1C1A1A;
   border: none;
   border-radius: 50%;

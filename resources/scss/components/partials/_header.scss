@@ -28,6 +28,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .header__navigation {
@@ -211,11 +212,15 @@
 @media screen and (max-width: 1320px) {
 
     .header__list {
-        gap: 20px;
+        gap: 15px;
     }
 
     .header__item {
         font-size: 18px;
+    }
+
+    .header__callback {
+        width: 260px;
     }
 }
 

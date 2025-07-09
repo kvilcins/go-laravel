@@ -48,7 +48,7 @@
                 @include transition();
                 white-space: nowrap;
                 box-shadow: 0 2px 8px rgba($success-green, 0.2);
-                background: linear-gradient(135deg, $success-green 0%, #20a339 100%);
+                background: $success-green;
                 border: none;
                 position: relative;
                 overflow: hidden;

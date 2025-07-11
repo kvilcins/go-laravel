@@ -11,3 +11,4 @@ import './modules/fixed-header';
 import './modules/mobile-menu';
 import './modules/scroll-to-top';
 import './modules/smooth-scroll';
+import './modules/form-validation';

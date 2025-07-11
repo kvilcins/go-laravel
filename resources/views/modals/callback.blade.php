@@ -10,16 +10,16 @@
             <h2 class="modal__title">Request a call</h2>
         </div>
         <div class="modal__body">
-            <form class="modal__form" action="#" method="POST">
+            <form class="modal__form" method="POST" novalidate>
                 @csrf
                 <div class="modal__form-group">
-                    <input type="text" class="modal__input" name="name" placeholder="Your name" required>
+                    <input type="text" class="modal__input" name="name" placeholder="Your name">
                 </div>
                 <div class="modal__form-group">
-                    <input type="tel" class="modal__input" name="phone" placeholder="Phone number" required>
+                    <input type="tel" class="modal__input" name="phone" placeholder="Phone number">
                 </div>
                 <div class="modal__form-group">
-                    <input type="text" class="modal__input" name="email" placeholder="Your email">
+                    <input type="email" class="modal__input" name="email" placeholder="Your email">
                 </div>
                 <div class="modal__form-group">
                     <textarea class="modal__textarea" name="message" placeholder="Comment (optional)" rows="4"></textarea>

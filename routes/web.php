@@ -15,6 +15,10 @@ Route::post('/callback', [CallbackController::class, 'send'])->name('callback.se
 // Booking controller
 Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.form');
 
+// Validation
+Route::post('/api/booking/submit', [BookingController::class, 'submitFormApi'])->name('booking.submit.api');
+Route::post('/callback/send', [CallbackController::class, 'send'])->name('callback.send');
+
 // AJAX API for booking
 Route::post('/api/booking', [BookingController::class, 'submitFormApi'])->name('booking.api');
 Route::get('/booking/available-dates', [BookingController::class, 'getAvailableDates']);

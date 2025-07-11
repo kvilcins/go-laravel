@@ -1,4 +1,5 @@
 .notification {
+    @include font($Inter-500);
     position: fixed;
     top: 20px;
     right: 20px;
@@ -6,13 +7,12 @@
     color: white;
     border-radius: 5px;
     z-index: 10000;
-    font-weight: 500;
 
     &--success {
-        background: #4caf50;
+        background: $success-green;
     }
 
     &--error {
-        background: #f44336;
+        background: $danger-red;
     }
 }

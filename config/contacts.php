@@ -32,7 +32,7 @@ return [
         ]
     ],
     'map' => [
-        'embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3594.123456789012!2d-80.1234567890123!3d25.7890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ3JzIwLjQiTiA4MMKwMDcnMjQuNSJX!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus'
+        'embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.298765432109!2d-80.1198765432109!3d25.7890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b48b1234567%3A0x1234567890abcdef!2s1234%20Collins%20Ave%2C%20Miami%20Beach%2C%20FL%2033139!5e0!3m2!1sen!2sus!4v1642123456789!5m2!1sen!2sus'
     ],
     'copyright' => [
         'company' => 'Game Over',

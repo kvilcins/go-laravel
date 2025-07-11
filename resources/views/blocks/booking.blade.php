@@ -3,29 +3,7 @@
     <div class="container">
         <h2 class="booking__title h2">Book a room easily</h2>
 
-        @if(session('success'))
-            <div class="booking__message booking__message--success">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="booking__message booking__message--error">
-                {!! session('error') !!}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="booking__message booking__message--error">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{!! $error !!}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form class="booking__form" method="POST" action="{!! route('booking.submit') !!}">
+        <form class="booking__form" method="POST" action="{!! route('booking.submit') !!}" novalidate>
             @csrf
             <fieldset class="booking__fieldset booking__fieldset--halls">
                 <legend class="booking__legend">Choose room</legend>
@@ -117,15 +95,15 @@
                         <div class="booking__inputs">
                             <label class="booking__input-label">
                                 <span class="booking__input-text">First Name</span>
-                                <input type="text" name="first_name" required class="booking__input" value="{!! old('first_name') !!}">
+                                <input type="text" name="first_name" class="booking__input" value="{!! old('first_name') !!}">
                             </label>
                             <label class="booking__input-label">
                                 <span class="booking__input-text">Phone</span>
-                                <input type="tel" name="phone" required pattern="^\+?[7-8]-?[0-9]{3}-?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$" class="booking__input" value="{!! old('phone') !!}">
+                                <input type="tel" name="phone" class="booking__input" value="{!! old('phone') !!}">
                             </label>
                             <label class="booking__input-label">
                                 <span class="booking__input-text">Last Name</span>
-                                <input type="text" name="last_name" required class="booking__input" value="{!! old('last_name') !!}">
+                                <input type="text" name="last_name" class="booking__input" value="{!! old('last_name') !!}">
                             </label>
                             <label class="booking__input-label">
                                 <span class="booking__input-text">E-mail</span>

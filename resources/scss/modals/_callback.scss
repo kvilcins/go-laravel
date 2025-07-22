@@ -50,6 +50,7 @@
     cursor: pointer;
     padding: 5px;
     transition: color 0.3s ease;
+    z-index: 1111;
 
     &:hover {
         color: $neon-purple;

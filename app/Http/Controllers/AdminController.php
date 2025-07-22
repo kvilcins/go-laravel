@@ -8,6 +8,28 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    private function deactivatePastDates()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+
+        DB::table('available_dates')
+            ->where('date', '<', $today)
+            ->where('is_active', true)
+            ->update([
+                'is_active' => false,
+                'updated_at' => now()
+            ]);
+
+        DB::table('room_availability')
+            ->join('available_dates', 'room_availability.date_id', '=', 'available_dates.id')
+            ->where('available_dates.date', '<', $today)
+            ->where('room_availability.is_available', true)
+            ->update([
+                'room_availability.is_available' => false,
+                'room_availability.updated_at' => now()
+            ]);
+    }
+
     public function dashboard()
     {
         $stats = [
@@ -50,43 +72,76 @@ class AdminController extends Controller
         return view('admin.bookings', compact('bookings', 'rooms', 'entertainments', 'bookingEntertainments'));
     }
 
-    public function availableDates()
+    public function availableDates(Request $request)
     {
-        $dates = DB::table('available_dates')
-            ->orderBy('date', 'asc')
-            ->paginate(20);
+        $this->deactivatePastDates();
 
-        return view('admin.available-dates', compact('dates'));
+        $status = $request->get('status', 'active');
+
+        $activeDates = DB::table('available_dates')
+            ->where('is_active', true)
+            ->orderBy('date', 'asc')
+            ->paginate(20, ['*'], 'active_page');
+
+        $inactiveDates = DB::table('available_dates')
+            ->where('is_active', false)
+            ->orderBy('date', 'desc')
+            ->paginate(20, ['*'], 'inactive_page');
+
+        $activeDatesCount = $activeDates->total();
+        $inactiveDatesCount = $inactiveDates->total();
+
+        return view('admin.available-dates', compact(
+            'activeDates',
+            'inactiveDates',
+            'activeDatesCount',
+            'inactiveDatesCount'
+        ));
     }
 
     public function roomAvailability(Request $request)
     {
-        $query = DB::table('room_availability')
+        $this->deactivatePastDates();
+
+        $activeQuery = DB::table('room_availability')
             ->join('available_dates', 'room_availability.date_id', '=', 'available_dates.id')
             ->join('time_slots', 'room_availability.time_slot_id', '=', 'time_slots.id')
+            ->where('room_availability.is_available', true)
+            ->select('room_availability.*', 'available_dates.formatted_date', 'time_slots.label as time_label');
+
+        $inactiveQuery = DB::table('room_availability')
+            ->join('available_dates', 'room_availability.date_id', '=', 'available_dates.id')
+            ->join('time_slots', 'room_availability.time_slot_id', '=', 'time_slots.id')
+            ->where('room_availability.is_available', false)
             ->select('room_availability.*', 'available_dates.formatted_date', 'time_slots.label as time_label');
 
         if ($request->filled('room_id')) {
-            $query->where('room_availability.room_id', $request->room_id);
+            $activeQuery->where('room_availability.room_id', $request->room_id);
+            $inactiveQuery->where('room_availability.room_id', $request->room_id);
         }
 
         if ($request->filled('admin_date')) {
-            $query->where('available_dates.date', $request->admin_date);
+            $activeQuery->where('available_dates.date', $request->admin_date);
+            $inactiveQuery->where('available_dates.date', $request->admin_date);
         }
 
         if ($request->filled('admin_time_slot_id')) {
-            $query->where('room_availability.time_slot_id', $request->admin_time_slot_id);
+            $activeQuery->where('room_availability.time_slot_id', $request->admin_time_slot_id);
+            $inactiveQuery->where('room_availability.time_slot_id', $request->admin_time_slot_id);
         }
 
-        if ($request->filled('availability')) {
-            $query->where('room_availability.is_available', $request->availability);
-        }
-
-        $availability = $query
+        $activeAvailability = $activeQuery
             ->orderBy('available_dates.date', 'asc')
             ->orderBy('room_availability.room_id', 'asc')
             ->orderBy('time_slots.label', 'asc')
-            ->paginate(30)
+            ->paginate(30, ['*'], 'active_page')
+            ->appends($request->query());
+
+        $inactiveAvailability = $inactiveQuery
+            ->orderBy('available_dates.date', 'desc')
+            ->orderBy('room_availability.room_id', 'asc')
+            ->orderBy('time_slots.label', 'asc')
+            ->paginate(30, ['*'], 'inactive_page')
             ->appends($request->query());
 
         $rooms = DB::table('rooms')->pluck('label', 'id')->toArray();
@@ -106,12 +161,12 @@ class AdminController extends Controller
         $filters = [
             'room_id' => $request->get('room_id'),
             'date' => $request->get('admin_date'),
-            'time_slot_id' => $request->get('admin_time_slot_id'),
-            'availability' => $request->get('availability')
+            'time_slot_id' => $request->get('admin_time_slot_id')
         ];
 
         return view('admin.room-availability', compact(
-            'availability',
+            'activeAvailability',
+            'inactiveAvailability',
             'rooms',
             'timeSlots',
             'availableDates',
@@ -244,6 +299,96 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.room-availability')->with('success', $message);
+    }
+
+    public function generateDates(Request $request)
+    {
+        $request->validate([
+            'months' => 'required|integer|min:1|max:12'
+        ]);
+
+        $months = $request->input('months');
+
+        try {
+            $lastDate = DB::table('available_dates')
+                ->orderBy('date', 'desc')
+                ->first();
+
+            $startDate = $lastDate
+                ? \Carbon\Carbon::parse($lastDate->date)->addDay()
+                : \Carbon\Carbon::today();
+
+            $endDate = \Carbon\Carbon::today()->addMonths($months);
+
+            $dates = [];
+            $current = $startDate->copy();
+
+            while ($current->lte($endDate)) {
+                $exists = DB::table('available_dates')
+                    ->where('date', $current->format('Y-m-d'))
+                    ->exists();
+
+                if (!$exists) {
+                    $dates[] = [
+                        'date' => $current->format('Y-m-d'),
+                        'formatted_date' => $current->format('m/d/Y'),
+                        'day_name' => $current->format('D'),
+                        'is_active' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+
+                $current->addDay();
+            }
+
+            if (!empty($dates)) {
+                DB::table('available_dates')->insert($dates);
+
+                $rooms = DB::table('rooms')->get();
+                $timeSlots = DB::table('time_slots')->get();
+
+                foreach ($dates as $dateData) {
+                    $dateRecord = DB::table('available_dates')
+                        ->where('date', $dateData['date'])
+                        ->first();
+
+                    foreach ($rooms as $room) {
+                        foreach ($timeSlots as $slot) {
+                            DB::table('room_availability')->insert([
+                                'room_id' => $room->id,
+                                'date_id' => $dateRecord->id,
+                                'time_slot_id' => $slot->id,
+                                'is_available' => true,
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
+                    }
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'message' => "Successfully generated {$months} month(s) of dates",
+                    'generated' => count($dates),
+                    'period' => "{$startDate->format('Y-m-d')} to {$endDate->format('Y-m-d')}"
+                ]);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'All dates already exist for the specified period',
+                    'generated' => 0
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Error generating dates: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error generating dates: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function deleteDate($id)

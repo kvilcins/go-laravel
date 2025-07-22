@@ -2,6 +2,7 @@ import './bootstrap';
 
 import './admin/delete';
 import './admin/filters';
+import './admin/tabs';
 
 import './modules/slider';
 import './modules/accordion';
@@ -12,3 +13,4 @@ import './modules/mobile-menu';
 import './modules/scroll-to-top';
 import './modules/smooth-scroll';
 import './modules/form-validation';
+import './modules/dates-generation';

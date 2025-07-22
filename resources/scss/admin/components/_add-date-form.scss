@@ -1,11 +1,16 @@
 .form-group {
     position: relative;
+    margin-bottom: 15px;
 
     &:focus-within {
         &::before {
             height: 100%;
             opacity: 1;
         }
+    }
+
+    &--actions {
+        margin-bottom: 0;
     }
 }
 
@@ -15,19 +20,23 @@
     display: block;
     color: $text-dark;
     position: relative;
+    margin-bottom: 8px;
 
     &--checkbox {
         @include transition();
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 14px;
+        padding: 12px 14px;
         background: linear-gradient(135deg, rgba($white-color, 0.9) 0%, rgba($light-grey, 0.5) 100%);
         border: 2px solid rgba($dark-purple, 0.1);
         border-radius: 8px;
         cursor: pointer;
         position: relative;
         overflow: hidden;
+        margin-bottom: 0;
+        height: 51px;
+        font-size: 13px;
 
         &::before {
             content: '';
@@ -62,10 +71,47 @@
                 transform: scale(1.1);
             }
         }
+
+        &--success {
+            background: linear-gradient(135deg, rgba($success-green, 0.05) 0%, rgba($white-color, 0.8) 100%);
+            border: 2px solid rgba($success-green, 0.15);
+
+            &::after {
+                content: '✓';
+                position: absolute;
+                right: 15px;
+                font-size: 14px;
+                color: $success-green;
+                opacity: 0;
+                transform: scale(0);
+                transition: all 0.3s ease;
+            }
+
+            &:hover {
+                background: linear-gradient(135deg, rgba($success-green, 0.08) 0%, rgba($white-color, 0.9) 100%);
+                border-color: rgba($success-green, 0.25);
+
+                &::after {
+                    opacity: 0.6;
+                    transform: scale(1);
+                }
+            }
+
+            input[type="checkbox"] {
+                accent-color: $success-green;
+
+                &:checked + span {
+                    & ~ &::after {
+                        opacity: 1;
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
     }
 }
 
-.form-input {
+.form-input, .form-select {
     @include font($Inter-400);
     @include transition();
     width: 100%;
@@ -77,6 +123,7 @@
     color: $text-dark;
     position: relative;
     box-shadow: 0 1px 3px rgba($black-color, 0.05);
+    height: 51px;
 
     &::placeholder {
         color: rgba($text-muted, 0.7);
@@ -95,113 +142,126 @@
         border-color: rgba($dark-purple, 0.3);
         box-shadow: 0 2px 6px rgba($black-color, 0.08);
     }
-
-    &:invalid {
-        border-color: rgba($danger-red, 0.5);
-        box-shadow: 0 0 0 2px rgba($danger-red, 0.1);
-    }
-
-    &:valid {
-        border-color: rgba($success-green, 0.5);
-    }
 }
 
 .form-row {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 20px;
     flex-wrap: wrap;
     position: relative;
+    margin-bottom: 15px;
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    button {
+        height: 51px;
+        flex-shrink: 0;
+    }
+}
+
+.btn {
+    @include font($Inter-500);
+    @include transition();
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    height: 51px;
+
+    &--success {
+        background: $success-green;
+        color: $white-color;
+        border-color: $success-green;
+        box-shadow: 0 2px 8px rgba($success-green, 0.2);
+
+        &::before {
+            content: '+';
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        &:hover {
+            background: darken($success-green, 8%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba($success-green, 0.3);
+            padding-left: 35px;
+
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &--primary {
+        background: $dark-purple;
+        color: $white-color;
+        border-color: $dark-purple;
+
+        &:hover {
+            background: $admin-purple-hover;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+.bulk-availability-form {
+    position: relative;
+    overflow: hidden;
 
     &::before {
         content: '';
         position: absolute;
-        bottom: -10px;
+        top: 0;
         left: 0;
         right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent 0%, rgba($neon-purple, 0.3) 50%, transparent 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba($success-green, 0.02) 0%, rgba($dark-purple, 0.01) 100%);
+        border-radius: 12px;
+        pointer-events: none;
     }
 
-    &:focus-within {
-        &::before {
-            opacity: 1;
-        }
-    }
-
-    .form-group {
+    .form-row, .form-group {
         position: relative;
-
-        &:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -10px;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 30px;
-            background: linear-gradient(180deg, transparent 0%, rgba($neon-purple, 0.2) 50%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        &:focus-within:not(:last-child)::after {
-            opacity: 1;
-        }
+        z-index: 1;
     }
 }
 
-@keyframes formGlow {
-    0%, 100% { box-shadow: 0 0 5px rgba($neon-purple, 0.2); }
-    50% { box-shadow: 0 0 20px rgba($neon-purple, 0.4); }
-}
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
 
-@keyframes labelShine {
-    0% { background-position: -100px; }
-    100% { background-position: calc(100% + 100px); }
-}
+    .form-label--checkbox {
+        margin-bottom: 0;
+        height: auto;
+        padding: 8px 12px;
+        font-size: 12px;
 
-.form-group {
-    &--required {
-        .form-label::before {
-            content: '*';
-            color: $danger-red;
-            margin-right: 4px;
-            font-weight: bold;
+        &:first-child {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba($dark-purple, 0.05) 0%, rgba($white-color, 0.8) 100%);
+            border-color: rgba($dark-purple, 0.15);
+            font-weight: 600;
         }
-    }
-
-    &--success {
-        .form-input {
-            border-color: $success-green;
-            background: linear-gradient(135deg, rgba($success-green, 0.05) 0%, $white-color 100%);
-        }
-    }
-
-    &--error {
-        .form-input {
-            border-color: $danger-red;
-            background: linear-gradient(135deg, rgba($danger-red, 0.05) 0%, $white-color 100%);
-            animation: shake 0.5s ease-in-out;
-        }
-    }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-@media screen and (max-width: 1320px) {
-    .form-group {
-        min-width: 200px;
-    }
-
-    .form-row {
-        gap: 15px;
     }
 }
 
@@ -209,44 +269,29 @@
     .form-row {
         flex-direction: column;
         align-items: stretch;
-        gap: 15px;
 
         .form-group {
-            &:not(:last-child)::after {
-                display: none;
-            }
+            width: 100%;
         }
     }
 
-    .form-group {
-        min-width: auto;
-        width: 100%;
+    .checkbox-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .form-input {
+    .form-input, .form-select, .form-label--checkbox, .btn {
+        height: 45px;
+        font-size: 12px;
         padding: 10px 12px;
-        font-size: 12px;
-        border-radius: 6px;
     }
 
-    .form-label {
-        font-size: 12px;
-        margin-bottom: 5px;
+    .checkbox-grid {
+        gap: 8px;
 
-        &--checkbox {
-            padding: 8px 12px;
-            gap: 6px;
-
-            input[type="checkbox"] {
-                width: 14px;
-                height: 14px;
-            }
+        .form-label--checkbox {
+            padding: 6px 10px;
         }
-    }
-
-    .form-row {
-        gap: 12px;
     }
 }

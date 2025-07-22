@@ -1,0 +1,120 @@
+.admin-tabs {
+    &__header {
+        display: flex;
+        border-bottom: 1px solid $border-light;
+        margin-bottom: 24px;
+        gap: 4px;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border: none;
+        background: transparent;
+        color: $secondary-grey;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: $text-dark;
+            background-color: $light-grey;
+        }
+
+        &--active {
+            color: $dark-purple;
+            border-bottom-color: $dark-purple;
+            background-color: transparent;
+
+            &:hover {
+                color: $dark-purple;
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__text {
+        white-space: nowrap;
+    }
+
+    &__count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        background-color: $border-light;
+        color: $text-dark;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 10px;
+        line-height: 1;
+
+        .admin-tabs__button--active & {
+            background-color: rgba($dark-purple, 0.1);
+            color: $dark-purple;
+        }
+    }
+
+    &__content {
+        position: relative;
+    }
+
+    &__panel {
+        display: none;
+
+        &--active {
+            display: block;
+        }
+    }
+
+    nav[role="navigation"] {
+        margin-top: 20px;
+
+        .relative.inline-flex.items-center {
+            padding: 6px 10px;
+            font-size: 13px;
+            font-weight: 500;
+
+            &[aria-disabled="true"],
+            &.cursor-default {
+                color: $text-muted !important;
+                background-color: $light-grey !important;
+                border-color: $border-light !important;
+                cursor: not-allowed !important;
+            }
+
+            &:not([aria-disabled]):not(.cursor-default) {
+                &:hover {
+                    background-color: $beige-hover;
+                    color: $text-dark;
+                }
+            }
+
+            &[aria-current="page"] {
+                background-color: $dark-purple !important;
+                color: $white-color !important;
+                border-color: $dark-purple !important;
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .text-gray-700 {
+            color: $secondary-grey;
+            font-size: 13px;
+        }
+
+        .font-medium {
+            font-weight: 600;
+        }
+    }
+}

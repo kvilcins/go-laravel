@@ -26,13 +26,19 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-label form-label--checkbox form-label--checkbox--success">
+                        <input type="checkbox" name="is_available" value="1" checked> Available for Booking
+                    </label>
+                </div>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Time Slots</label>
                 <div class="checkbox-grid">
                     <label class="form-label form-label--checkbox">
-                        <input type="checkbox" id="selectAllTimes"> Select All
+                        <input type="checkbox" id="selectAllTimes"> Select All Time Slots
                     </label>
                     @foreach($timeSlots as $id => $label)
                         <label class="form-label form-label--checkbox">
@@ -40,12 +46,6 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label form-label--checkbox">
-                    <input type="checkbox" name="is_available" value="1" checked> Available for Booking
-                </label>
             </div>
 
             <div class="form-group form-group--actions">

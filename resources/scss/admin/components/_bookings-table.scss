@@ -42,6 +42,13 @@
     &--spaced {
         margin-bottom: 30px;
     }
+
+    .btn {
+
+        .btn__spinner {
+            display: none;
+        }
+    }
 }
 
 @media screen and (max-width: 1320px) {

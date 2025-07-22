@@ -28,11 +28,12 @@
     ])
 
     @include('admin.components.room-availability-table', [
-        'availability' => $availability,
+        'activeAvailability' => $activeAvailability,
+        'inactiveAvailability' => $inactiveAvailability,
         'rooms' => $rooms
     ])
 
-    @if($availability->count() > 0)
-        @include('admin.components.availability-stats', ['availability' => $availability])
+    @if($activeAvailability->count() > 0 || $inactiveAvailability->count() > 0)
+        @include('admin.components.availability-stats', ['availability' => $activeAvailability])
     @endif
 @endsection

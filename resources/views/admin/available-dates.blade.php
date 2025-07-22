@@ -11,5 +11,12 @@
 
     @include('admin.components.add-date-form')
 
-    @include('admin.components.dates-table', ['dates' => $dates])
+    @include('admin.components.add-multiple-dates')
+
+    @include('admin.components.dates-table', [
+        'activeDates' => $activeDates,
+        'inactiveDates' => $inactiveDates,
+        'activeDatesCount' => $activeDatesCount,
+        'inactiveDatesCount' => $inactiveDatesCount
+    ])
 @endsection

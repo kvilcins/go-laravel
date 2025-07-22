@@ -108,9 +108,8 @@
                 position: relative;
 
                 &::before {
-                    content: '👑';
                     position: absolute;
-                    top: -8px;
+                    top: 0;
                     right: -8px;
                     font-size: 16px;
                     opacity: 0.7;

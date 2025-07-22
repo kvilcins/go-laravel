@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initUniversalSlider = (sliderSelector, options = {}) => {
         const slider = document.querySelector(sliderSelector);
-        if (!slider) return;
+        if (!slider) return null;
 
         const track = slider.querySelector('.slider__track');
         const slides = slider.querySelectorAll('.slider__slide');
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dotsContainer = slider.querySelector('.slider__dots');
         const totalSlides = slides.length;
 
-        if (!track || totalSlides === 0) return;
+        if (!track || totalSlides === 0) return null;
 
         const config = {
             autoplay: true,
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             swipeThreshold: 50,
             enableKeyboard: true,
             enableTouch: true,
+            ...options
         };
 
         let currentSlide = 0;
@@ -110,23 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }, duration);
         };
 
-        nextBtn?.addEventListener('click', () => {
-            nextSlide();
-            pauseAutoplay();
-        });
-
         prevBtn?.addEventListener('click', () => {
             prevSlide();
             pauseAutoplay();
         });
 
-        dotsContainer?.addEventListener('click', (e) => {
-            const target = e.target.closest('.slider__dot');
-            if (!target) return;
-            const index = parseInt(target.getAttribute('data-slide'));
-            goToSlide(index);
+        nextBtn?.addEventListener('click', () => {
+            nextSlide();
             pauseAutoplay();
         });
+
+        if (dotsContainer) {
+            dotsContainer.addEventListener('click', (e) => {
+                const target = e.target.closest('.slider__dot');
+                if (!target) return;
+                const index = parseInt(target.getAttribute('data-slide'));
+                goToSlide(index);
+                pauseAutoplay();
+            });
+        }
 
         if (config.enableKeyboard) {
             let isFocused = false;
@@ -147,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        if (config.enableTouch) {
+        if (config.enableTouch && track) {
             let touchStartX = 0;
             let touchEndX = 0;
             let isSwiping = false;
@@ -220,5 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplayDelay: 4000
     });
 
-    window.initUniversalSlider = initUniversalSlider;
+    if (typeof window !== 'undefined') {
+        window.initUniversalSlider = initUniversalSlider;
+    }
 });

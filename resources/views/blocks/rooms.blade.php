@@ -3,8 +3,9 @@
         <h2 class="room__title h2">{!! $title !!}</h2>
 
         <ul class="room__list">
-            @foreach($items as $item)
-                <li class="room__item room__item--{!! get_data($item, 'class') !!}">
+            @foreach($items as $index => $item)
+                <li class="room__item room__item--{!! get_data($item, 'class') !!}"
+                    data-modal-open="room-{!! $index !!}">
                     {!! get_img($item, 'image', 'room__image') !!}
                     <p class="room__description">{!! get_data($item, 'description') !!}</p>
                 </li>
@@ -14,9 +15,10 @@
         <div class="room__slider">
             <div class="room__slider-wrapper">
                 <div class="slider__track room__slider-track">
-                    @foreach($items as $item)
+                    @foreach($items as $index => $item)
                         <div class="slider__slide room__slider-slide">
-                            <div class="room__slider-item room__slider-item--{!! get_data($item, 'class') !!}">
+                            <div class="room__slider-item room__slider-item--{!! get_data($item, 'class') !!}"
+                                 data-modal-open="room-{!! $index !!}">
                                 {!! get_img($item, 'image', 'room__slider-image') !!}
                                 <p class="room__slider-description">{!! get_data($item, 'description') !!}</p>
                             </div>
@@ -41,3 +43,12 @@
         </div>
     </div>
 </section>
+
+@foreach($items as $index => $item)
+    @include('modals.info', [
+        'modalId' => 'room-' . $index,
+        'title' => get_data($item, 'modal_title', get_data($item, 'description')),
+        'description' => get_data($item, 'modal_description', 'Discover this themed room.'),
+        'image' => asset('img/' . get_data($item, 'image'))
+    ])
+@endforeach

@@ -3,8 +3,9 @@
         <h2 class="about-us__title h2">{!! get_data($data, 'title', 'About us') !!}</h2>
         <div class="about-us__content">
             <div class="about-us__gallery">
-                @foreach(get_data($data, 'gallery', []) as $item)
-                    <div class="about-us__gallery-item about-us__gallery-item--{!! get_data($item, 'class') !!}">
+                @foreach(get_data($data, 'gallery', []) as $index => $item)
+                    <div class="about-us__gallery-item about-us__gallery-item--{!! get_data($item, 'class') !!}"
+                         data-modal-open="gallery-{!! $index !!}">
                         {!! get_img($item, 'image', 'about-us__image', 'img/about-us') !!}
                     </div>
                 @endforeach
@@ -31,3 +32,12 @@
         </div>
     </div>
 </section>
+
+@foreach(get_data($data, 'gallery', []) as $index => $item)
+    @include('modals.info', [
+        'modalId' => 'gallery-' . $index,
+        'title' => get_data($item, 'modal_title', get_data($item, 'alt', 'Gallery Image')),
+        'description' => get_data($item, 'modal_description', 'Experience our gaming atmosphere.'),
+        'image' => asset('img/about-us/' . get_data($item, 'image'))
+    ])
+@endforeach
